@@ -1,7 +1,7 @@
 package test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import main.Operations;
 
@@ -129,7 +129,7 @@ public class TestOperations extends TestCase {
 	 * Test the subgraph method.
 	 */
 	public void testSubgraph() {
-		List<Integer> a = new ArrayList<Integer>();
+		Set<Integer> a = new HashSet<Integer>();
 		a.add(1);
 		a.add(2);
 		a.add(4);

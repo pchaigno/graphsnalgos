@@ -60,4 +60,27 @@ public class TransitiveClosure {
 			}
 		}
 	}
+	
+	/**
+	 * Check is a graph is tau-minimal.
+	 * Remove each edge and check that the graph no longer have the same transitive closure.
+	 * @param graph The graph.
+	 * @return True if it's tau-minimal, false else.
+	 */
+	public static boolean isTauMinimal(Graph<Integer, DefaultEdge> graph) {
+		Graph<Integer, DefaultEdge> closure = getByRoyMarshall(graph);
+		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		for(Integer vertexX: vertexes) {
+			for(Integer vertexY: vertexes) {
+				if(graph.containsEdge(vertexX, vertexY)) {
+					graph.removeEdge(vertexX, vertexY);
+					if(Tools.graphEquals(closure, getByRoyMarshall(graph))) {
+						return false;
+					}
+					graph.addEdge(vertexX, vertexY);
+				}
+			}
+		}
+		return true;
+	}
 }

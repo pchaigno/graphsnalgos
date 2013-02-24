@@ -46,9 +46,18 @@ public class TestTransitiveClosure extends TestCase {
 	/**
 	 * Test the getByRoyMarshall method.
 	 */
-	public void test() {
+	public void testGetByRoyMarshall() {
 		Graph<Integer, DefaultEdge> closure = TransitiveClosure.getByRoyMarshall(this.graph);
 		System.out.println("Transitive closure by Roy-Marshall:");
 		System.out.println(closure);
+	}
+	
+	/**
+	 * Test the isTauMinimal method.
+	 */
+	public void testIsTauMinimal() {
+		assertTrue(TransitiveClosure.isTauMinimal(this.graph));
+		this.graph.addEdge(1, 3);
+		assertFalse(TransitiveClosure.isTauMinimal(this.graph));
 	}
 }

@@ -1,6 +1,6 @@
 package main;
 
-import java.util.List;
+import java.util.Set;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -174,7 +174,7 @@ public class Operations {
 	 * @param a The list of vertex for the subgraph.
 	 * @return The subgraph of graph from a.
 	 */
-	public static Graph<Integer, DefaultEdge> subgraph(Graph<Integer, DefaultEdge> graph, List<Integer> a) {
+	public static Graph<Integer, DefaultEdge> subgraph(Graph<Integer, DefaultEdge> graph, Set<Integer> a) {
 		Graph<Integer, DefaultEdge> subgraph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
 		for(Integer vertex: a) {

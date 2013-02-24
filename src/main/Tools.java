@@ -32,11 +32,26 @@ public class Tools {
 			return false;
 		}
 		for(int i=0 ; i<array1.length ; i++) {
-			if(array1[i]!=array2[i]) {
+			if(!arrayContains(array1, array2[i])) {
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Check if i is in array.
+	 * @param array The array to search in.
+	 * @param i The element to search for.
+	 * @return True if i is in array.
+	 */
+	public static boolean arrayContains(Integer[] array, int i) {
+		for(int integer: array) {
+			if(integer==i) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -58,5 +73,30 @@ public class Tools {
 			}
 		}
 		return clone;
+	}
+	
+	/**
+	 * Check if two graphs are the same.
+	 * @param graph1 The first graph.
+	 * @param graph2 The second graph.
+	 * @return True if they are equals, false else.
+	 */
+	public static boolean graphEquals(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) {
+		Integer[] vertexes1 = graph1.vertexSet().toArray(new Integer[0]);
+		Integer[] vertexes2 = graph1.vertexSet().toArray(new Integer[0]);
+		if(!arrayEquals(vertexes1, vertexes2)) {
+			return false;
+		}
+		for(Integer vertexX: vertexes1) {
+			for(Integer vertexY: vertexes1) {
+				if(graph1.containsEdge(vertexX, vertexY) && !graph2.containsEdge(vertexX, vertexY)) {
+					return false;
+				}
+				if(!graph1.containsEdge(vertexX, vertexY) && graph2.containsEdge(vertexX, vertexY)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
