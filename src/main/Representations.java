@@ -13,7 +13,7 @@ import org.jgrapht.Graph;
  * Works only with 1-graphs.
  * @author Paul Chaignon
  */
-public class Representation {
+public class Representations {
 
 	/**
 	 * The adjacency matrix is a square matrix of size (number of vertex)².
@@ -72,20 +72,5 @@ public class Representation {
 			}
 		}
 		return map;
-	}
-	
-	/**
-	 * @param matrix The matrix.
-	 * @return A string representation of an integer matrix.
-	 */
-	public static String matrixToString(int[][] matrix) {
-		String str = "";
-		for(int i=0 ; i<matrix.length ; i++) {
-			for(int j=0 ; j<matrix[i].length ; j++) {
-				str += matrix[i][j]+" ";
-			}
-			str += "\n";
-		}
-		return str;
 	}
 }

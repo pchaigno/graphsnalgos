@@ -1,18 +1,19 @@
 package test;
 
-import org.jgrapht.Graph;
+import org.jgrapht.DirectedGraph;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 
-import main.Representation;
+import main.Representations;
+import main.Tools;
 import junit.framework.TestCase;
 
 /**
- * Unit tests of the methods from Representation.
+ * Unit tests of the methods from Representations.
  * @author Paul Chaignon
  */
-public class TestRepresentation extends TestCase {
-	private Graph<Integer, DefaultEdge> graph;
+public class TestRepresentations extends TestCase {
+	private DirectedGraph<Integer, DefaultEdge> graph;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
@@ -45,21 +46,21 @@ public class TestRepresentation extends TestCase {
 	 * Test the getAdjacencyMatrix method.
 	 */
 	public void testAdjacencyMatrix() {        
-		int[][] adjacencyMatrix = Representation.getAdjacencyMatrix(graph);
-		System.out.println(Representation.matrixToString(adjacencyMatrix));
+		int[][] adjacencyMatrix = Representations.getAdjacencyMatrix(graph);
+		System.out.println(Tools.matrixToString(adjacencyMatrix));
 	}
 	
 	/**
 	 *  Test the getSourcesLists method.
 	 */
 	public void testSourcesLists() {
-		System.out.println(Representation.getSourcesLists(graph));
+		System.out.println(Representations.getSourcesLists(graph));
 	}
 	
 	/**
 	 * Test the getTargetsLists method.
 	 */
 	public void testTargetsLists() {
-		System.out.println(Representation.getTargetsLists(graph));
+		System.out.println(Representations.getTargetsLists(graph));
 	}
 }
