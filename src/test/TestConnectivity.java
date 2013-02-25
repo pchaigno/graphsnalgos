@@ -155,9 +155,10 @@ public class TestConnectivity extends TestCase {
 	 */
 	public void testGetConnectedComposantByTarjan() {
 		Graph<Integer, DefaultEdge> subgraph = Connectivity.getConnectedComposantByTarjan(this.graph1, 1);
+		System.out.println("Connected composant of 1 by Tarjan:");
 		System.out.println(subgraph);
 		List<Graph<Integer, DefaultEdge>> subgraphs = Connectivity.getConnectedComposantsByTarjan(this.graph2);
-		System.out.println("Connected Composants By Tarjan:");
+		System.out.println("Connected composants by Tarjan:");
 		for(Graph<Integer, DefaultEdge> graph: subgraphs) {
 			System.out.println(graph);
 		}
@@ -166,9 +167,20 @@ public class TestConnectivity extends TestCase {
 	/**
 	 * Test the getStronglyConnectedComposantsByFoulkes method.
 	 */
-	public void testGetStronglyConnectedComposantByFoulkes() {
+	public void testGetStronglyConnectedComposantsByFoulkes() {
 		List<Graph<Integer, DefaultEdge>> subgraphs = Connectivity.getStronglyConnectedComposantsByFoulkes(this.graph4);
-		System.out.println("Strongly Connected Composants By Foulkes:");
+		System.out.println("Strongly connected composants by Foulkes:");
+		for(Graph<Integer, DefaultEdge> graph: subgraphs) {
+			System.out.println(graph);
+		}
+	}
+	
+	/**
+	 * Test the getStronglyConnectedComposantsByAscendingDescending method.
+	 */
+	public void testGetStronglyConnectedComposantsByAscendingDescending() {
+		List<Graph<Integer, DefaultEdge>> subgraphs = Connectivity.getStronglyConnectedComposantsByAscendingDescending(this.graph4);
+		System.out.println("Strongly connected composants by ascending-descending:");
 		for(Graph<Integer, DefaultEdge> graph: subgraphs) {
 			System.out.println(graph);
 		}

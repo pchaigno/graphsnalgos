@@ -158,10 +158,9 @@ public class Connectivity {
 	}
 	
 	/**
-	 * Construct the strongly connected composant of a graph from the vertex a using the Foulkes algorithm.
+	 * Construct the strongly connected composants of a graph using the Foulkes algorithm.
 	 * @param graph The graph.
-	 * @param a The vertex to start on.
-	 * @return The connected composant of a graph from the vertex a.
+	 * @return The strongly connected composants of a graph.
 	 */
 	public static List<Graph<Integer, DefaultEdge>> getStronglyConnectedComposantsByFoulkes(Graph<Integer, DefaultEdge> graph) {
 		List<Graph<Integer, DefaultEdge>> composants = new LinkedList<Graph<Integer, DefaultEdge>>();
@@ -192,11 +191,124 @@ public class Connectivity {
 				}
 				
 				// Construct the graph:
-				Graph<Integer, DefaultEdge> subgraph = Operations.subgraph(closure, cfc);
+				Graph<Integer, DefaultEdge> subgraph = Operations.subgraph(graph, cfc);
 				composants.add(subgraph);
 			}
 		}
 		
 		return composants;
+	}
+	
+	/**
+	 * Construct the strongly connected composants of a graph using the ascending-descending algorithm.
+	 * @param graph The graph.
+	 * @return The strongly connected composants of a graph.
+	 */
+	public static List<Graph<Integer, DefaultEdge>> getStronglyConnectedComposantsByAscendingDescending(Graph<Integer, DefaultEdge> graph) {
+		List<Graph<Integer, DefaultEdge>> composants = new LinkedList<Graph<Integer, DefaultEdge>>();
+		Set<Integer> nc = new HashSet<Integer>();
+		for(Integer vertex: graph.vertexSet()) {
+			nc.add(vertex);
+		}
+		
+		// Ascending-descending algorithm:
+		for(Integer i: graph.vertexSet()) {
+			if(nc.contains(i)) {
+				Set<Integer> a = ascendantsUnclassified(graph, nc, i);
+				Set<Integer> d = descendantsUnclassified(graph, nc, i);
+				Set<Integer> cfc = new HashSet<Integer>();
+				a.retainAll(d); // Intersection between two sets.
+				cfc.addAll(a);
+				nc.removeAll(cfc);
+				
+				// Construct the graph:
+				Graph<Integer, DefaultEdge> subgraph = Operations.subgraph(graph, cfc);
+				composants.add(subgraph);
+			}
+		}
+		
+		return composants;
+	}
+	
+	/**
+	 * Construct the list of unclassified ascendants of x using a recursive method.
+	 * This method is not recursive.
+	 * @param graph The graph.
+	 * @param x The vertex.
+	 * @return Unclassified ascendants of x.
+	 */
+	private static Set<Integer> ascendantsUnclassified(Graph<Integer, DefaultEdge> graph, Set<Integer> nc, Integer x) {
+		Set<Integer> a = new HashSet<Integer>();
+		ancestors(a, x, nc, graph);
+		return a;
+	}
+	
+	/**
+	 * Get all the unclassified ancestors (ie not in nc) of y.
+	 * The parameters a is changed by the function.
+	 * This method is recursive.
+	 * TODO Is it tail-recursive?
+	 * @param a The set where to add the new ancestors found.
+	 * @param y The vertex.
+	 * @param nc The vertexes not rated.
+	 * @param graph The graph.
+	 */
+	private static void ancestors(Set<Integer> a, Integer y, Set<Integer> nc, Graph<Integer, DefaultEdge> graph) {
+		a.add(y);
+		
+		// Get unclassified predecessors of y:
+		Set<Integer> lPred = new HashSet<Integer>();
+		for(Integer notRated: nc) {
+			if(graph.containsEdge(notRated, y)) {
+				lPred.add(notRated);
+			}
+		}
+		
+		for(Integer z: lPred) {
+			if(!a.contains(z)) {
+				ancestors(a, z, nc, graph);
+			}
+		}
+	}
+	
+	/**
+	 * Construct the list of unclassified descendants of x using a recursive method.
+	 * This method is not recursive.
+	 * @param graph The graph.
+	 * @param x The vertex.
+	 * @return Unclassified descendants of x.
+	 */
+	private static Set<Integer> descendantsUnclassified(Graph<Integer, DefaultEdge> graph, Set<Integer> nc, Integer x) {
+		Set<Integer> d = new HashSet<Integer>();
+		sons(d, x, nc, graph);
+		return d;
+	}
+	
+	/**
+	 * Get all the unclassified sons (ie not in nc) of y.
+	 * The parameters d is changed by the function.
+	 * This method is recursive.
+	 * TODO Is it tail-recursive?
+	 * @param d The set where to add the new sons found.
+	 * @param y The vertex.
+	 * @param nc The vertexes not rated.
+	 * @param graph The graph.
+	 */
+	private static void sons(Set<Integer> d, Integer y, Set<Integer> nc, Graph<Integer, DefaultEdge> graph) {
+		d.add(y);
+		
+		// Get unclassified successors of y. 
+		Set<Integer> lSuc = new HashSet<Integer>();
+		for(Integer notRated: nc) {
+			if(graph.containsEdge(y, notRated)) {
+				lSuc.add(notRated);
+			}
+		}
+		
+		for(Integer z: lSuc) {
+			if(!d.contains(z)) {
+				sons(d, z, nc, graph);
+			}
+		}
 	}
 }
