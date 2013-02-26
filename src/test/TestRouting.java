@@ -1,5 +1,7 @@
 package test;
 
+import java.util.List;
+
 import main.Routing;
 import main.Tools;
 
@@ -43,29 +45,38 @@ public class TestRouting extends TestCase {
 	}
 	
 	/**
-	 * Test the routingByRoyMarshallWithSuccessor method.
+	 * Test the routing with successor methods.
 	 */
 	public void testRoutingByRoyMarshallWithSuccessor() {
-		int[][] routageMatrix = Routing.routingByRoyMarshallWithSuccessor(this.graph);
+		int[][] routingMatrix = Routing.routingByRoyMarshallWithSuccessor(this.graph);
 		System.out.println("Routage matrix with successors:");
-		System.out.println(Tools.matrixToString(routageMatrix));
+		System.out.println(Tools.matrixToString(routingMatrix));
+		List<Integer> path = Routing.pathFromRoutingWithSuccessor(routingMatrix, 1, 6);
+		System.out.println("Path:");
+		System.out.println(path);
 	}
 	
 	/**
-	 * Test the routingByRoyMarshallWithPredecessor method.
+	 * Test the routing with predecessor methods.
 	 */
 	public void testRoutingByRoyMarshallWithPredecessor() {
-		int[][] routageMatrix = Routing.routingByRoyMarshallWithPredecessor(this.graph);
+		int[][] routingMatrix = Routing.routingByRoyMarshallWithPredecessor(this.graph);
 		System.out.println("Routage matrix with predecessors:");
-		System.out.println(Tools.matrixToString(routageMatrix));
+		System.out.println(Tools.matrixToString(routingMatrix));
+		List<Integer> path = Routing.pathFromRoutingWithPredecessor(routingMatrix, 1, 6);
+		System.out.println("Path:");
+		System.out.println(path);
 	}
 	
 	/**
-	 * Test the routingByRoyMarshallWithAStep method.
+	 * Test the routing with "a step" methods.
 	 */
 	public void testRoutingByRoyMarshallWithAStep() {
-		int[][] routageMatrix = Routing.routingByRoyMarshallWithAStep(this.graph);
+		int[][] routingMatrix = Routing.routingByRoyMarshallWithAStep(this.graph);
 		System.out.println("Routage matrix with a step:");
-		System.out.println(Tools.matrixToString(routageMatrix));
+		System.out.println(Tools.matrixToString(routingMatrix));
+		List<Integer> path = Routing.pathFromRoutingWithAStep(routingMatrix, 1, 6);
+		System.out.println("Path:");
+		System.out.println(path);
 	}
 }
