@@ -1,6 +1,10 @@
 package test;
 
+import java.util.List;
+import java.util.Map;
+
 import org.jgrapht.DirectedGraph;
+import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 
@@ -46,7 +50,7 @@ public class TestRepresentations extends TestCase {
 	 * Test the getAdjacencyMatrix method.
 	 */
 	public void testAdjacencyMatrix() {        
-		int[][] adjacencyMatrix = Representations.getAdjacencyMatrix(graph);
+		int[][] adjacencyMatrix = Representations.getAdjacencyMatrix(this.graph);
 		System.out.println(Tools.matrixToString(adjacencyMatrix));
 	}
 	
@@ -54,13 +58,21 @@ public class TestRepresentations extends TestCase {
 	 *  Test the getSourcesLists method.
 	 */
 	public void testSourcesLists() {
-		System.out.println(Representations.getSourcesLists(graph));
+		Map<Integer, List<Integer>> sources = Representations.getSourcesLists(this.graph);
+		System.out.println("Sources lists:");
+		System.out.println(sources);
+		Graph<Integer,DefaultEdge> graphBis = Representations.getGraphFromSourcesLists(sources);
+		assertTrue(Tools.graphEquals(this.graph, graphBis));
 	}
 	
 	/**
 	 * Test the getTargetsLists method.
 	 */
 	public void testTargetsLists() {
-		System.out.println(Representations.getTargetsLists(graph));
+		Map<Integer, List<Integer>> targets = Representations.getTargetsLists(this.graph);
+		System.out.println("Targets lists:");
+		System.out.println(targets);
+		Graph<Integer,DefaultEdge> graphBis = Representations.getGraphFromTargetsLists(targets);
+		assertTrue(Tools.graphEquals(this.graph, graphBis));
 	}
 }
