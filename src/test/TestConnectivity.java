@@ -176,10 +176,10 @@ public class TestConnectivity extends TestCase {
 	}
 	
 	/**
-	 * Test the getStronglyConnectedComposantsByAscendingDescending method.
+	 * Test the getStronglyConnectedComposantsByAscendantDescendant method.
 	 */
-	public void testGetStronglyConnectedComposantsByAscendingDescending() {
-		List<Graph<Integer, DefaultEdge>> subgraphs = Connectivity.getStronglyConnectedComposantsByAscendingDescending(this.graph4);
+	public void testGetStronglyConnectedComposantsByAscendantDescendant() {
+		List<Graph<Integer, DefaultEdge>> subgraphs = Connectivity.getStronglyConnectedComposantsByAscendantDescendant(this.graph4);
 		System.out.println("Strongly connected composants by ascending-descending:");
 		for(Graph<Integer, DefaultEdge> graph: subgraphs) {
 			System.out.println(graph);

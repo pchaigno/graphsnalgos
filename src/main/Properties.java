@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Set;
+
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 
@@ -16,7 +18,7 @@ public class Properties {
 	 * @return True if the graph is reflexive, false else.
 	 */
 	public static boolean isReflexive(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertex: vertexes) {
 			if(!graph.containsEdge(vertex, vertex)) {
 				return false;
@@ -31,7 +33,7 @@ public class Properties {
 	 * @return True if the graph is anti-reflexive, false else.
 	 */
 	public static boolean isAntiReflexive(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertex: vertexes) {
 			if(graph.containsEdge(vertex, vertex)) {
 				return false;
@@ -46,7 +48,7 @@ public class Properties {
 	 * @return True if the graph is symetric, false else.
 	 */
 	public static boolean isSymetric(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertexX: vertexes) {
 			for(Integer vertexY: vertexes) {
 				if(graph.containsEdge(vertexX, vertexY)) {
@@ -65,7 +67,7 @@ public class Properties {
 	 * @return True if the graph is anti-symetric, false else.
 	 */
 	public static boolean isAntiSymetric(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertexX: vertexes) {
 			for(Integer vertexY: vertexes) {
 				if(graph.containsEdge(vertexX, vertexY)) {
@@ -84,7 +86,7 @@ public class Properties {
 	 * @return True if the graph is transitive, false else.
 	 */
 	public static boolean isTransitive(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertexX: vertexes) {
 			for(Integer vertexY: vertexes) {
 				for(Integer vertexZ: vertexes) {
@@ -105,7 +107,7 @@ public class Properties {
 	 * @return True if the graph is anti-transitive, false else.
 	 */
 	public static boolean isAntiTransitive(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertexX: vertexes) {
 			for(Integer vertexY: vertexes) {
 				for(Integer vertexZ: vertexes) {

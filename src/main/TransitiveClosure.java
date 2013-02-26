@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Set;
+
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 
@@ -35,10 +37,10 @@ public class TransitiveClosure {
 	 * @return The transitive closure.
 	 */
 	public static Graph<Integer, DefaultEdge> getByRoyMarshall(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		Graph<Integer, DefaultEdge> closure = Tools.clone(graph);
-		for(int i=0 ; i<vertexes.length ; i++) {
-			teta(closure, vertexes[i], vertexes);
+		for(Integer vertex: vertexes) {
+			teta(closure, vertex, vertexes);
 		}
 		return closure;
 	}
@@ -49,7 +51,7 @@ public class TransitiveClosure {
 	 * @param graph The graph to be changed.
 	 * @param i The vertex on which compute the teta function.
 	 */
-	private static void teta(Graph<Integer, DefaultEdge> graph, int i, Integer[] vertexes) {
+	private static void teta(Graph<Integer, DefaultEdge> graph, int i, Set<Integer> vertexes) {
 		for(Integer vertexX: vertexes) {
 			if(graph.containsEdge(vertexX, i)) {
 				for(Integer vertexY: vertexes) {
@@ -69,7 +71,7 @@ public class TransitiveClosure {
 	 */
 	public static boolean isTauMinimal(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> closure = getByRoyMarshall(graph);
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertexX: vertexes) {
 			for(Integer vertexY: vertexes) {
 				if(graph.containsEdge(vertexX, vertexY)) {

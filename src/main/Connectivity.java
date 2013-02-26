@@ -12,7 +12,7 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 
 /**
- * Regroups the methods about the conn
+ * Regroups the methods about the connectivity.
  * @author Paul Chaignon
  */
 public class Connectivity {
@@ -25,7 +25,6 @@ public class Connectivity {
 	 */
 	public static Graph<Integer, DefaultEdge> getConnectedComposantByTarjan(Graph<Integer, DefaultEdge> graph, Integer a) {
 		Map<Integer, List<Integer>> map = getAdjacencyVertexes(graph);
-		//System.err.println(map);
 		
 		// Initialization:
 		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
@@ -47,50 +46,36 @@ public class Connectivity {
 		num[numA] = 0;
 		p[numA] = numA;
 		int j;
-		//System.err.println();
 		
 		// Core of the algorithm:
 		while(n[i]+1!=d[i] || i!=numA) {
-			//System.err.println("Nouveau tour: i="+i);
 			if(n[i]+1==d[i]) {
-				//System.err.println("n["+i+"]+1==d["+i+"]=="+n[i]);
 				i = p[i];
-				//System.err.println("i=p[i]="+i);
 			} else {
-				//System.err.println("n["+i+"]+1!=d["+i+"];n="+n[i]+";d="+d[i]);
 				n[i]++;
 				j = map.get(i).get(n[i]);
-				//System.err.println("n["+i+"]="+n[i]+"; j="+j);
 				if(p[j]==-1) {
-					//System.err.println("p["+j+"]==-1");
 					p[j] = i;
 					i = j;
 					k++;
 					num[i] = k;
-					//System.err.println("p["+j+"]="+p[j]+"; k="+k+"; num["+i+"]="+k);
 				}
 			}
-			//System.err.println();
 		}
 		
 		// Check if the graph is connected:
 		if(k+1==vertexes.length) {
-			//System.err.println("Is connected!");
 			return Tools.clone(graph);
 		}
 		
 		// Construct the subgraph which is the connected composant:
 		Set<Integer> connectedVertexes = new HashSet<Integer>();
-		//System.err.println("k="+k);
 		connectedVertexes.add(a);
 		for(i=0 ; i<vertexes.length ; i++) {
-			//System.err.print(i+"=>"+num[i]+" ");
 			if(num[i]<=k && num[i]!=0) {
 				connectedVertexes.add(vertexes[i]);
 			}
 		}
-		//System.err.println();
-		//System.err.println(connectedVertexes);
 		Graph<Integer, DefaultEdge> subgraph = Operations.subgraph(graph, connectedVertexes);
 		return subgraph;
 	}
@@ -200,11 +185,11 @@ public class Connectivity {
 	}
 	
 	/**
-	 * Construct the strongly connected composants of a graph using the ascending-descending algorithm.
+	 * Construct the strongly connected composants of a graph using the ascendant-descendant algorithm.
 	 * @param graph The graph.
 	 * @return The strongly connected composants of a graph.
 	 */
-	public static List<Graph<Integer, DefaultEdge>> getStronglyConnectedComposantsByAscendingDescending(Graph<Integer, DefaultEdge> graph) {
+	public static List<Graph<Integer, DefaultEdge>> getStronglyConnectedComposantsByAscendantDescendant(Graph<Integer, DefaultEdge> graph) {
 		List<Graph<Integer, DefaultEdge>> composants = new LinkedList<Graph<Integer, DefaultEdge>>();
 		Set<Integer> nc = new HashSet<Integer>();
 		for(Integer vertex: graph.vertexSet()) {

@@ -24,9 +24,9 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> union(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) throws IllegalArgumentException {
 		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		Integer[] vertexes = graph1.vertexSet().toArray(new Integer[0]);
-		Integer[] vertexes2 = graph2.vertexSet().toArray(new Integer[0]);
-		if(!Tools.arrayEquals(vertexes, vertexes2)) {
+		Set<Integer> vertexes = graph1.vertexSet();
+		Set<Integer> vertexes2 = graph2.vertexSet();
+		if(!vertexes.equals(vertexes2)) {
 			throw new IllegalArgumentException("The two graphs must have the same vertexes.");
 		}
 		for(Integer vertex: vertexes) {
@@ -52,9 +52,9 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> composition(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) throws IllegalArgumentException {
 		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		Integer[] vertexes = graph1.vertexSet().toArray(new Integer[0]);
-		Integer[] vertexes2 = graph2.vertexSet().toArray(new Integer[0]);
-		if(!Tools.arrayEquals(vertexes, vertexes2)) {
+		Set<Integer> vertexes = graph1.vertexSet();
+		Set<Integer> vertexes2 = graph2.vertexSet();
+		if(!vertexes.equals(vertexes2)) {
 			throw new IllegalArgumentException("The two graphs must have the same vertexes.");
 		}
 		for(Integer vertex: vertexes) {
@@ -94,7 +94,7 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> transpose(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> transposed = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertex: vertexes) {
 			transposed.addVertex(vertex);
 		}
@@ -115,7 +115,7 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> complementary(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> complementary = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertex: vertexes) {
 			complementary.addVertex(vertex);
 		}
@@ -136,7 +136,7 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> complementaryWithoutLoops(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> complementary = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertex: vertexes) {
 			complementary.addVertex(vertex);
 		}
@@ -157,7 +157,7 @@ public class Operations {
 	 * @return True if partialGraph is the partial graph of graph.
 	 */
 	public static boolean isPartialGraph(Graph<Integer, DefaultEdge> partialGraph, Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertexX: vertexes) {
 			for(Integer vertexY: vertexes) {
 				if(partialGraph.containsEdge(vertexX, vertexY) && !graph.containsEdge(vertexX, vertexY)) {
@@ -176,7 +176,7 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> subgraph(Graph<Integer, DefaultEdge> graph, Set<Integer> a) {
 		Graph<Integer, DefaultEdge> subgraph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Set<Integer> vertexes = graph.vertexSet();
 		for(Integer vertex: a) {
 			subgraph.addVertex(vertex);
 		}
