@@ -15,10 +15,11 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestConnectivity extends TestCase {
-	Graph<Integer, DefaultEdge> graph1;
-	Graph<Integer, DefaultEdge> graph2;
-	Graph<Integer, DefaultEdge> graph3;
-	Graph<Integer, DefaultEdge> graph4;
+	private Graph<Integer, DefaultEdge> graph1;
+	private Graph<Integer, DefaultEdge> graph2;
+	private Graph<Integer, DefaultEdge> graph3;
+	private Graph<Integer, DefaultEdge> graph4;
+	private Graph<Integer, DefaultEdge> graph5;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
@@ -28,6 +29,7 @@ public class TestConnectivity extends TestCase {
 		this.graph2 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		this.graph3 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		this.graph4 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		this.graph5 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 
 		this.graph2.addVertex(1);
 		this.graph2.addVertex(2);
@@ -138,6 +140,13 @@ public class TestConnectivity extends TestCase {
 		this.graph4.addEdge(17, 16);
 		this.graph4.addEdge(17, 18);
 		this.graph4.addEdge(18, 17);
+
+		this.graph5.addVertex(1);
+		this.graph5.addVertex(2);
+		this.graph5.addVertex(3);
+
+		this.graph5.addEdge(2, 1);
+		this.graph5.addEdge(3, 1);
 	}
 	
 	/**
@@ -184,5 +193,14 @@ public class TestConnectivity extends TestCase {
 		for(Graph<Integer, DefaultEdge> graph: subgraphs) {
 			System.out.println(graph);
 		}
+	}
+	
+	/**
+	 * Test the isAlmostStronglyConnected method.
+	 */
+	public void testIsAlmostStronglyConnected() {
+		assertTrue(Connectivity.isAlmostStronglyConnected(this.graph3));
+		assertTrue(Connectivity.isAlmostStronglyConnected(this.graph1));
+		assertFalse(Connectivity.isAlmostStronglyConnected(this.graph5));
 	}
 }

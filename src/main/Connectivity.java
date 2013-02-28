@@ -296,4 +296,36 @@ public class Connectivity {
 			}
 		}
 	}
+	
+	/**
+	 * Check if a graph is almost strongly connected.
+	 * @param graph The graph.
+	 * @return True if it's almost strongly connected, false else.
+	 */
+	public static boolean isAlmostStronglyConnected(Graph<Integer, DefaultEdge> graph) {
+		int[][] routingMatrix = Routing.routingByRoyMarshallWithSuccessor(graph);
+		return isAlmostStronglyConnected(routingMatrix);
+	}
+	
+	/**
+	 * Check if a graph is almost strongly connected.
+	 * @param graph The routing matrix of the graph.
+	 * @return True if it's almost strongly connected, false else.
+	 */
+	public static boolean isAlmostStronglyConnected(int[][] routingMatrix) {
+		boolean isRoot;
+		for(int a=0 ; a<routingMatrix.length ; a++) {
+			isRoot = true;
+			for(int x=0 ; x<routingMatrix.length ; x++) {
+				if(a!=x && routingMatrix[a][x]==-1) {
+					isRoot = false;
+					break;
+				}
+			}
+			if(isRoot) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
