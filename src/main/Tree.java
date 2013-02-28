@@ -32,4 +32,19 @@ public class Tree {
 		}
 		return -1;
 	}
+	
+	/**
+	 * Check if a graph is a rooted tree.
+	 * @param graph The graph.
+	 * @return True if it is.
+	 */
+	public static boolean isRootedTree(Graph<Integer, DefaultEdge> graph) {
+		if(graph.edgeSet().size()+1!=graph.vertexSet().size()) {
+			return false;
+		}
+		if(Connectivity.isAlmostStronglyConnected(graph)) {
+			return true;
+		}
+		return false;
+	}
 }
