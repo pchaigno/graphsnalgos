@@ -33,12 +33,11 @@ public class Tools {
 	 */
 	public static Graph<Integer, DefaultEdge> clone(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> clone = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
-		for(Integer vertex: vertexes) {
+		for(Integer vertex: graph.vertexSet()) {
 			clone.addVertex(vertex);
 		}
-		for(Integer vertexX: vertexes) {
-			for(Integer vertexY: vertexes) {
+		for(Integer vertexX: graph.vertexSet()) {
+			for(Integer vertexY: graph.vertexSet()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					clone.addEdge(vertexX, vertexY);
 				}
@@ -54,13 +53,11 @@ public class Tools {
 	 * @return True if they are equals, false else.
 	 */
 	public static boolean graphEquals(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) {
-		Set<Integer> vertexes1 = graph1.vertexSet();
-		Set<Integer> vertexes2 = graph1.vertexSet();
-		if(!vertexes1.equals(vertexes2)) {
+		if(!graph1.vertexSet().equals(graph2.vertexSet())) {
 			return false;
 		}
-		for(Integer vertexX: vertexes1) {
-			for(Integer vertexY: vertexes1) {
+		for(Integer vertexX: graph1.vertexSet()) {
+			for(Integer vertexY: graph1.vertexSet()) {
 				if(graph1.containsEdge(vertexX, vertexY) && !graph2.containsEdge(vertexX, vertexY)) {
 					return false;
 				}

@@ -1,7 +1,5 @@
 package main;
 
-import java.util.Set;
-
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 
@@ -18,8 +16,7 @@ public class Properties {
 	 * @return True if the graph is reflexive, false else.
 	 */
 	public static boolean isReflexive(Graph<Integer, DefaultEdge> graph) {
-		Set<Integer> vertexes = graph.vertexSet();
-		for(Integer vertex: vertexes) {
+		for(Integer vertex: graph.vertexSet()) {
 			if(!graph.containsEdge(vertex, vertex)) {
 				return false;
 			}
@@ -33,8 +30,7 @@ public class Properties {
 	 * @return True if the graph is anti-reflexive, false else.
 	 */
 	public static boolean isAntiReflexive(Graph<Integer, DefaultEdge> graph) {
-		Set<Integer> vertexes = graph.vertexSet();
-		for(Integer vertex: vertexes) {
+		for(Integer vertex: graph.vertexSet()) {
 			if(graph.containsEdge(vertex, vertex)) {
 				return false;
 			}
@@ -48,9 +44,8 @@ public class Properties {
 	 * @return True if the graph is symetric, false else.
 	 */
 	public static boolean isSymetric(Graph<Integer, DefaultEdge> graph) {
-		Set<Integer> vertexes = graph.vertexSet();
-		for(Integer vertexX: vertexes) {
-			for(Integer vertexY: vertexes) {
+		for(Integer vertexX: graph.vertexSet()) {
+			for(Integer vertexY: graph.vertexSet()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					if(!vertexX.equals(vertexY) && !graph.containsEdge(vertexY, vertexX)) {
 						return false;
@@ -67,9 +62,8 @@ public class Properties {
 	 * @return True if the graph is anti-symetric, false else.
 	 */
 	public static boolean isAntiSymetric(Graph<Integer, DefaultEdge> graph) {
-		Set<Integer> vertexes = graph.vertexSet();
-		for(Integer vertexX: vertexes) {
-			for(Integer vertexY: vertexes) {
+		for(Integer vertexX: graph.vertexSet()) {
+			for(Integer vertexY: graph.vertexSet()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					if(!vertexX.equals(vertexY) && graph.containsEdge(vertexY, vertexX)) {
 						return false;
@@ -86,10 +80,9 @@ public class Properties {
 	 * @return True if the graph is transitive, false else.
 	 */
 	public static boolean isTransitive(Graph<Integer, DefaultEdge> graph) {
-		Set<Integer> vertexes = graph.vertexSet();
-		for(Integer vertexX: vertexes) {
-			for(Integer vertexY: vertexes) {
-				for(Integer vertexZ: vertexes) {
+		for(Integer vertexX: graph.vertexSet()) {
+			for(Integer vertexY: graph.vertexSet()) {
+				for(Integer vertexZ: graph.vertexSet()) {
 					if(graph.containsEdge(vertexX, vertexY) && graph.containsEdge(vertexY, vertexZ)) {
 						if(!graph.containsEdge(vertexX, vertexZ)) {
 							return false;
@@ -107,10 +100,9 @@ public class Properties {
 	 * @return True if the graph is anti-transitive, false else.
 	 */
 	public static boolean isAntiTransitive(Graph<Integer, DefaultEdge> graph) {
-		Set<Integer> vertexes = graph.vertexSet();
-		for(Integer vertexX: vertexes) {
-			for(Integer vertexY: vertexes) {
-				for(Integer vertexZ: vertexes) {
+		for(Integer vertexX: graph.vertexSet()) {
+			for(Integer vertexY: graph.vertexSet()) {
+				for(Integer vertexZ: graph.vertexSet()) {
 					if(graph.containsEdge(vertexX, vertexY) && graph.containsEdge(vertexY, vertexZ)) {
 						if(graph.containsEdge(vertexX, vertexZ)) {
 							return false;

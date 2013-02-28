@@ -37,10 +37,9 @@ public class TransitiveClosure {
 	 * @return The transitive closure.
 	 */
 	public static Graph<Integer, DefaultEdge> getByRoyMarshall(Graph<Integer, DefaultEdge> graph) {
-		Set<Integer> vertexes = graph.vertexSet();
 		Graph<Integer, DefaultEdge> closure = Tools.clone(graph);
-		for(Integer vertex: vertexes) {
-			teta(closure, vertex, vertexes);
+		for(Integer vertex: graph.vertexSet()) {
+			teta(closure, vertex, graph.vertexSet());
 		}
 		return closure;
 	}
@@ -71,9 +70,8 @@ public class TransitiveClosure {
 	 */
 	public static boolean isTauMinimal(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> closure = getByRoyMarshall(graph);
-		Set<Integer> vertexes = graph.vertexSet();
-		for(Integer vertexX: vertexes) {
-			for(Integer vertexY: vertexes) {
+		for(Integer vertexX: graph.vertexSet()) {
+			for(Integer vertexY: graph.vertexSet()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					graph.removeEdge(vertexX, vertexY);
 					if(Tools.graphEquals(closure, getByRoyMarshall(graph))) {
