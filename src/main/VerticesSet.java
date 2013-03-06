@@ -22,8 +22,8 @@ public class VerticesSet {
 	 * @return True if the set s is an independent set of graph.
 	 */
 	public static boolean isIndependentSet(Graph<Integer, DefaultEdge> graph, Set<Integer> s) {
-		for(Integer x: s) {
-			for(Integer y: s) {
+		for(int x: s) {
+			for(int y: s) {
 				if(graph.containsEdge(x, y)) {
 					return false;
 				}
@@ -63,7 +63,7 @@ public class VerticesSet {
 		int firstVertex;
 		boolean notAdjacent;
 		List<Integer> unclassedVertices = new LinkedList<Integer>();
-		for(Integer vertex: graph.vertexSet()) {
+		for(int vertex: graph.vertexSet()) {
 			unclassedVertices.add(vertex);
 		}
 		while(unclassedVertices.size()>0) {
@@ -71,7 +71,7 @@ public class VerticesSet {
 			set = new HashSet<Integer>();
 			firstVertex = unclassedVertices.remove(0);
 			set.add(firstVertex);
-			for(Integer vertex: graph.vertexSet()) {
+			for(int vertex: graph.vertexSet()) {
 				if(firstVertex!=vertex) {
 					notAdjacent = true;
 					for(Integer classedVertices: set) {
@@ -93,5 +93,42 @@ public class VerticesSet {
 			}
 		}
 		return maximum;
+	}
+	
+	/**
+	 * Check if a set of vertices is a clique of a graph.
+	 * TODO Does it need to be distinct vertices?
+	 * @param graph The graph.
+	 * @param s The set to test.
+	 * @return True if the set s is a clique of graph.
+	 */
+	public static boolean isClique(Graph<Integer, DefaultEdge> graph, Set<Integer> s) {
+		for(int x: s) {
+			for(int y: s) {
+				if(x!=y && !graph.containsEdge(x, y) && !graph.containsEdge(y, x)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Check if a set of vertices is a maximal clique of a graph.
+	 * @param graph The graph.
+	 * @param s The set to test.
+	 * @return True if the set s is a maximal clique of graph.
+	 */
+	public static boolean isMaximalClique(Graph<Integer, DefaultEdge> graph, Set<Integer> s) {
+		for(int vertex: graph.vertexSet()) {
+			if(!s.contains(vertex)) {
+				s.add(vertex);
+				if(isClique(graph, s)) {
+					return false;
+				}
+				s.remove(vertex);
+			}
+		}
+		return true;
 	}
 }

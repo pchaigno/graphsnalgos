@@ -11,6 +11,10 @@ import org.jgrapht.graph.DefaultEdge;
 
 import junit.framework.TestCase;
 
+/**
+ * Unit tests of the methods from VerticesSet.
+ * @author Paul Chaignon
+ */
 public class TestVerticesSet extends TestCase {
 	private Graph<Integer, DefaultEdge> graph1;
 	private Graph<Integer, DefaultEdge> graph2;
@@ -69,5 +73,31 @@ public class TestVerticesSet extends TestCase {
 		assertFalse(VerticesSet.isMaximalIndependentSet(this.graph1, set));
 		set.add(3);
 		assertTrue(VerticesSet.isMaximalIndependentSet(this.graph1, set));
+	}
+	
+	/**
+	 * Test the isClique method.
+	 */
+	public void testIsClique() {
+		Set<Integer> set = new HashSet<Integer>();
+		set.add(2);
+		set.add(3);
+		set.add(4);
+		assertTrue(VerticesSet.isClique(this.graph1, set));
+		set.add(1);
+		set.remove(3);
+		assertFalse(VerticesSet.isClique(this.graph1, set));
+	}
+	
+	/**
+	 * Test the isMaximalClique method.
+	 */
+	public void testIsMaximalClique() {
+		Set<Integer> set = new HashSet<Integer>();
+		set.add(2);
+		set.add(3);
+		assertFalse(VerticesSet.isMaximalClique(this.graph1, set));
+		set.add(4);
+		assertTrue(VerticesSet.isMaximalClique(this.graph1, set));
 	}
 }
