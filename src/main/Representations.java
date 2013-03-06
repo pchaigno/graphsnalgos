@@ -46,7 +46,7 @@ public class Representations {
 		for(int i=0 ; i<vertices.length ; i++) {
 			source = vertices[i];
 			map.put(source, new LinkedList<Integer>());
-			for(Integer vertex: vertices) {
+			for(int vertex: vertices) {
 				if(graph.containsEdge(source, vertex)) {
 					map.get(source).add(vertex);
 				}
@@ -66,7 +66,7 @@ public class Representations {
 		for(int i=0 ; i<vertices.length ; i++) {
 			target = vertices[i];
 			map.put(target, new LinkedList<Integer>());
-			for(Integer vertex: vertices) {
+			for(int vertex: vertices) {
 				if(graph.containsEdge(vertex, target)) {
 					map.get(target).add(vertex);
 				}

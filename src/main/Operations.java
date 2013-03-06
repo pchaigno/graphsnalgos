@@ -27,11 +27,11 @@ public class Operations {
 		if(!graph1.vertexSet().equals(graph2.vertexSet())) {
 			throw new IllegalArgumentException("The two graphs must have the same vertices.");
 		}
-		for(Integer vertex: graph1.vertexSet()) {
+		for(int vertex: graph1.vertexSet()) {
 			graph.addVertex(vertex);
 		}
-		for(Integer vertexX: graph1.vertexSet()) {
-			for(Integer vertexY: graph1.vertexSet()) {
+		for(int vertexX: graph1.vertexSet()) {
+			for(int vertexY: graph1.vertexSet()) {
 				if(graph1.containsEdge(vertexX, vertexY) || graph2.containsEdge(vertexX, vertexY)) {
 					graph.addEdge(vertexX, vertexY);
 				}
@@ -53,12 +53,12 @@ public class Operations {
 		if(!graph1.vertexSet().equals(graph2.vertexSet())) {
 			throw new IllegalArgumentException("The two graphs must have the same vertices.");
 		}
-		for(Integer vertex: graph1.vertexSet()) {
+		for(int vertex: graph1.vertexSet()) {
 			graph.addVertex(vertex);
 		}
-		for(Integer vertexX: graph1.vertexSet()) {
-			for(Integer vertexY: graph1.vertexSet()) {
-				for(Integer vertexZ: graph1.vertexSet()) {
+		for(int vertexX: graph1.vertexSet()) {
+			for(int vertexY: graph1.vertexSet()) {
+				for(int vertexZ: graph1.vertexSet()) {
 					if(graph2.containsEdge(vertexX, vertexZ) && graph1.containsEdge(vertexZ, vertexY)) {
 						graph.addEdge(vertexX, vertexY);
 					}
@@ -90,11 +90,11 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> transpose(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> transposed = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(Integer vertex: graph.vertexSet()) {
+		for(int vertex: graph.vertexSet()) {
 			transposed.addVertex(vertex);
 		}
-		for(Integer vertexX: graph.vertexSet()) {
-			for(Integer vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.vertexSet()) {
+			for(int vertexY: graph.vertexSet()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					transposed.addEdge(vertexY, vertexX);
 				}
@@ -110,11 +110,11 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> complementary(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> complementary = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(Integer vertex: graph.vertexSet()) {
+		for(int vertex: graph.vertexSet()) {
 			complementary.addVertex(vertex);
 		}
-		for(Integer vertexX: graph.vertexSet()) {
-			for(Integer vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.vertexSet()) {
+			for(int vertexY: graph.vertexSet()) {
 				if(!graph.containsEdge(vertexX, vertexY)) {
 					complementary.addEdge(vertexX, vertexY);
 				}
@@ -130,12 +130,12 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> complementaryWithoutLoops(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> complementary = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(Integer vertex: graph.vertexSet()) {
+		for(int vertex: graph.vertexSet()) {
 			complementary.addVertex(vertex);
 		}
-		for(Integer vertexX: graph.vertexSet()) {
-			for(Integer vertexY: graph.vertexSet()) {
-				if(!vertexX.equals(vertexY) && !graph.containsEdge(vertexX, vertexY)) {
+		for(int vertexX: graph.vertexSet()) {
+			for(int vertexY: graph.vertexSet()) {
+				if(vertexX!=vertexY && !graph.containsEdge(vertexX, vertexY)) {
 					complementary.addEdge(vertexX, vertexY);
 				}
 			}
@@ -150,8 +150,8 @@ public class Operations {
 	 * @return True if partialGraph is the partial graph of graph.
 	 */
 	public static boolean isPartialGraph(Graph<Integer, DefaultEdge> partialGraph, Graph<Integer, DefaultEdge> graph) {
-		for(Integer vertexX: graph.vertexSet()) {
-			for(Integer vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.vertexSet()) {
+			for(int vertexY: graph.vertexSet()) {
 				if(partialGraph.containsEdge(vertexX, vertexY) && !graph.containsEdge(vertexX, vertexY)) {
 					return false;
 				}
@@ -168,11 +168,11 @@ public class Operations {
 	 */
 	public static Graph<Integer, DefaultEdge> subgraph(Graph<Integer, DefaultEdge> graph, Set<Integer> a) {
 		Graph<Integer, DefaultEdge> subgraph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(Integer vertex: a) {
+		for(int vertex: a) {
 			subgraph.addVertex(vertex);
 		}
-		for(Integer vertexX: graph.vertexSet()) {
-			for(Integer vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.vertexSet()) {
+			for(int vertexY: graph.vertexSet()) {
 				if(a.contains(vertexX) && a.contains(vertexY) && graph.containsEdge(vertexX, vertexY)) {
 					subgraph.addEdge(vertexX, vertexY);
 				}

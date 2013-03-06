@@ -34,11 +34,11 @@ public class Tools {
 	 */
 	public static Graph<Integer, DefaultEdge> clone(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> clone = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(Integer vertex: graph.vertexSet()) {
+		for(int vertex: graph.vertexSet()) {
 			clone.addVertex(vertex);
 		}
-		for(Integer vertexX: graph.vertexSet()) {
-			for(Integer vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.vertexSet()) {
+			for(int vertexY: graph.vertexSet()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					clone.addEdge(vertexX, vertexY);
 				}
@@ -70,8 +70,8 @@ public class Tools {
 		if(!graph1.vertexSet().equals(graph2.vertexSet())) {
 			return false;
 		}
-		for(Integer vertexX: graph1.vertexSet()) {
-			for(Integer vertexY: graph1.vertexSet()) {
+		for(int vertexX: graph1.vertexSet()) {
+			for(int vertexY: graph1.vertexSet()) {
 				if(graph1.containsEdge(vertexX, vertexY) && !graph2.containsEdge(vertexX, vertexY)) {
 					return false;
 				}

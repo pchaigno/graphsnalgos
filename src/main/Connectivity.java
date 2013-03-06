@@ -114,7 +114,7 @@ public class Connectivity {
 	public static List<Graph<Integer, DefaultEdge>> getConnectedComposantsByTarjan(Graph<Integer, DefaultEdge> graph) {
 		List<Graph<Integer, DefaultEdge>> connectedComposants = new ArrayList<Graph<Integer, DefaultEdge>>();
 		List<Integer> vertices = new ArrayList<Integer>();
-		for(Integer vertex: graph.vertexSet()) {
+		for(int vertex: graph.vertexSet()) {
 			vertices.add(vertex);
 		}
 		do {
@@ -132,8 +132,8 @@ public class Connectivity {
 	public static boolean isStronglyConnected(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> closure = TransitiveClosure.getByRoyMarshall(graph);
 		Integer[] vertices = closure.vertexSet().toArray(new Integer[0]);
-		for(Integer vertexX: vertices) {
-			for(Integer vertexY: vertices) {
+		for(int vertexX: vertices) {
+			for(int vertexY: vertices) {
 				if(!closure.containsEdge(vertexX, vertexY)) {
 					return false;
 				}
@@ -151,25 +151,25 @@ public class Connectivity {
 		List<Graph<Integer, DefaultEdge>> composants = new LinkedList<Graph<Integer, DefaultEdge>>();
 		Graph<Integer, DefaultEdge> closure = TransitiveClosure.getByRoyMarshall(graph);
 		Set<Integer> nc = new HashSet<Integer>();
-		for(Integer vertex: graph.vertexSet()) {
+		for(int vertex: graph.vertexSet()) {
 			nc.add(vertex);
 		}
 		
 		// Foulkes' algorithm:
-		for(Integer i: graph.vertexSet()) {
+		for(int i: graph.vertexSet()) {
 			if(nc.contains(i)) {
 				Set<Integer> cfc = new HashSet<Integer>();
 				cfc.add(i);
 				nc.remove(i);
 				if(closure.containsEdge(i, i)) {
 					boolean jSupI = false;
-					for(Integer j: graph.vertexSet()) {
+					for(int j: graph.vertexSet()) {
 						if(jSupI) {
 							if(nc.contains(j) && closure.containsEdge(i, j) && closure.containsEdge(j, i)) {
 								cfc.add(j);
 								nc.remove(j);
 							}
-						} else if(j.equals(i)) {
+						} else if(j==i) {
 							jSupI = true;
 						}
 					}
@@ -192,12 +192,12 @@ public class Connectivity {
 	public static List<Graph<Integer, DefaultEdge>> getStronglyConnectedComposantsByAscendantDescendant(Graph<Integer, DefaultEdge> graph) {
 		List<Graph<Integer, DefaultEdge>> composants = new LinkedList<Graph<Integer, DefaultEdge>>();
 		Set<Integer> nc = new HashSet<Integer>();
-		for(Integer vertex: graph.vertexSet()) {
+		for(int vertex: graph.vertexSet()) {
 			nc.add(vertex);
 		}
 		
 		// Ascending-descending algorithm:
-		for(Integer i: graph.vertexSet()) {
+		for(int i: graph.vertexSet()) {
 			if(nc.contains(i)) {
 				Set<Integer> a = ascendantsUnclassified(graph, nc, i);
 				Set<Integer> d = descendantsUnclassified(graph, nc, i);
@@ -243,13 +243,13 @@ public class Connectivity {
 		
 		// Get unclassified predecessors of y:
 		Set<Integer> lPred = new HashSet<Integer>();
-		for(Integer notRated: nc) {
+		for(int notRated: nc) {
 			if(graph.containsEdge(notRated, y)) {
 				lPred.add(notRated);
 			}
 		}
 		
-		for(Integer z: lPred) {
+		for(int z: lPred) {
 			if(!a.contains(z)) {
 				ancestors(a, z, nc, graph);
 			}
@@ -284,13 +284,13 @@ public class Connectivity {
 		
 		// Get unclassified successors of y. 
 		Set<Integer> lSuc = new HashSet<Integer>();
-		for(Integer notRated: nc) {
+		for(int notRated: nc) {
 			if(graph.containsEdge(y, notRated)) {
 				lSuc.add(notRated);
 			}
 		}
 		
-		for(Integer z: lSuc) {
+		for(int z: lSuc) {
 			if(!d.contains(z)) {
 				sons(d, z, nc, graph);
 			}
