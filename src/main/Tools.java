@@ -1,5 +1,8 @@
 package main;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
@@ -25,7 +28,7 @@ public class Tools {
 	}
 	
 	/**
-	 * Construct a copy of the graph.
+	 * Build a copy of the graph.
 	 * @param graph The graph to clone.
 	 * @return The cloned graph.
 	 */
@@ -42,6 +45,19 @@ public class Tools {
 			}
 		}
 		return clone;
+	}
+	
+	/**
+	 * Build a copy of a set of integers.
+	 * @param set The set to clone.
+	 * @return The cloned set.
+	 */
+	public static Set<Integer> clone(Set<Integer> set) {
+		Set<Integer> result = new HashSet<Integer>();
+		for(int el: set) {
+			result.add(el);
+		}
+		return result;
 	}
 	
 	/**
