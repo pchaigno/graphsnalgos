@@ -50,10 +50,10 @@ public class TransitiveClosure {
 	 * @param graph The graph to be changed.
 	 * @param i The vertex on which compute the teta function.
 	 */
-	private static void teta(Graph<Integer, DefaultEdge> graph, int i, Set<Integer> vertexes) {
-		for(Integer vertexX: vertexes) {
+	private static void teta(Graph<Integer, DefaultEdge> graph, int i, Set<Integer> vertices) {
+		for(Integer vertexX: vertices) {
 			if(graph.containsEdge(vertexX, i)) {
-				for(Integer vertexY: vertexes) {
+				for(Integer vertexY: vertices) {
 					if(graph.containsEdge(i, vertexY) && !graph.containsEdge(vertexX, vertexY)) {
 						graph.addEdge(vertexX, vertexY);
 					}

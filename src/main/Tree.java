@@ -26,8 +26,8 @@ public class Tree {
 				}
 			}
 			if(isRoot) {
-				Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
-				return vertexes[a];
+				Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+				return vertices[a];
 			}
 		}
 		return -1;

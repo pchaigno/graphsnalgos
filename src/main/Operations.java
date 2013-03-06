@@ -16,7 +16,7 @@ public class Operations {
 	/**
 	 * Construct the union of two graphs.
 	 * The result graph is always a 1-graph.
-	 * The two graph must have the same vertexes.
+	 * The two graph must have the same vertices.
 	 * @param graph1 The first graph.
 	 * @param graph2 The second graph.
 	 * @return The union of graph1 and graph2.
@@ -25,7 +25,7 @@ public class Operations {
 	public static Graph<Integer, DefaultEdge> union(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) throws IllegalArgumentException {
 		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		if(!graph1.vertexSet().equals(graph2.vertexSet())) {
-			throw new IllegalArgumentException("The two graphs must have the same vertexes.");
+			throw new IllegalArgumentException("The two graphs must have the same vertices.");
 		}
 		for(Integer vertex: graph1.vertexSet()) {
 			graph.addVertex(vertex);
@@ -51,7 +51,7 @@ public class Operations {
 	public static Graph<Integer, DefaultEdge> composition(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) throws IllegalArgumentException {
 		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		if(!graph1.vertexSet().equals(graph2.vertexSet())) {
-			throw new IllegalArgumentException("The two graphs must have the same vertexes.");
+			throw new IllegalArgumentException("The two graphs must have the same vertices.");
 		}
 		for(Integer vertex: graph1.vertexSet()) {
 			graph.addVertex(vertex);

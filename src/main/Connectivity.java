@@ -27,17 +27,17 @@ public class Connectivity {
 		Map<Integer, List<Integer>> map = getAdjacencyVertexes(graph);
 		
 		// Initialization:
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
-		int[] p = new int[vertexes.length];
-		int[] d = new int[vertexes.length];
-		int[] n = new int[vertexes.length];
-		int[] num = new int[vertexes.length];
+		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+		int[] p = new int[vertices.length];
+		int[] d = new int[vertices.length];
+		int[] n = new int[vertices.length];
+		int[] num = new int[vertices.length];
 		int numA = -1;
-		for(int i=0 ; i<vertexes.length ; i++) {
+		for(int i=0 ; i<vertices.length ; i++) {
 			p[i] = -1;
 			d[i] = map.get(i).size();
 			n[i] = -1;
-			if(vertexes[i]==a) {
+			if(vertices[i]==a) {
 				numA = i;
 			}
 		}
@@ -64,16 +64,16 @@ public class Connectivity {
 		}
 		
 		// Check if the graph is connected:
-		if(k+1==vertexes.length) {
+		if(k+1==vertices.length) {
 			return Tools.clone(graph);
 		}
 		
 		// Construct the subgraph which is the connected composant:
 		Set<Integer> connectedVertexes = new HashSet<Integer>();
 		connectedVertexes.add(a);
-		for(i=0 ; i<vertexes.length ; i++) {
+		for(i=0 ; i<vertices.length ; i++) {
 			if(num[i]<=k && num[i]!=0) {
-				connectedVertexes.add(vertexes[i]);
+				connectedVertexes.add(vertices[i]);
 			}
 		}
 		Graph<Integer, DefaultEdge> subgraph = Operations.subgraph(graph, connectedVertexes);
@@ -81,19 +81,19 @@ public class Connectivity {
 	}
 	
 	/**
-	 * Construct a map of all adjacency vertexes for each vertex.
+	 * Construct a map of all adjacency vertices for each vertex.
 	 * @param graph The graph.
-	 * @return The map of all adjacency vertexes.
+	 * @return The map of all adjacency vertices.
 	 */
 	private static Map<Integer, List<Integer>> getAdjacencyVertexes(Graph<Integer, DefaultEdge> graph) {
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
-		for(int i=0 ; i<vertexes.length ; i++) {
+		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+		for(int i=0 ; i<vertices.length ; i++) {
 			map.put(i, new LinkedList<Integer>());
 		}
-		for(int i=0 ; i<vertexes.length ; i++) {
-			for(int j=0 ; j<vertexes.length ; j++) {
-				if(graph.containsEdge(vertexes[i], vertexes[j]) || graph.containsEdge(vertexes[j], vertexes[i])) {
+		for(int i=0 ; i<vertices.length ; i++) {
+			for(int j=0 ; j<vertices.length ; j++) {
+				if(graph.containsEdge(vertices[i], vertices[j]) || graph.containsEdge(vertices[j], vertices[i])) {
 					if(!map.get(i).contains(j)) {
 						map.get(i).add(j);
 					}
@@ -113,14 +113,14 @@ public class Connectivity {
 	 */
 	public static List<Graph<Integer, DefaultEdge>> getConnectedComposantsByTarjan(Graph<Integer, DefaultEdge> graph) {
 		List<Graph<Integer, DefaultEdge>> connectedComposants = new ArrayList<Graph<Integer, DefaultEdge>>();
-		List<Integer> vertexes = new ArrayList<Integer>();
+		List<Integer> vertices = new ArrayList<Integer>();
 		for(Integer vertex: graph.vertexSet()) {
-			vertexes.add(vertex);
+			vertices.add(vertex);
 		}
 		do {
-			connectedComposants.add(getConnectedComposantByTarjan(graph, vertexes.get(0)));
-			vertexes.removeAll(connectedComposants.get(connectedComposants.size()-1).vertexSet());
-		} while(vertexes.size()>0);
+			connectedComposants.add(getConnectedComposantByTarjan(graph, vertices.get(0)));
+			vertices.removeAll(connectedComposants.get(connectedComposants.size()-1).vertexSet());
+		} while(vertices.size()>0);
 		return connectedComposants;
 	}
 
@@ -131,9 +131,9 @@ public class Connectivity {
 	 */
 	public static boolean isStronglyConnected(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> closure = TransitiveClosure.getByRoyMarshall(graph);
-		Integer[] vertexes = closure.vertexSet().toArray(new Integer[0]);
-		for(Integer vertexX: vertexes) {
-			for(Integer vertexY: vertexes) {
+		Integer[] vertices = closure.vertexSet().toArray(new Integer[0]);
+		for(Integer vertexX: vertices) {
+			for(Integer vertexY: vertices) {
 				if(!closure.containsEdge(vertexX, vertexY)) {
 					return false;
 				}
@@ -235,7 +235,7 @@ public class Connectivity {
 	 * TODO Is it tail-recursive?
 	 * @param a The set where to add the new ancestors found.
 	 * @param y The vertex.
-	 * @param nc The vertexes not rated.
+	 * @param nc The vertices not rated.
 	 * @param graph The graph.
 	 */
 	private static void ancestors(Set<Integer> a, Integer y, Set<Integer> nc, Graph<Integer, DefaultEdge> graph) {
@@ -276,7 +276,7 @@ public class Connectivity {
 	 * TODO Is it tail-recursive?
 	 * @param d The set where to add the new sons found.
 	 * @param y The vertex.
-	 * @param nc The vertexes not rated.
+	 * @param nc The vertices not rated.
 	 * @param graph The graph.
 	 */
 	private static void sons(Set<Integer> d, Integer y, Set<Integer> nc, Graph<Integer, DefaultEdge> graph) {

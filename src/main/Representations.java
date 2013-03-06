@@ -23,11 +23,11 @@ public class Representations {
 	 * @return The adjacency matrix.
 	 */
 	public static int[][] getAdjacencyMatrix(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
-		int[][] adjacencyMatrix = new int[vertexes.length][vertexes.length];
-		for(int i=0 ; i<vertexes.length ; i++) {
-			for(int j=0 ; j<vertexes.length ; j++) {
-				if(graph.containsEdge(vertexes[i], vertexes[j])) {
+		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+		int[][] adjacencyMatrix = new int[vertices.length][vertices.length];
+		for(int i=0 ; i<vertices.length ; i++) {
+			for(int j=0 ; j<vertices.length ; j++) {
+				if(graph.containsEdge(vertices[i], vertices[j])) {
 					adjacencyMatrix[i][j] = 1;
 				}
 			}
@@ -37,16 +37,16 @@ public class Representations {
 	
 	/**
 	 * @param graph The graph.
-	 * @return The list of targets vertexes for each vertex.
+	 * @return The list of targets vertices for each vertex.
 	 */
 	public static Map<Integer, List<Integer>> getTargetsLists(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer source;
-		for(int i=0 ; i<vertexes.length ; i++) {
-			source = vertexes[i];
+		for(int i=0 ; i<vertices.length ; i++) {
+			source = vertices[i];
 			map.put(source, new LinkedList<Integer>());
-			for(Integer vertex: vertexes) {
+			for(Integer vertex: vertices) {
 				if(graph.containsEdge(source, vertex)) {
 					map.get(source).add(vertex);
 				}
@@ -57,16 +57,16 @@ public class Representations {
 	
 	/**
 	 * @param graph The graph.
-	 * @return The list of sources vertexes for each vertex.
+	 * @return The list of sources vertices for each vertex.
 	 */
 	public static Map<Integer, List<Integer>> getSourcesLists(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertexes = graph.vertexSet().toArray(new Integer[0]);
+		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer target;
-		for(int i=0 ; i<vertexes.length ; i++) {
-			target = vertexes[i];
+		for(int i=0 ; i<vertices.length ; i++) {
+			target = vertices[i];
 			map.put(target, new LinkedList<Integer>());
-			for(Integer vertex: vertexes) {
+			for(Integer vertex: vertices) {
 				if(graph.containsEdge(vertex, target)) {
 					map.get(target).add(vertex);
 				}
@@ -78,22 +78,22 @@ public class Representations {
 	/**
 	 * Build a graph from the adjacency matrix.
 	 * @param matrix The adjacency matrix.
-	 * @param vertexes The vertexes.
+	 * @param vertices The vertices.
 	 * @return The graph corresponding.
 	 * @throws IllegalArgumentException
 	 */
-	public static Graph<Integer, DefaultEdge> getGraphFromAdjacencyMatrix(int[][] matrix, int[] vertexes) throws IllegalArgumentException {
+	public static Graph<Integer, DefaultEdge> getGraphFromAdjacencyMatrix(int[][] matrix, int[] vertices) throws IllegalArgumentException {
 		if(matrix.length<1 || matrix.length!=matrix[0].length) {
 			throw new IllegalArgumentException();
 		}
 		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(int vertex: vertexes) {
+		for(int vertex: vertices) {
 			graph.addVertex(vertex);
 		}
 		for(int i=0 ; i<matrix.length ; i++) {
 			for(int j=0 ; j<matrix.length ; j++) {
 				if(matrix[i][j]==1) {
-					graph.addEdge(vertexes[i], vertexes[j]);
+					graph.addEdge(vertices[i], vertices[j]);
 				}
 			}
 		}
@@ -101,8 +101,8 @@ public class Representations {
 	}
 	
 	/**
-	 * Build the graph from the list of targets vertexes.
-	 * @param targets The list of targets vertexes for each vertex.
+	 * Build the graph from the list of targets vertices.
+	 * @param targets The list of targets vertices for each vertex.
 	 * @return The graph built.
 	 */
 	public static Graph<Integer, DefaultEdge> getGraphFromTargetsLists(Map<Integer, List<Integer>> targets) {
@@ -122,8 +122,8 @@ public class Representations {
 	}
 	
 	/**
-	 * Build the graph from the list of sources vertexes.
-	 * @param sources The list of sources vertexes for each vertex.
+	 * Build the graph from the list of sources vertices.
+	 * @param sources The list of sources vertices for each vertex.
 	 * @return The graph built.
 	 */
 	public static Graph<Integer, DefaultEdge> getGraphFromSourcesLists(Map<Integer, List<Integer>> sources) {
