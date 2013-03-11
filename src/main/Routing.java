@@ -21,11 +21,12 @@ public class Routing {
 	 */
 	public static int[][] routingByRoyMarshallWithSuccessor(Graph<Integer, DefaultEdge> graph) {
 		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
-		int[][] r = new int[vertices.length][vertices.length];
+		int length = vertices.length;
+		int[][] r = new int[length][length];
 		
 		// Initialization:
-		for(int i=0 ; i<vertices.length ; i++) {
-			for(int j=0 ; j<vertices.length ; j++) {
+		for(int i=0 ; i<length ; i++) {
+			for(int j=0 ; j<length ; j++) {
 				if(graph.containsEdge(vertices[i], vertices[j])) {
 					r[i][j] = vertices[j];
 				} else {
@@ -35,10 +36,10 @@ public class Routing {
 		}
 		
 		// Roy-Marshall's algorithm:
-		for(int i=0 ; i<vertices.length ; i++) {
-			for(int x=0 ; x<vertices.length ; x++) {
+		for(int i=0 ; i<length ; i++) {
+			for(int x=0 ; x<length ; x++) {
 				if(r[x][i]!=-1) {
-					for(int y=0 ; y<vertices.length ; y++) {
+					for(int y=0 ; y<length ; y++) {
 						if(r[i][y]!=-1 && r[x][y]==-1) {
 							r[x][y] = r[x][i];
 						}
@@ -58,11 +59,12 @@ public class Routing {
 	 */
 	public static int[][] routingByRoyMarshallWithPredecessor(Graph<Integer, DefaultEdge> graph) {
 		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
-		int[][] r = new int[vertices.length][vertices.length];
+		int length = vertices.length;
+		int[][] r = new int[length][length];
 		
 		// Initialization:
-		for(int i=0 ; i<vertices.length ; i++) {
-			for(int j=0 ; j<vertices.length ; j++) {
+		for(int i=0 ; i<length ; i++) {
+			for(int j=0 ; j<length ; j++) {
 				if(graph.containsEdge(vertices[i], vertices[j])) {
 					r[i][j] = vertices[i];
 				} else {
@@ -72,10 +74,10 @@ public class Routing {
 		}
 		
 		// Roy-Marshall's algorithm:
-		for(int i=0 ; i<vertices.length ; i++) {
-			for(int x=0 ; x<vertices.length ; x++) {
+		for(int i=0 ; i<length ; i++) {
+			for(int x=0 ; x<length ; x++) {
 				if(r[x][i]!=-1) {
-					for(int y=0 ; y<vertices.length ; y++) {
+					for(int y=0 ; y<length ; y++) {
 						if(r[i][y]!=-1 && r[x][y]==-1) {
 							r[x][y] = r[i][y];
 						}
@@ -95,11 +97,12 @@ public class Routing {
 	 */
 	public static int[][] routingByRoyMarshallWithAStep(Graph<Integer, DefaultEdge> graph) {
 		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
-		int[][] r = new int[vertices.length][vertices.length];
+		int length = vertices.length;
+		int[][] r = new int[length][length];
 		
 		// Initialization:
-		for(int i=0 ; i<vertices.length ; i++) {
-			for(int j=0 ; j<vertices.length ; j++) {
+		for(int i=0 ; i<length ; i++) {
+			for(int j=0 ; j<length ; j++) {
 				if(graph.containsEdge(vertices[i], vertices[j])) {
 					r[i][j] = 0;
 				} else {
@@ -109,10 +112,10 @@ public class Routing {
 		}
 		
 		// Roy-Marshall's algorithm:
-		for(int i=0 ; i<vertices.length ; i++) {
-			for(int x=0 ; x<vertices.length ; x++) {
+		for(int i=0 ; i<length ; i++) {
+			for(int x=0 ; x<length ; x++) {
 				if(r[x][i]!=-1) {
-					for(int y=0 ; y<vertices.length ; y++) {
+					for(int y=0 ; y<length ; y++) {
 						if(r[i][y]!=-1 && r[x][y]==-1) {
 							r[x][y] = vertices[i];
 						}

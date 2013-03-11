@@ -28,12 +28,13 @@ public class Connectivity {
 		
 		// Initialization:
 		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
-		int[] p = new int[vertices.length];
-		int[] d = new int[vertices.length];
-		int[] n = new int[vertices.length];
-		int[] num = new int[vertices.length];
+		int length = vertices.length;
+		int[] p = new int[length];
+		int[] d = new int[length];
+		int[] n = new int[length];
+		int[] num = new int[length];
 		int numA = -1;
-		for(int i=0 ; i<vertices.length ; i++) {
+		for(int i=0 ; i<length ; i++) {
 			p[i] = -1;
 			d[i] = map.get(i).size();
 			n[i] = -1;
@@ -64,14 +65,14 @@ public class Connectivity {
 		}
 		
 		// Check if the graph is connected:
-		if(k+1==vertices.length) {
+		if(k+1==length) {
 			return Tools.clone(graph);
 		}
 		
 		// Construct the subgraph which is the connected composant:
 		Set<Integer> connectedVertexes = new HashSet<Integer>();
 		connectedVertexes.add(a);
-		for(i=0 ; i<vertices.length ; i++) {
+		for(i=0 ; i<length ; i++) {
 			if(num[i]<=k && num[i]!=0) {
 				connectedVertexes.add(vertices[i]);
 			}
@@ -88,11 +89,12 @@ public class Connectivity {
 	private static Map<Integer, List<Integer>> getAdjacencyVertexes(Graph<Integer, DefaultEdge> graph) {
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
-		for(int i=0 ; i<vertices.length ; i++) {
+		int length = vertices.length;
+		for(int i=0 ; i<length ; i++) {
 			map.put(i, new LinkedList<Integer>());
 		}
-		for(int i=0 ; i<vertices.length ; i++) {
-			for(int j=0 ; j<vertices.length ; j++) {
+		for(int i=0 ; i<length ; i++) {
+			for(int j=0 ; j<length ; j++) {
 				if(graph.containsEdge(vertices[i], vertices[j]) || graph.containsEdge(vertices[j], vertices[i])) {
 					if(!map.get(i).contains(j)) {
 						map.get(i).add(j);
@@ -314,9 +316,10 @@ public class Connectivity {
 	 */
 	public static boolean isAlmostStronglyConnected(int[][] routingMatrix) {
 		boolean isRoot;
-		for(int a=0 ; a<routingMatrix.length ; a++) {
+		int length = routingMatrix.length;
+		for(int a=0 ; a<length ; a++) {
 			isRoot = true;
-			for(int x=0 ; x<routingMatrix.length ; x++) {
+			for(int x=0 ; x<length ; x++) {
 				if(a!=x && routingMatrix[a][x]==-1) {
 					isRoot = false;
 					break;

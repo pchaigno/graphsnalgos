@@ -17,9 +17,10 @@ public class Tree {
 	public static int getRoot(Graph<Integer, DefaultEdge> graph) {
 		int[][] routingMatrix = Routing.routingByRoyMarshallWithSuccessor(graph);
 		boolean isRoot;
-		for(int a=0 ; a<routingMatrix.length ; a++) {
+		int length = routingMatrix.length;
+		for(int a=0 ; a<length ; a++) {
 			isRoot = true;
-			for(int x=0 ; x<routingMatrix.length ; x++) {
+			for(int x=0 ; x<length ; x++) {
 				if(a!=x && routingMatrix[a][x]==-1) {
 					isRoot = false;
 					break;

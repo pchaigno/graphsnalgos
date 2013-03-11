@@ -15,8 +15,11 @@ public class Tools {
 	 */
 	public static String matrixToString(int[][] matrix) {
 		String str = "";
-		for(int i=0 ; i<matrix.length ; i++) {
-			for(int j=0 ; j<matrix[i].length ; j++) {
+		int length_matrix = matrix.length;
+		int length_vector;
+		for(int i=0 ; i<length_matrix ; i++) {
+			length_vector = matrix[i].length;
+			for(int j=0 ; j<length_vector ; j++) {
 				if(matrix[i][j]>=0) {
 					str += " ";
 				}

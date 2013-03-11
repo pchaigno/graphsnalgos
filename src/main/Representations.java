@@ -24,9 +24,10 @@ public class Representations {
 	 */
 	public static int[][] getAdjacencyMatrix(Graph<Integer, DefaultEdge> graph) {
 		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
-		int[][] adjacencyMatrix = new int[vertices.length][vertices.length];
-		for(int i=0 ; i<vertices.length ; i++) {
-			for(int j=0 ; j<vertices.length ; j++) {
+		int length = vertices.length;
+		int[][] adjacencyMatrix = new int[length][length];
+		for(int i=0 ; i<length ; i++) {
+			for(int j=0 ; j<length ; j++) {
 				if(graph.containsEdge(vertices[i], vertices[j])) {
 					adjacencyMatrix[i][j] = 1;
 				}
@@ -43,7 +44,8 @@ public class Representations {
 		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer source;
-		for(int i=0 ; i<vertices.length ; i++) {
+		int length = vertices.length;
+		for(int i=0 ; i<length ; i++) {
 			source = vertices[i];
 			map.put(source, new LinkedList<Integer>());
 			for(int vertex: vertices) {
@@ -63,7 +65,8 @@ public class Representations {
 		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer target;
-		for(int i=0 ; i<vertices.length ; i++) {
+		int length = vertices.length;
+		for(int i=0 ; i<length ; i++) {
 			target = vertices[i];
 			map.put(target, new LinkedList<Integer>());
 			for(int vertex: vertices) {
@@ -83,15 +86,16 @@ public class Representations {
 	 * @throws IllegalArgumentException
 	 */
 	public static Graph<Integer, DefaultEdge> getGraphFromAdjacencyMatrix(int[][] matrix, int[] vertices) throws IllegalArgumentException {
-		if(matrix.length<1 || matrix.length!=matrix[0].length) {
+		int length = matrix.length;
+		if(length<1 || length!=matrix[0].length) {
 			throw new IllegalArgumentException();
 		}
 		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		for(int vertex: vertices) {
 			graph.addVertex(vertex);
 		}
-		for(int i=0 ; i<matrix.length ; i++) {
-			for(int j=0 ; j<matrix.length ; j++) {
+		for(int i=0 ; i<length ; i++) {
+			for(int j=0 ; j<length ; j++) {
 				if(matrix[i][j]==1) {
 					graph.addEdge(vertices[i], vertices[j]);
 				}
