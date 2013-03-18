@@ -166,7 +166,7 @@ public class Operations {
 	 * @param a The list of vertex for the subgraph.
 	 * @return The subgraph of graph from a.
 	 */
-	public static Graph<Integer, DefaultEdge> subgraph(Graph<Integer, DefaultEdge> graph, Set<Integer> a) {
+	public static Graph<Integer, DefaultEdge> subgraphFrom(Graph<Integer, DefaultEdge> graph, Set<Integer> a) {
 		Graph<Integer, DefaultEdge> subgraph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		for(int vertex: a) {
 			subgraph.addVertex(vertex);
@@ -174,6 +174,29 @@ public class Operations {
 		for(int vertexX: graph.vertexSet()) {
 			for(int vertexY: graph.vertexSet()) {
 				if(a.contains(vertexX) && a.contains(vertexY) && graph.containsEdge(vertexX, vertexY)) {
+					subgraph.addEdge(vertexX, vertexY);
+				}
+			}
+		}
+		return subgraph;
+	}
+	
+	/**
+	 * Construct the subgraph of graph without the vertices of a.
+	 * @param graph The original graph.
+	 * @param a The list of vertex to remove from graph.
+	 * @return The subgraph of graph from a.
+	 */
+	public static Graph<Integer, DefaultEdge> subgraphWithout(Graph<Integer, DefaultEdge> graph, Set<Integer> a) {
+		Graph<Integer, DefaultEdge> subgraph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		for(int vertex: graph.vertexSet()) {
+			if(!a.contains(vertex)) {
+				subgraph.addVertex(vertex);
+			}
+		}
+		for(int vertexX: graph.vertexSet()) {
+			for(int vertexY: graph.vertexSet()) {
+				if(!a.contains(vertexX) && !a.contains(vertexY) && graph.containsEdge(vertexX, vertexY)) {
 					subgraph.addEdge(vertexX, vertexY);
 				}
 			}

@@ -18,8 +18,9 @@ public class Cycles {
 	 * @return True if the graph contains cycles.
 	 */
 	public static boolean containsCycles(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> subGraph = Tools.clone(graph);
+		Graph<Integer, DefaultEdge> subGraph0, subGraph = Tools.clone(graph);
 		Set<Integer> inputVertices, outputVertices;
+		System.err.println(subGraph);
 		while(subGraph.vertexSet().size()!=0) {
 			inputVertices = getInputVertices(subGraph);
 			outputVertices = getOutputVertices(subGraph);
@@ -27,7 +28,11 @@ public class Cycles {
 				return true;
 			}
 			inputVertices.addAll(outputVertices);
-			subGraph = Operations.subgraph(subGraph, inputVertices);
+			subGraph0 = Tools.clone(subGraph);
+			subGraph = Operations.subgraphWithout(subGraph, inputVertices);
+			if(!Tools.graphEquals(subGraph, subGraph0)) {
+				System.err.println(subGraph);
+			}
 		}
 		return false;
 	}

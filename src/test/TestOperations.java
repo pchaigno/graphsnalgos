@@ -126,17 +126,17 @@ public class TestOperations extends TestCase {
 	}
 	
 	/**
-	 * Test the subgraph method.
+	 * Test the subgraphFrom method.
 	 */
-	public void testSubgraph() {
+	public void testSubgraphFrom() {
 		Set<Integer> a = new HashSet<Integer>();
 		a.add(1);
 		a.add(2);
 		a.add(4);
-		Graph<Integer, DefaultEdge> graph = Operations.subgraph(this.graph1, a);
+		Graph<Integer, DefaultEdge> graph = Operations.subgraphFrom(this.graph1, a);
 		System.out.println("g1 subgraph:");
 		System.out.println(graph);
-		graph = Operations.subgraph(this.graph2, a);
+		graph = Operations.subgraphFrom(this.graph2, a);
 		System.out.println("g2 subgraph:");
 		System.out.println(graph);
 	}
