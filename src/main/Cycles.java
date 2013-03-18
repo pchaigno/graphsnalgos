@@ -1,6 +1,8 @@
 package main;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.jgrapht.Graph;
@@ -14,13 +16,13 @@ public class Cycles {
 
 	/**
 	 * Check if a graph contains cycles using the Marimont algorithm.
+	 * Use the version of the algorithm with the input and output vertices.
 	 * @param graph The graph.
 	 * @return True if the graph contains cycles.
 	 */
-	public static boolean containsCycles(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> subGraph0, subGraph = Tools.clone(graph);
+	public static boolean containsCyclesByInputOutput(Graph<Integer, DefaultEdge> graph) {
+		Graph<Integer, DefaultEdge> subGraph = Tools.clone(graph);
 		Set<Integer> inputVertices, outputVertices;
-		System.err.println(subGraph);
 		while(subGraph.vertexSet().size()!=0) {
 			inputVertices = getInputVertices(subGraph);
 			outputVertices = getOutputVertices(subGraph);
@@ -28,13 +30,70 @@ public class Cycles {
 				return true;
 			}
 			inputVertices.addAll(outputVertices);
-			subGraph0 = Tools.clone(subGraph);
 			subGraph = Operations.subgraphWithout(subGraph, inputVertices);
-			if(!Tools.graphEquals(subGraph, subGraph0)) {
-				System.err.println(subGraph);
-			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Check if a graph contains cycles using the Marimont algorithm.
+	 * Use the version of the algorithm with only the input vertices.
+	 * @param graph The graph.
+	 * @return True if the graph contains cycles.
+	 */
+	public static boolean containsCyclesByInput(Graph<Integer, DefaultEdge> graph) {
+		Graph<Integer, DefaultEdge> subGraph = Tools.clone(graph);
+		Set<Integer> inputVertices;
+		while(subGraph.vertexSet().size()!=0) {
+			inputVertices = getInputVertices(subGraph);
+			if(inputVertices.size()==0) {
+				return true;
+			}
+			subGraph = Operations.subgraphWithout(subGraph, inputVertices);
+		}
+		return false;
+	}
+	
+	/**
+	 * Check if a graph contains cycles using the Marimont algorithm.
+	 * Use the version of the algorithm with only the output vertices.
+	 * @param graph The graph.
+	 * @return True if the graph contains cycles.
+	 */
+	public static boolean containsCyclesByOutput(Graph<Integer, DefaultEdge> graph) {
+		Graph<Integer, DefaultEdge> subGraph = Tools.clone(graph);
+		Set<Integer> outputVertices;
+		while(subGraph.vertexSet().size()!=0) {
+			outputVertices = getOutputVertices(subGraph);
+			if(outputVertices.size()==0) {
+				return true;
+			}
+			subGraph = Operations.subgraphWithout(subGraph, outputVertices);
+		}
+		return false;
+	}
+	
+	/**
+	 * Get the rank of all vertices of the graph using the Marimont algorithm with the input vertices.
+	 * Will return null if the graph contains cycles.
+	 * @param graph The graph.
+	 * @return A map with the rank as key and the vertices corresponding as value or null if the graph contains cycle.
+	 */
+	public static Map<Integer, Set<Integer>> getRanksOfVertices(Graph<Integer, DefaultEdge> graph) {
+		Map<Integer, Set<Integer>> levels = new HashMap<Integer, Set<Integer>>();
+		Graph<Integer, DefaultEdge> subGraph = Tools.clone(graph);
+		Set<Integer> inputVertices;
+		int rank = 0;
+		while(subGraph.vertexSet().size()!=0) {
+			inputVertices = getInputVertices(subGraph);
+			if(inputVertices.size()==0) {
+				return null;
+			}
+			levels.put(rank, inputVertices);
+			rank++;
+			subGraph = Operations.subgraphWithout(subGraph, inputVertices);
+		}
+		return levels;
 	}
 	
 	/**

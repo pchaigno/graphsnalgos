@@ -1,5 +1,6 @@
 package test;
 
+import java.util.Map;
 import java.util.Set;
 
 import main.Cycles;
@@ -77,9 +78,52 @@ public class TestCycles extends TestCase {
 	/**
 	 * Test the containsCycles method.
 	 */
-	public void testContainsCycles() {
-		assertFalse(Cycles.containsCycles(this.graph));
+	public void testContainsCyclesWithInputOutput() {
+		assertFalse(Cycles.containsCyclesByInputOutput(this.graph));
 		this.graph.addEdge(7, 11);
-		assertTrue(Cycles.containsCycles(this.graph));
+		assertTrue(Cycles.containsCyclesByInputOutput(this.graph));
+	}
+	
+	/**
+	 * Test the containsCycles method.
+	 */
+	public void testContainsCyclesWithInput() {
+		assertFalse(Cycles.containsCyclesByInput(this.graph));
+		this.graph.addEdge(7, 11);
+		assertTrue(Cycles.containsCyclesByInput(this.graph));
+	}
+	
+	/**
+	 * Test the containsCycles method.
+	 */
+	public void testContainsCyclesWithOutput() {
+		assertFalse(Cycles.containsCyclesByOutput(this.graph));
+		this.graph.addEdge(7, 11);
+		assertTrue(Cycles.containsCyclesByOutput(this.graph));
+	}
+	
+	/**
+	 * Test the getRanksOfVertices method.
+	 */
+	public void testGetRanksOfVertices() {
+		Map<Integer, Set<Integer>> levels = Cycles.getRanksOfVertices(this.graph);
+		assertEquals(2, levels.get(0).size());
+		assertTrue(levels.get(0).contains(9));
+		assertTrue(levels.get(0).contains(12));
+		assertEquals(3, levels.get(1).size());
+		assertTrue(levels.get(1).contains(3));
+		assertTrue(levels.get(1).contains(10));
+		assertTrue(levels.get(1).contains(11));
+		assertEquals(1, levels.get(2).size());
+		assertTrue(levels.get(2).contains(1));
+		assertEquals(2, levels.get(3).size());
+		assertTrue(levels.get(3).contains(4));
+		assertTrue(levels.get(3).contains(5));
+		assertEquals(1, levels.get(4).size());
+		assertTrue(levels.get(4).contains(2));
+		assertEquals(3, levels.get(5).size());
+		assertTrue(levels.get(5).contains(6));
+		assertTrue(levels.get(5).contains(7));
+		assertTrue(levels.get(5).contains(8));
 	}
 }
