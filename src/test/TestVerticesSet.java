@@ -100,4 +100,29 @@ public class TestVerticesSet extends TestCase {
 		set.add(4);
 		assertTrue(VerticesSet.isMaximalClique(this.graph1, set));
 	}
+	
+	/**
+	 * Test the isDominatingSet method.
+	 */
+	public void testIsDominatingSet() {
+		Set<Integer> set = new HashSet<Integer>();
+		set.add(2);
+		assertFalse(VerticesSet.isDominatingSet(this.graph1, set));
+		set.add(3);
+		assertTrue(VerticesSet.isDominatingSet(this.graph1, set));
+		set.remove(2);
+		assertFalse(VerticesSet.isDominatingSet(this.graph1, set));
+	}
+	
+	/**
+	 * Test the isMinimalDominatingSet method.
+	 */
+	public void testIsMinimalDominatingSet() {
+		Set<Integer> set = new HashSet<Integer>();
+		set.add(2);
+		set.add(3);
+		assertTrue(VerticesSet.isMinimalDominatingSet(this.graph1, set));
+		set.add(4);
+		assertFalse(VerticesSet.isMinimalDominatingSet(this.graph1, set));
+	}
 }

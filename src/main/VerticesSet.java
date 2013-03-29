@@ -131,4 +131,47 @@ public class VerticesSet {
 		}
 		return true;
 	}
+	
+	/**
+	 * Check if a set is a dominating set in a graph.
+	 * @param graph The graph.
+	 * @param s The set to test.
+	 * @return True if the set is an dominating set.
+	 */
+	public static boolean isDominatingSet(Graph<Integer, DefaultEdge> graph, Set<Integer> s) {
+		boolean isAdjacent;
+		for(int vertex: graph.vertexSet()) {
+			if(!s.contains(vertex)) {
+				isAdjacent = false;
+				for(int succ: s) {
+					if(graph.containsEdge(vertex, succ)) {
+						isAdjacent = true;
+						break;
+					}
+				}
+				if(!isAdjacent) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	/**
+	 * Check if a set of vertices is a minimal dominating set.
+	 * @param graph The graph.
+	 * @param s The set to check.
+	 * @return True if the set is minimal.
+	 */
+	public static boolean isMinimalDominatingSet(Graph<Integer, DefaultEdge> graph, Set<Integer> s) {
+		Set<Integer> copiedSet = Tools.clone(s);
+		for(int vertex: s) {
+			copiedSet.remove(vertex);
+			if(isDominatingSet(graph, copiedSet)) {
+				return false;
+			}
+			copiedSet.add(vertex);
+		}
+		return true;
+	}
 }
