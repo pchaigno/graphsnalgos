@@ -1,5 +1,7 @@
 package main;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.jgrapht.Graph;
@@ -202,5 +204,45 @@ public class Operations {
 			}
 		}
 		return subgraph;
+	}
+	
+	/**
+	 * Build the edges graph of a graph.
+	 * It must be an undirected 1-graph.
+	 * @param graph The graph.
+	 * @return The edges graph.
+	 */
+	public static Graph<Integer, DefaultEdge> edgesGraph(Graph<Integer, DefaultEdge> graph) {
+		// Couple numbers to the edges and build the vertices of the edges graph:
+		Graph<Integer, DefaultEdge> edgesGraph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		Map<Integer, Integer[]> edges = new HashMap<Integer, Integer[]>();
+		int num = 1;
+		for(int vertexX: graph.vertexSet()) {
+			for(int vertexY: graph.vertexSet()) {
+				if(graph.containsEdge(vertexX, vertexY)) {
+					edges.put(num, new Integer[] {vertexX, vertexY});
+					edgesGraph.addVertex(num);
+					num++;
+				}
+			}
+		}
+		
+		// Link the vertices:
+		Integer[] edgeX, edgeY;
+		for(int vertexX: edges.keySet()) {
+			edgeX = edges.get(vertexX);
+			for(int vertexY: edges.keySet()) {
+				if(vertexX!=vertexY) {
+					edgeY = edges.get(vertexY);
+					if(edgeX[0].equals(edgeY[0]) || edgeX[0].equals(edgeY[1]) || edgeX[1].equals(edgeY[0]) || edgeX[1].equals(edgeY[1])) {
+						if(!edgesGraph.containsEdge(vertexY, vertexX)) {
+							edgesGraph.addEdge(vertexX, vertexY);
+						}
+					}
+				}
+			}
+		}
+		
+		return edgesGraph;
 	}
 }

@@ -18,6 +18,7 @@ import junit.framework.TestCase;
 public class TestOperations extends TestCase {
 	private Graph<Integer, DefaultEdge> graph1;
 	private Graph<Integer, DefaultEdge> graph2;
+	private Graph<Integer, DefaultEdge> graph3;
 
 	/**
 	 * Initalize the tests with the graph from the handout.
@@ -25,6 +26,7 @@ public class TestOperations extends TestCase {
 	protected void setUp() throws Exception {
 		this.graph1 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		this.graph2 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		this.graph3 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 
 		this.graph1.addVertex(1);
 		this.graph1.addVertex(2);
@@ -37,6 +39,11 @@ public class TestOperations extends TestCase {
 		this.graph2.addVertex(3);
 		this.graph2.addVertex(4);
 		this.graph2.addVertex(5);
+		
+		this.graph3.addVertex(1);
+		this.graph3.addVertex(2);
+		this.graph3.addVertex(3);
+		this.graph3.addVertex(4);
 
 		this.graph1.addEdge(1, 2);
 		this.graph1.addEdge(2, 3);
@@ -50,6 +57,11 @@ public class TestOperations extends TestCase {
 		this.graph2.addEdge(3, 4);
 		this.graph2.addEdge(4, 5);
 		this.graph2.addEdge(5, 2);
+		
+		this.graph3.addEdge(1, 3);
+		this.graph3.addEdge(2, 3);
+		this.graph3.addEdge(3, 4);
+		this.graph3.addEdge(4, 2);
 	}
 	
 	/**
@@ -78,7 +90,7 @@ public class TestOperations extends TestCase {
 	 */
 	public void testPower() {
 		Graph<Integer, DefaultEdge> graph = Operations.power(this.graph1, 2);
-		System.out.println("g1²:");
+		System.out.println("g1 square:");
 		System.out.println(graph);
 	}
 	
@@ -139,5 +151,14 @@ public class TestOperations extends TestCase {
 		graph = Operations.subgraphFrom(this.graph2, a);
 		System.out.println("g2 subgraph:");
 		System.out.println(graph);
+	}
+	
+	/**
+	 * Test the edgesGraph method.
+	 */
+	public void testEdgesGraph() {
+		Graph<Integer, DefaultEdge> edgesGraph = Operations.edgesGraph(this.graph3);
+		System.out.println("g3 edges graph:");
+		System.out.println(edgesGraph);
 	}
 }
