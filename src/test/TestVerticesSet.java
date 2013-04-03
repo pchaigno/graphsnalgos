@@ -3,6 +3,7 @@ package test;
 import java.util.HashSet;
 import java.util.Set;
 
+import main.Tools;
 import main.VerticesSet;
 
 import org.jgrapht.Graph;
@@ -24,23 +25,15 @@ public class TestVerticesSet extends TestCase {
 		this.graph1 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		this.graph2 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 
-		this.graph1.addVertex(1);
-		this.graph1.addVertex(2);
-		this.graph1.addVertex(3);
-		this.graph1.addVertex(4);
 
+		Tools.addVertices(this.graph1, 4);
 		this.graph1.addEdge(1, 2);
 		this.graph1.addEdge(2, 3);
 		this.graph1.addEdge(3, 4);
 		this.graph1.addEdge(4, 2);
 
-		this.graph2.addVertex(1);
-		this.graph2.addVertex(2);
-		this.graph2.addVertex(3);
-		this.graph2.addVertex(4);
-		this.graph2.addVertex(5);
-		this.graph2.addVertex(6);
-		
+
+		Tools.addVertices(this.graph2, 6);
 		this.graph2.addEdge(1, 6);
 		this.graph2.addEdge(2, 1);
 		this.graph2.addEdge(2, 3);

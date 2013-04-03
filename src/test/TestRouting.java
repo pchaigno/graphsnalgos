@@ -24,14 +24,7 @@ public class TestRouting extends TestCase {
 	protected void setUp() throws Exception {
 		this.graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 
-		this.graph.addVertex(1);
-		this.graph.addVertex(2);
-		this.graph.addVertex(3);
-		this.graph.addVertex(4);
-		this.graph.addVertex(5);
-		this.graph.addVertex(6);
-		this.graph.addVertex(7);
-
+		Tools.addVertices(this.graph, 7);
 		this.graph.addEdge(1, 2);
 		this.graph.addEdge(1, 5);
 		this.graph.addEdge(2, 3);

@@ -37,18 +37,7 @@ public class TestProperties extends TestCase {
 		this.graph8 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		this.graph10 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 
-		this.graph1.addVertex(1);
-		this.graph1.addVertex(2);
-		this.graph1.addVertex(3);
-		this.graph1.addVertex(4);
-		this.graph1.addVertex(5);
-		
-		this.graph2.addVertex(1);
-		this.graph2.addVertex(2);
-		this.graph2.addVertex(3);
-		this.graph2.addVertex(4);
-		this.graph2.addVertex(5);
-
+		Tools.addVertices(this.graph1, 5);
 		this.graph1.addEdge(1, 2);
 		this.graph1.addEdge(2, 3);
 		this.graph1.addEdge(2, 4);
@@ -59,6 +48,7 @@ public class TestProperties extends TestCase {
 		this.graph1.addEdge(3, 3);
 		this.graph1.addEdge(4, 4);
 		
+		Tools.addVertices(this.graph2, 5);
 		this.graph2.addEdge(1, 3);
 		this.graph2.addEdge(2, 1);
 		this.graph2.addEdge(2, 3);
@@ -70,18 +60,12 @@ public class TestProperties extends TestCase {
 		this.graph3.addEdge(3, 3);
 		this.graph3.addEdge(2, 2);
 		
-		this.graph4.addVertex(1);
-		this.graph4.addVertex(2);
-		this.graph4.addVertex(3);
-		
-		this.graph5.addVertex(1);
-		this.graph5.addVertex(2);
-		this.graph5.addVertex(3);
-
+		Tools.addVertices(this.graph4, 3);
 		this.graph4.addEdge(1, 1);
 		this.graph4.addEdge(2, 3);
 		this.graph4.addEdge(3, 2);
-
+		
+		Tools.addVertices(this.graph5, 3);
 		this.graph5.addEdge(1, 1);
 		this.graph5.addEdge(1, 2);
 		this.graph5.addEdge(1, 3);
@@ -93,10 +77,7 @@ public class TestProperties extends TestCase {
 		this.graph7.addEdge(2, 2);
 		this.graph7.addEdge(3, 3);
 		
-		this.graph8.addVertex(1);
-		this.graph8.addVertex(2);
-		this.graph8.addVertex(3);
-
+		Tools.addVertices(this.graph8, 3);
 		this.graph8.addEdge(1, 2);
 		this.graph8.addEdge(2, 3);
 		this.graph8.addEdge(3, 2);
@@ -105,11 +86,7 @@ public class TestProperties extends TestCase {
 		this.graph9.addEdge(1, 1);
 		this.graph9.addEdge(3, 3);
 		
-		this.graph10.addVertex(1);
-		this.graph10.addVertex(2);
-		this.graph10.addVertex(3);
-		this.graph10.addVertex(4);
-
+		Tools.addVertices(this.graph10, 4);
 		this.graph10.addEdge(1, 2);
 		this.graph10.addEdge(2, 3);
 		this.graph10.addEdge(4, 1);

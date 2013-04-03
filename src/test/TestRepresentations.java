@@ -25,15 +25,7 @@ public class TestRepresentations extends TestCase {
 	protected void setUp() throws Exception {
 		this.graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 
-		this.graph.addVertex(1);
-		this.graph.addVertex(2);
-		this.graph.addVertex(3);
-		this.graph.addVertex(4);
-		this.graph.addVertex(5);
-		this.graph.addVertex(6);
-		this.graph.addVertex(7);
-		this.graph.addVertex(8);
-
+		Tools.addVertices(this.graph, 8);
 		this.graph.addEdge(1, 3);
 		this.graph.addEdge(2, 1);
 		this.graph.addEdge(2, 2);

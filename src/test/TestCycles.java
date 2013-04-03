@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import main.Cycles;
+import main.Tools;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -24,19 +25,7 @@ public class TestCycles extends TestCase {
 	protected void setUp() {
 		this.graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 
-		this.graph.addVertex(1);
-		this.graph.addVertex(2);
-		this.graph.addVertex(3);
-		this.graph.addVertex(4);
-		this.graph.addVertex(5);
-		this.graph.addVertex(6);
-		this.graph.addVertex(7);
-		this.graph.addVertex(8);
-		this.graph.addVertex(9);
-		this.graph.addVertex(10);
-		this.graph.addVertex(11);
-		this.graph.addVertex(12);
-
+		Tools.addVertices(this.graph, 12);
 		this.graph.addEdge(1, 4);
 		this.graph.addEdge(1, 5);
 		this.graph.addEdge(2, 6);

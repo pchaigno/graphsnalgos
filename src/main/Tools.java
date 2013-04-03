@@ -4,7 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.jgrapht.Graph;
+import org.jgrapht.WeightedGraph;
 import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DefaultDirectedWeightedGraph;
 import org.jgrapht.graph.DefaultEdge;
 
 public class Tools {
@@ -51,6 +53,27 @@ public class Tools {
 	}
 	
 	/**
+	 * Build a copy of a weighted graph.
+	 * @param graph The graph to clone.
+	 * @return The cloned graph.
+	 */
+	public static WeightedGraph<Integer, DefaultEdge> clone(WeightedGraph<Integer, DefaultEdge> graph) {
+		WeightedGraph<Integer, DefaultEdge> clone = new DefaultDirectedWeightedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		for(int vertex: graph.vertexSet()) {
+			clone.addVertex(vertex);
+		}
+		for(int vertexX: graph.vertexSet()) {
+			for(int vertexY: graph.vertexSet()) {
+				DefaultEdge edge = graph.getEdge(vertexX, vertexY);
+				if(edge!=null) {
+					clone.addEdge(vertexX, vertexY, edge);
+				}
+			}
+		}
+		return clone;
+	}
+	
+	/**
 	 * Build a copy of a set of integers.
 	 * @param set The set to clone.
 	 * @return The cloned set.
@@ -84,5 +107,20 @@ public class Tools {
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Add vertices to a graph.
+	 * Start at vertex 1 and end on vertex nbVertices.
+	 * @param graph An empty graph.
+	 * @param nbVertices The number of vertices to add.
+	 */
+	public static void addVertices(Graph<Integer, DefaultEdge> graph, int nbVertices) {
+		if(graph.vertexSet().size()!=0) {
+			throw new IllegalArgumentException("The graph need to be empty.");
+		}
+		for(int i=1 ; i<=nbVertices ; i++) {
+			graph.addVertex(i);
+		}
 	}
 }

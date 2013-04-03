@@ -3,6 +3,7 @@ package test;
 import java.util.List;
 
 import main.Connectivity;
+import main.Tools;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -30,22 +31,18 @@ public class TestConnectivity extends TestCase {
 		this.graph3 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		this.graph4 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		this.graph5 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		
+		Tools.addVertices(this.graph1, 6);
+		this.graph1.addEdge(1, 2);
+		this.graph1.addEdge(1, 3);
+		this.graph1.addEdge(1, 4);
+		this.graph1.addEdge(1, 6);
+		this.graph1.addEdge(2, 4);
+		this.graph1.addEdge(6, 4);
+		this.graph1.addEdge(4, 5);
 
-		this.graph2.addVertex(1);
-		this.graph2.addVertex(2);
-		this.graph2.addVertex(3);
-		this.graph2.addVertex(4);
-		this.graph2.addVertex(5);
-		this.graph2.addVertex(6);
-		this.graph2.addVertex(7);
-		this.graph2.addVertex(8);
-		this.graph2.addVertex(9);
-		this.graph2.addVertex(10);
-		this.graph2.addVertex(11);
-		this.graph2.addVertex(12);
-		this.graph2.addVertex(13);
-		this.graph2.addVertex(14);
 
+		Tools.addVertices(this.graph2, 14);
 		this.graph2.addEdge(1, 2);
 		this.graph2.addEdge(1, 3);
 		this.graph2.addEdge(2, 4);
@@ -63,51 +60,15 @@ public class TestConnectivity extends TestCase {
 		this.graph2.addEdge(13, 12);
 		this.graph2.addEdge(13, 11);
 
-		this.graph1.addVertex(1);
-		this.graph1.addVertex(2);
-		this.graph1.addVertex(3);
-		this.graph1.addVertex(4);
-		this.graph1.addVertex(5);
-		this.graph1.addVertex(6);
-		
-		this.graph1.addEdge(1, 2);
-		this.graph1.addEdge(1, 3);
-		this.graph1.addEdge(1, 4);
-		this.graph1.addEdge(1, 6);
-		this.graph1.addEdge(2, 4);
-		this.graph1.addEdge(6, 4);
-		this.graph1.addEdge(4, 5);
-
-		this.graph3.addVertex(1);
-		this.graph3.addVertex(2);
-		this.graph3.addVertex(3);
-		this.graph3.addVertex(4);
-
+		Tools.addVertices(this.graph3, 4);
 		this.graph3.addEdge(1, 2);
 		this.graph3.addEdge(2, 3);
 		this.graph3.addEdge(2, 4);
 		this.graph3.addEdge(4, 3);
 		this.graph3.addEdge(3, 1);
 
-		this.graph4.addVertex(1);
-		this.graph4.addVertex(2);
-		this.graph4.addVertex(3);
-		this.graph4.addVertex(4);
-		this.graph4.addVertex(5);
-		this.graph4.addVertex(6);
-		this.graph4.addVertex(7);
-		this.graph4.addVertex(8);
-		this.graph4.addVertex(9);
-		this.graph4.addVertex(10);
-		this.graph4.addVertex(11);
-		this.graph4.addVertex(12);
-		this.graph4.addVertex(13);
-		this.graph4.addVertex(14);
-		this.graph4.addVertex(15);
-		this.graph4.addVertex(16);
-		this.graph4.addVertex(17);
-		this.graph4.addVertex(18);
-		
+
+		Tools.addVertices(this.graph4, 18);
 		this.graph4.addEdge(1, 2);
 		this.graph4.addEdge(2, 3);
 		this.graph4.addEdge(2, 4);
@@ -141,10 +102,8 @@ public class TestConnectivity extends TestCase {
 		this.graph4.addEdge(17, 18);
 		this.graph4.addEdge(18, 17);
 
-		this.graph5.addVertex(1);
-		this.graph5.addVertex(2);
-		this.graph5.addVertex(3);
 
+		Tools.addVertices(this.graph5, 3);
 		this.graph5.addEdge(2, 1);
 		this.graph5.addEdge(3, 1);
 	}

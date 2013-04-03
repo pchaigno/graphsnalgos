@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import main.Operations;
+import main.Tools;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
@@ -28,29 +29,14 @@ public class TestOperations extends TestCase {
 		this.graph2 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		this.graph3 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 
-		this.graph1.addVertex(1);
-		this.graph1.addVertex(2);
-		this.graph1.addVertex(3);
-		this.graph1.addVertex(4);
-		this.graph1.addVertex(5);
-		
-		this.graph2.addVertex(1);
-		this.graph2.addVertex(2);
-		this.graph2.addVertex(3);
-		this.graph2.addVertex(4);
-		this.graph2.addVertex(5);
-		
-		this.graph3.addVertex(1);
-		this.graph3.addVertex(2);
-		this.graph3.addVertex(3);
-		this.graph3.addVertex(4);
-
+		Tools.addVertices(this.graph1, 5);
 		this.graph1.addEdge(1, 2);
 		this.graph1.addEdge(2, 3);
 		this.graph1.addEdge(2, 4);
 		this.graph1.addEdge(3, 2);
 		this.graph1.addEdge(5, 5);
 		
+		Tools.addVertices(this.graph2, 5);
 		this.graph2.addEdge(1, 3);
 		this.graph2.addEdge(2, 1);
 		this.graph2.addEdge(2, 3);
@@ -58,6 +44,7 @@ public class TestOperations extends TestCase {
 		this.graph2.addEdge(4, 5);
 		this.graph2.addEdge(5, 2);
 		
+		Tools.addVertices(this.graph3, 4);
 		this.graph3.addEdge(1, 3);
 		this.graph3.addEdge(2, 3);
 		this.graph3.addEdge(3, 4);

@@ -1,5 +1,6 @@
 package test;
 
+import main.Tools;
 import main.TransitiveClosure;
 
 import org.jgrapht.Graph;
@@ -21,12 +22,7 @@ public class TestTransitiveClosure extends TestCase {
 	protected void setUp() throws Exception {
 		this.graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 
-		this.graph.addVertex(1);
-		this.graph.addVertex(2);
-		this.graph.addVertex(3);
-		this.graph.addVertex(4);
-		this.graph.addVertex(5);
-
+		Tools.addVertices(this.graph, 5);
 		this.graph.addEdge(1, 2);
 		this.graph.addEdge(2, 3);
 		this.graph.addEdge(3, 2);
