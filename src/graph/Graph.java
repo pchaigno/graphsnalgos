@@ -14,6 +14,8 @@ public interface Graph extends Cloneable {
 	
 	public boolean addVertex(int vertex);
 	
+	public void addVertices(int nbVertices);
+	
 	public boolean addEdge(Edge edge);
 	
 	public boolean addEdge(int x, int y);

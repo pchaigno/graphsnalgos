@@ -38,12 +38,28 @@ public class DefaultGraph implements Graph {
 	}
 
 	@Override
+	public void addVertices(int nbVertices) {
+		if(this.vertices.size()!=0) {
+			throw new IllegalArgumentException();
+		}
+		for(int i=1 ; i<=nbVertices ; i++) {
+			this.addVertex(i);
+		}
+	}
+
+	@Override
 	public boolean addEdge(Edge edge) {
+		if(!this.vertices.contains(edge.getX()) || (edge.getX()!=edge.getY() && !this.vertices.contains(edge.getY()))) {
+			throw new IllegalArgumentException();
+		}
 		return this.edges.add(edge);
 	}
 
 	@Override
 	public boolean addEdge(int x, int y) {
+		if(!this.vertices.contains(x) || (x!=y && !this.vertices.contains(y))) {
+			throw new IllegalArgumentException();
+		}
 		return this.edges.add(new DefaultEdge(x, y));
 	}
 	
@@ -58,5 +74,49 @@ public class DefaultGraph implements Graph {
 	    graph.vertices.addAll(this.vertices);
 	    graph.edges.addAll(this.edges);
 	    return graph;
+	}
+
+	@Override
+	public String toString() {
+		return vertices.toString()+"\n"+this.edges.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((edges == null) ? 0 : edges.hashCode());
+		result = prime * result
+				+ ((vertices == null) ? 0 : vertices.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		DefaultGraph other = (DefaultGraph) obj;
+		if (edges == null) {
+			if (other.edges != null) {
+				return false;
+			}
+		} else if (!edges.equals(other.edges)) {
+			return false;
+		}
+		if (vertices == null) {
+			if (other.vertices != null) {
+				return false;
+			}
+		} else if (!vertices.equals(other.vertices)) {
+			return false;
+		}
+		return true;
 	}
 }

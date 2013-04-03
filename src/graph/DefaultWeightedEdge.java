@@ -50,4 +50,9 @@ public class DefaultWeightedEdge extends DefaultDirectedEdge implements Weighted
 		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "("+this.x+", "+this.y+", "+this.value+")";
+	}
 }
