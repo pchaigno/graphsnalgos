@@ -1,16 +1,22 @@
 package test;
 
-import graph.DefaultWeightedEdge;
 import graph.DefaultWeightedGraph;
 import graph.WeightedGraph;
 import junit.framework.TestCase;
 
+/**
+ * Unit tests of weighted graphs.
+ * @author Paul Chaignon
+ */
 public class TestWeightedGraph extends TestCase {
 	private WeightedGraph graph1;
 	private WeightedGraph graph2;
 	private WeightedGraph graph3;
 	private WeightedGraph graph4;
 	
+	/**
+	 * Initialize a few weighted graphs.
+	 */
 	protected void setUp() {
 		this.graph1 = new DefaultWeightedGraph();
 		this.graph1.addVertex(1);
@@ -33,17 +39,18 @@ public class TestWeightedGraph extends TestCase {
 		this.graph4.addEdge(1, 2, 5);
 	}
 	
+	/**
+	 * Test the equals method.
+	 */
 	public void testEquals() {
 		assertEquals(this.graph1, this.graph2);
-		assertFalse(new DefaultWeightedEdge(2, 1, 5).equals(new DefaultWeightedEdge(1, 2, 5)));
-		System.out.println(this.graph1);
-		System.out.println(this.graph2);
-		System.out.println(this.graph3);
-		System.out.println(this.graph4);
 		assertFalse(this.graph1.equals(this.graph3));
 		assertFalse(this.graph1.equals(this.graph4));
 	}
 	
+	/**
+	 * Test the clone method.
+	 */
 	public void testClone() {
 		assertEquals(this.graph1, this.graph1.clone());
 		assertEquals(this.graph3, this.graph3.clone());

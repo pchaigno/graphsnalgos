@@ -1,7 +1,16 @@
 package graph;
 
+/**
+ * The default implentation of DirectedEdge.
+ * @author Paul Chaignon
+ */
 public class DefaultDirectedEdge extends DefaultEdge implements DirectedEdge {
 
+	/**
+	 * Constructor
+	 * @param x The starting vertex.
+	 * @param y The end vertex.
+	 */
 	public DefaultDirectedEdge(int x, int y) {
 		super(x, y);
 	}

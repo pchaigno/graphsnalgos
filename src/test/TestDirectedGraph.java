@@ -4,11 +4,18 @@ import graph.DefaultDirectedGraph;
 import graph.DirectedGraph;
 import junit.framework.TestCase;
 
+/**
+ * Unit tests for directed graphs.
+ * @author Paul Chaignon
+ */
 public class TestDirectedGraph extends TestCase {
 	private DirectedGraph graph1;
 	private DirectedGraph graph2;
 	private DirectedGraph graph3;
 	
+	/**
+	 * Initalize a few directed graphs.
+	 */
 	protected void setUp() {
 		this.graph1 = new DefaultDirectedGraph();
 		this.graph1.addVertex(1);
@@ -26,11 +33,17 @@ public class TestDirectedGraph extends TestCase {
 		this.graph3.addEdge(2, 1);
 	}
 	
+	/**
+	 * Test the equals method.
+	 */
 	public void testEquals() {
 		assertEquals(this.graph1, this.graph2);
 		assertFalse(this.graph1.equals(this.graph3));
 	}
 	
+	/**
+	 * Test the clone method.
+	 */
 	public void testClone() {
 		assertEquals(this.graph1, this.graph1.clone());
 		assertEquals(this.graph3, this.graph3.clone());

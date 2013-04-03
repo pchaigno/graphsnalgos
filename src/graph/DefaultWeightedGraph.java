@@ -1,5 +1,9 @@
 package graph;
 
+/**
+ * Default implementation for WeightedGraph.
+ * @author Paul Chaignon
+ */
 public class DefaultWeightedGraph extends DefaultDirectedGraph implements WeightedGraph {
 	
 	@Override

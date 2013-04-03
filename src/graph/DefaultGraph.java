@@ -3,10 +3,17 @@ package graph;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The default implementation for a Graph.
+ * @author Paul Chaignon
+ */
 public class DefaultGraph implements Graph {
 	protected Set<Integer> vertices;
 	protected Set<Edge> edges;
 	
+	/**
+	 * Constructor
+	 */
 	public DefaultGraph() {
 		this.vertices = new HashSet<Integer>();
 		this.edges = new HashSet<Edge>();

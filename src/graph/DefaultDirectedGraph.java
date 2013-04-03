@@ -1,5 +1,9 @@
 package graph;
 
+/**
+ * The default implementation for DirectedGraph.
+ * @author Paul Chaignon
+ */
 public class DefaultDirectedGraph extends DefaultGraph implements DirectedGraph {
 
 	@Override

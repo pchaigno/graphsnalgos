@@ -1,9 +1,18 @@
 package graph;
 
+/**
+ * The default implementation of Edge.
+ * @author Paul Chaignon
+ */
 public class DefaultEdge implements Edge {
 	protected int x;
 	protected int y;
 	
+	/**
+	 * Constructor
+	 * @param x The first vertex.
+	 * @param y The second vertex.
+	 */
 	public DefaultEdge(int x, int y) {
 		this.x = x;
 		this.y = y;
