@@ -1,9 +1,6 @@
 package graph;
 
-import java.util.Set;
-
 public class DefaultWeightedGraph extends DefaultDirectedGraph implements WeightedGraph {
-	protected Set<WeightedEdge> edges;
 	
 	@Override
 	public boolean addEdge(int x, int y) {
@@ -12,7 +9,7 @@ public class DefaultWeightedGraph extends DefaultDirectedGraph implements Weight
 
 	@Override
 	public boolean addEdge(int x, int y, double value) {
-		return this.edges.add(new DefaultWeightedEdge(x, y, value));
+		return this.addEdge(new DefaultWeightedEdge(x, y, value));
 	}
 	
 	@Override
