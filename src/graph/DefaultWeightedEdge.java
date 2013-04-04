@@ -54,14 +54,17 @@ public class DefaultWeightedEdge extends DefaultDirectedEdge implements Weighted
 		if (this == obj) {
 			return true;
 		}
-		if (!super.equals(obj)) {
+		if (obj == null) {
 			return false;
 		}
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
 		DefaultWeightedEdge other = (DefaultWeightedEdge) obj;
-		if (Double.doubleToLongBits(value) != Double.doubleToLongBits(other.value)) {
+		if (x!=other.x) {
+			return false;
+		}
+		if (y!=other.y) {
 			return false;
 		}
 		return true;
