@@ -6,8 +6,12 @@ package graph;
  */
 public class DefaultDirectedGraph extends DefaultGraph implements DirectedGraph {
 
+
 	@Override
 	public boolean addEdge(int x, int y) {
+		if(!this.vertices.contains(x) || (x!=y && !this.vertices.contains(y))) {
+			throw new IllegalArgumentException();
+		}
 		return this.edges.add(new DefaultDirectedEdge(x, y));
 	}
 	
