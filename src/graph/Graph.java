@@ -33,6 +33,14 @@ public interface Graph extends Cloneable {
 	public boolean containsEdge(Edge edge);
 	
 	/**
+	 * Check if an edge is contained in the graph.
+	 * @param x The starting vertex of the edge.
+	 * @param y The end vertex of the edge.
+	 * @return True if the graph contains the edge.
+	 */
+	public boolean containsEdge(int x, int y);
+	
+	/**
 	 * Add a vertex to the graph.
 	 * @param vertex The vertex to add.
 	 * @return True if the vertex wasn't already in the graph.

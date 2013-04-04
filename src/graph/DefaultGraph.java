@@ -40,6 +40,11 @@ public class DefaultGraph implements Graph {
 	}
 
 	@Override
+	public boolean containsEdge(int x, int y) {
+		return this.edges.contains(new DefaultEdge(x, y));
+	}
+
+	@Override
 	public boolean addVertex(int vertex) {
 		return this.vertices.add(vertex);
 	}
