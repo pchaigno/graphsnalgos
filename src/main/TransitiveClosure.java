@@ -1,9 +1,8 @@
 package main;
 
-import java.util.Set;
+import graph.Graph;
 
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
+import java.util.Set;
 
 /**
  * Different algorithms to get the transitive closure of a graph.
@@ -17,12 +16,12 @@ public class TransitiveClosure {
 	 * @param graph The graph.
 	 * @return The transitive closure.
 	 */
-	public static Graph<Integer, DefaultEdge> getByPowers(Graph<Integer, DefaultEdge> graph) {
-		int n = graph.vertexSet().size();
-		Graph<Integer, DefaultEdge> closure = Tools.clone(graph);
-		Graph<Integer, DefaultEdge> h;
+	public static Graph getByPowers(Graph graph) {
+		int n = graph.getVertices().size();
+		Graph closure = (Graph)graph.clone();
+		Graph h;
 		for(int i=2 ; i<=n ; i++) {
-			h = Tools.clone(closure);
+			h = (Graph)closure.clone();
 			closure = Operations.union(graph, Operations.composition(graph, closure));
 			if(closure.equals(h)) {
 				break;
@@ -36,10 +35,10 @@ public class TransitiveClosure {
 	 * @param graph The graph.
 	 * @return The transitive closure.
 	 */
-	public static Graph<Integer, DefaultEdge> getByRoyMarshall(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> closure = Tools.clone(graph);
-		for(int vertex: graph.vertexSet()) {
-			teta(closure, vertex, graph.vertexSet());
+	public static Graph getByRoyMarshall(Graph graph) {
+		Graph closure = (Graph)graph.clone();
+		for(int vertex: graph.getVertices()) {
+			teta(closure, vertex, graph.getVertices());
 		}
 		return closure;
 	}
@@ -50,7 +49,7 @@ public class TransitiveClosure {
 	 * @param graph The graph to be changed.
 	 * @param i The vertex on which compute the teta function.
 	 */
-	private static void teta(Graph<Integer, DefaultEdge> graph, int i, Set<Integer> vertices) {
+	private static void teta(Graph graph, int i, Set<Integer> vertices) {
 		for(int vertexX: vertices) {
 			if(graph.containsEdge(vertexX, i)) {
 				for(int vertexY: vertices) {
@@ -68,13 +67,13 @@ public class TransitiveClosure {
 	 * @param graph The graph.
 	 * @return True if it's tau-minimal, false else.
 	 */
-	public static boolean isTauMinimal(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> closure = getByRoyMarshall(graph);
-		for(int vertexX: graph.vertexSet()) {
-			for(int vertexY: graph.vertexSet()) {
+	public static boolean isTauMinimal(Graph graph) {
+		Graph closure = getByRoyMarshall(graph);
+		for(int vertexX: graph.getVertices()) {
+			for(int vertexY: graph.getVertices()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					graph.removeEdge(vertexX, vertexY);
-					if(Tools.graphEquals(closure, getByRoyMarshall(graph))) {
+					if(closure.equals(getByRoyMarshall(graph))) {
 						return false;
 					}
 					graph.addEdge(vertexX, vertexY);

@@ -1,12 +1,11 @@
 package test;
 
+import graph.DefaultDirectedGraph;
+import graph.DirectedGraph;
+import graph.Graph;
+
 import java.util.List;
 import java.util.Map;
-
-import org.jgrapht.DirectedGraph;
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
 
 import main.Representations;
 import main.Tools;
@@ -17,15 +16,15 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestRepresentations extends TestCase {
-	private DirectedGraph<Integer, DefaultEdge> graph;
+	private DirectedGraph graph;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
 	protected void setUp() throws Exception {
-		this.graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		this.graph = new DefaultDirectedGraph();
 
-		Tools.addVertices(this.graph, 8);
+		this.graph.addVertices(8);
 		this.graph.addEdge(1, 3);
 		this.graph.addEdge(2, 1);
 		this.graph.addEdge(2, 2);
@@ -53,8 +52,8 @@ public class TestRepresentations extends TestCase {
 		Map<Integer, List<Integer>> sources = Representations.getSourcesLists(this.graph);
 		System.out.println("Sources lists:");
 		System.out.println(sources);
-		Graph<Integer,DefaultEdge> graphBis = Representations.getGraphFromSourcesLists(sources);
-		assertTrue(Tools.graphEquals(this.graph, graphBis));
+		Graph graphBis = Representations.getGraphFromSourcesLists(sources);
+		assertTrue(this.graph.equals(graphBis));
 	}
 	
 	/**
@@ -64,7 +63,7 @@ public class TestRepresentations extends TestCase {
 		Map<Integer, List<Integer>> targets = Representations.getTargetsLists(this.graph);
 		System.out.println("Targets lists:");
 		System.out.println(targets);
-		Graph<Integer,DefaultEdge> graphBis = Representations.getGraphFromTargetsLists(targets);
-		assertTrue(Tools.graphEquals(this.graph, graphBis));
+		Graph graphBis = Representations.getGraphFromTargetsLists(targets);
+		assertTrue(this.graph.equals(graphBis));
 	}
 }

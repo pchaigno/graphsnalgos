@@ -1,13 +1,12 @@
 package main;
 
+import graph.DefaultDirectedGraph;
+import graph.Graph;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.Graph;
 
 /**
  * Methods to get the different representations of graphs.
@@ -22,8 +21,8 @@ public class Representations {
 	 * @param graph The graph.
 	 * @return The adjacency matrix.
 	 */
-	public static int[][] getAdjacencyMatrix(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+	public static int[][] getAdjacencyMatrix(Graph graph) {
+		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		int length = vertices.length;
 		int[][] adjacencyMatrix = new int[length][length];
 		for(int i=0 ; i<length ; i++) {
@@ -40,8 +39,8 @@ public class Representations {
 	 * @param graph The graph.
 	 * @return The list of targets vertices for each vertex.
 	 */
-	public static Map<Integer, List<Integer>> getTargetsLists(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+	public static Map<Integer, List<Integer>> getTargetsLists(Graph graph) {
+		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer source;
 		int length = vertices.length;
@@ -61,8 +60,8 @@ public class Representations {
 	 * @param graph The graph.
 	 * @return The list of sources vertices for each vertex.
 	 */
-	public static Map<Integer, List<Integer>> getSourcesLists(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+	public static Map<Integer, List<Integer>> getSourcesLists(Graph graph) {
+		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer target;
 		int length = vertices.length;
@@ -85,12 +84,12 @@ public class Representations {
 	 * @return The graph corresponding.
 	 * @throws IllegalArgumentException
 	 */
-	public static Graph<Integer, DefaultEdge> getGraphFromAdjacencyMatrix(int[][] matrix, int[] vertices) throws IllegalArgumentException {
+	public static Graph getGraphFromAdjacencyMatrix(int[][] matrix, int[] vertices) throws IllegalArgumentException {
 		int length = matrix.length;
 		if(length<1 || length!=matrix[0].length) {
 			throw new IllegalArgumentException();
 		}
-		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		Graph graph = new DefaultDirectedGraph();
 		for(int vertex: vertices) {
 			graph.addVertex(vertex);
 		}
@@ -109,8 +108,8 @@ public class Representations {
 	 * @param targets The list of targets vertices for each vertex.
 	 * @return The graph built.
 	 */
-	public static Graph<Integer, DefaultEdge> getGraphFromTargetsLists(Map<Integer, List<Integer>> targets) {
-		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+	public static Graph getGraphFromTargetsLists(Map<Integer, List<Integer>> targets) {
+		Graph graph = new DefaultDirectedGraph();
 		for(int source: targets.keySet()) {
 			if(!graph.containsVertex(source)) {
 				graph.addVertex(source);
@@ -130,8 +129,8 @@ public class Representations {
 	 * @param sources The list of sources vertices for each vertex.
 	 * @return The graph built.
 	 */
-	public static Graph<Integer, DefaultEdge> getGraphFromSourcesLists(Map<Integer, List<Integer>> sources) {
-		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+	public static Graph getGraphFromSourcesLists(Map<Integer, List<Integer>> sources) {
+		Graph graph = new DefaultDirectedGraph();
 		for(int target: sources.keySet()) {
 			if(!graph.containsVertex(target)) {
 				graph.addVertex(target);

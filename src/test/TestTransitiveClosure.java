@@ -1,11 +1,8 @@
 package test;
 
-import main.Tools;
+import graph.DefaultDirectedGraph;
+import graph.Graph;
 import main.TransitiveClosure;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
 
 import junit.framework.TestCase;
 
@@ -14,15 +11,15 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestTransitiveClosure extends TestCase {
-	private Graph<Integer, DefaultEdge> graph;
+	private Graph graph;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
 	protected void setUp() throws Exception {
-		this.graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		this.graph = new DefaultDirectedGraph();
 
-		Tools.addVertices(this.graph, 5);
+		this.graph.addVertices(5);
 		this.graph.addEdge(1, 2);
 		this.graph.addEdge(2, 3);
 		this.graph.addEdge(3, 2);
@@ -34,7 +31,7 @@ public class TestTransitiveClosure extends TestCase {
 	 * Test the getByPowers method.
 	 */
 	public void testGetByPowers() {
-		Graph<Integer, DefaultEdge> closure = TransitiveClosure.getByPowers(this.graph);
+		Graph closure = TransitiveClosure.getByPowers(this.graph);
 		System.out.println("Transitive closure by powers:");
 		System.out.println(closure);
 	}
@@ -43,7 +40,7 @@ public class TestTransitiveClosure extends TestCase {
 	 * Test the getByRoyMarshall method.
 	 */
 	public void testGetByRoyMarshall() {
-		Graph<Integer, DefaultEdge> closure = TransitiveClosure.getByRoyMarshall(this.graph);
+		Graph closure = TransitiveClosure.getByRoyMarshall(this.graph);
 		System.out.println("Transitive closure by Roy-Marshall:");
 		System.out.println(closure);
 	}

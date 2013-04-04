@@ -1,13 +1,11 @@
 package test;
 
+import graph.DefaultDirectedGraph;
+import graph.Graph;
+
 import java.util.List;
 
 import main.Connectivity;
-import main.Tools;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
 
 import junit.framework.TestCase;
 
@@ -16,23 +14,23 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestConnectivity extends TestCase {
-	private Graph<Integer, DefaultEdge> graph1;
-	private Graph<Integer, DefaultEdge> graph2;
-	private Graph<Integer, DefaultEdge> graph3;
-	private Graph<Integer, DefaultEdge> graph4;
-	private Graph<Integer, DefaultEdge> graph5;
+	private Graph graph1;
+	private Graph graph2;
+	private Graph graph3;
+	private Graph graph4;
+	private Graph graph5;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
 	protected void setUp() {
-		this.graph1 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		this.graph2 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		this.graph3 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		this.graph4 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		this.graph5 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		this.graph1 = new DefaultDirectedGraph();
+		this.graph2 = new DefaultDirectedGraph();
+		this.graph3 = new DefaultDirectedGraph();
+		this.graph4 = new DefaultDirectedGraph();
+		this.graph5 = new DefaultDirectedGraph();
 		
-		Tools.addVertices(this.graph1, 6);
+		this.graph1.addVertices(6);
 		this.graph1.addEdge(1, 2);
 		this.graph1.addEdge(1, 3);
 		this.graph1.addEdge(1, 4);
@@ -42,7 +40,7 @@ public class TestConnectivity extends TestCase {
 		this.graph1.addEdge(4, 5);
 
 
-		Tools.addVertices(this.graph2, 14);
+		this.graph2.addVertices(14);
 		this.graph2.addEdge(1, 2);
 		this.graph2.addEdge(1, 3);
 		this.graph2.addEdge(2, 4);
@@ -60,7 +58,7 @@ public class TestConnectivity extends TestCase {
 		this.graph2.addEdge(13, 12);
 		this.graph2.addEdge(13, 11);
 
-		Tools.addVertices(this.graph3, 4);
+		this.graph3.addVertices(4);
 		this.graph3.addEdge(1, 2);
 		this.graph3.addEdge(2, 3);
 		this.graph3.addEdge(2, 4);
@@ -68,7 +66,7 @@ public class TestConnectivity extends TestCase {
 		this.graph3.addEdge(3, 1);
 
 
-		Tools.addVertices(this.graph4, 18);
+		this.graph4.addVertices(18);
 		this.graph4.addEdge(1, 2);
 		this.graph4.addEdge(2, 3);
 		this.graph4.addEdge(2, 4);
@@ -103,7 +101,7 @@ public class TestConnectivity extends TestCase {
 		this.graph4.addEdge(18, 17);
 
 
-		Tools.addVertices(this.graph5, 3);
+		this.graph5.addVertices(3);
 		this.graph5.addEdge(2, 1);
 		this.graph5.addEdge(3, 1);
 	}
@@ -122,12 +120,12 @@ public class TestConnectivity extends TestCase {
 	 * Test the getConnectedComposantByTarjan method.
 	 */
 	public void testGetConnectedComposantByTarjan() {
-		Graph<Integer, DefaultEdge> subgraph = Connectivity.getConnectedComposantByTarjan(this.graph1, 1);
+		Graph subgraph = Connectivity.getConnectedComposantByTarjan(this.graph1, 1);
 		System.out.println("Connected composant of 1 by Tarjan:");
 		System.out.println(subgraph);
-		List<Graph<Integer, DefaultEdge>> subgraphs = Connectivity.getConnectedComposantsByTarjan(this.graph2);
+		List<Graph> subgraphs = Connectivity.getConnectedComposantsByTarjan(this.graph2);
 		System.out.println("Connected composants by Tarjan:");
-		for(Graph<Integer, DefaultEdge> graph: subgraphs) {
+		for(Graph graph: subgraphs) {
 			System.out.println(graph);
 		}
 	}
@@ -136,9 +134,9 @@ public class TestConnectivity extends TestCase {
 	 * Test the getStronglyConnectedComposantsByFoulkes method.
 	 */
 	public void testGetStronglyConnectedComposantsByFoulkes() {
-		List<Graph<Integer, DefaultEdge>> subgraphs = Connectivity.getStronglyConnectedComposantsByFoulkes(this.graph4);
+		List<Graph> subgraphs = Connectivity.getStronglyConnectedComposantsByFoulkes(this.graph4);
 		System.out.println("Strongly connected composants by Foulkes:");
-		for(Graph<Integer, DefaultEdge> graph: subgraphs) {
+		for(Graph graph: subgraphs) {
 			System.out.println(graph);
 		}
 	}
@@ -147,9 +145,9 @@ public class TestConnectivity extends TestCase {
 	 * Test the getStronglyConnectedComposantsByAscendantDescendant method.
 	 */
 	public void testGetStronglyConnectedComposantsByAscendantDescendant() {
-		List<Graph<Integer, DefaultEdge>> subgraphs = Connectivity.getStronglyConnectedComposantsByAscendantDescendant(this.graph4);
+		List<Graph> subgraphs = Connectivity.getStronglyConnectedComposantsByAscendantDescendant(this.graph4);
 		System.out.println("Strongly connected composants by ascending-descending:");
-		for(Graph<Integer, DefaultEdge> graph: subgraphs) {
+		for(Graph graph: subgraphs) {
 			System.out.println(graph);
 		}
 	}

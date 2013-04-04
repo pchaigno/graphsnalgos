@@ -1,12 +1,11 @@
 package main;
 
+import graph.DefaultDirectedGraph;
+import graph.Graph;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
 
 /**
  * Methods to get the different operations on graphs.
@@ -24,16 +23,16 @@ public class Operations {
 	 * @return The union of graph1 and graph2.
 	 * @throws IllegalArgumentException
 	 */
-	public static Graph<Integer, DefaultEdge> union(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) throws IllegalArgumentException {
-		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		if(!graph1.vertexSet().equals(graph2.vertexSet())) {
+	public static Graph union(Graph graph1, Graph graph2) throws IllegalArgumentException {
+		Graph graph = new DefaultDirectedGraph();
+		if(!graph1.getVertices().equals(graph2.getVertices())) {
 			throw new IllegalArgumentException("The two graphs must have the same vertices.");
 		}
-		for(int vertex: graph1.vertexSet()) {
+		for(int vertex: graph1.getVertices()) {
 			graph.addVertex(vertex);
 		}
-		for(int vertexX: graph1.vertexSet()) {
-			for(int vertexY: graph1.vertexSet()) {
+		for(int vertexX: graph1.getVertices()) {
+			for(int vertexY: graph1.getVertices()) {
 				if(graph1.containsEdge(vertexX, vertexY) || graph2.containsEdge(vertexX, vertexY)) {
 					graph.addEdge(vertexX, vertexY);
 				}
@@ -50,17 +49,17 @@ public class Operations {
 	 * @return The composition of graph1 and graph2, graph1 o graph2.
 	 * @throws IllegalArgumentException
 	 */
-	public static Graph<Integer, DefaultEdge> composition(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) throws IllegalArgumentException {
-		Graph<Integer, DefaultEdge> graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		if(!graph1.vertexSet().equals(graph2.vertexSet())) {
+	public static Graph composition(Graph graph1, Graph graph2) throws IllegalArgumentException {
+		Graph graph = new DefaultDirectedGraph();
+		if(!graph1.getVertices().equals(graph2.getVertices())) {
 			throw new IllegalArgumentException("The two graphs must have the same vertices.");
 		}
-		for(int vertex: graph1.vertexSet()) {
+		for(int vertex: graph1.getVertices()) {
 			graph.addVertex(vertex);
 		}
-		for(int vertexX: graph1.vertexSet()) {
-			for(int vertexY: graph1.vertexSet()) {
-				for(int vertexZ: graph1.vertexSet()) {
+		for(int vertexX: graph1.getVertices()) {
+			for(int vertexY: graph1.getVertices()) {
+				for(int vertexZ: graph1.getVertices()) {
 					if(graph2.containsEdge(vertexX, vertexZ) && graph1.containsEdge(vertexZ, vertexY)) {
 						graph.addEdge(vertexX, vertexY);
 					}
@@ -78,9 +77,9 @@ public class Operations {
 	 * @param p The power.
 	 * @return Power p of the graph
 	 */
-	public static Graph<Integer, DefaultEdge> power(Graph<Integer, DefaultEdge> graph, int p) {
+	public static Graph power(Graph graph, int p) {
 		if(p==1) {
-			return Tools.clone(graph);
+			return (Graph)graph.clone();
 		}
 		return composition(power(graph, p-1), graph);
 	}
@@ -90,13 +89,13 @@ public class Operations {
 	 * @param graph The graph.
 	 * @return The transposed graph.
 	 */
-	public static Graph<Integer, DefaultEdge> transpose(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> transposed = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(int vertex: graph.vertexSet()) {
+	public static Graph transpose(Graph graph) {
+		Graph transposed = new DefaultDirectedGraph();
+		for(int vertex: graph.getVertices()) {
 			transposed.addVertex(vertex);
 		}
-		for(int vertexX: graph.vertexSet()) {
-			for(int vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.getVertices()) {
+			for(int vertexY: graph.getVertices()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					transposed.addEdge(vertexY, vertexX);
 				}
@@ -110,13 +109,13 @@ public class Operations {
 	 * @param graph The graph.
 	 * @return The complementary graph.
 	 */
-	public static Graph<Integer, DefaultEdge> complementary(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> complementary = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(int vertex: graph.vertexSet()) {
+	public static Graph complementary(Graph graph) {
+		Graph complementary = new DefaultDirectedGraph();
+		for(int vertex: graph.getVertices()) {
 			complementary.addVertex(vertex);
 		}
-		for(int vertexX: graph.vertexSet()) {
-			for(int vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.getVertices()) {
+			for(int vertexY: graph.getVertices()) {
 				if(!graph.containsEdge(vertexX, vertexY)) {
 					complementary.addEdge(vertexX, vertexY);
 				}
@@ -130,13 +129,13 @@ public class Operations {
 	 * @param graph The graph.
 	 * @return The complementary graph whitout loops.
 	 */
-	public static Graph<Integer, DefaultEdge> complementaryWithoutLoops(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> complementary = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(int vertex: graph.vertexSet()) {
+	public static Graph complementaryWithoutLoops(Graph graph) {
+		Graph complementary = new DefaultDirectedGraph();
+		for(int vertex: graph.getVertices()) {
 			complementary.addVertex(vertex);
 		}
-		for(int vertexX: graph.vertexSet()) {
-			for(int vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.getVertices()) {
+			for(int vertexY: graph.getVertices()) {
 				if(vertexX!=vertexY && !graph.containsEdge(vertexX, vertexY)) {
 					complementary.addEdge(vertexX, vertexY);
 				}
@@ -151,9 +150,9 @@ public class Operations {
 	 * @param graph The graph.
 	 * @return True if partialGraph is the partial graph of graph.
 	 */
-	public static boolean isPartialGraph(Graph<Integer, DefaultEdge> partialGraph, Graph<Integer, DefaultEdge> graph) {
-		for(int vertexX: graph.vertexSet()) {
-			for(int vertexY: graph.vertexSet()) {
+	public static boolean isPartialGraph(Graph partialGraph, Graph graph) {
+		for(int vertexX: graph.getVertices()) {
+			for(int vertexY: graph.getVertices()) {
 				if(partialGraph.containsEdge(vertexX, vertexY) && !graph.containsEdge(vertexX, vertexY)) {
 					return false;
 				}
@@ -168,13 +167,13 @@ public class Operations {
 	 * @param a The list of vertex for the subgraph.
 	 * @return The subgraph of graph from a.
 	 */
-	public static Graph<Integer, DefaultEdge> subgraphFrom(Graph<Integer, DefaultEdge> graph, Set<Integer> a) {
-		Graph<Integer, DefaultEdge> subgraph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+	public static Graph subgraphFrom(Graph graph, Set<Integer> a) {
+		Graph subgraph = new DefaultDirectedGraph();
 		for(int vertex: a) {
 			subgraph.addVertex(vertex);
 		}
-		for(int vertexX: graph.vertexSet()) {
-			for(int vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.getVertices()) {
+			for(int vertexY: graph.getVertices()) {
 				if(a.contains(vertexX) && a.contains(vertexY) && graph.containsEdge(vertexX, vertexY)) {
 					subgraph.addEdge(vertexX, vertexY);
 				}
@@ -189,15 +188,15 @@ public class Operations {
 	 * @param a The list of vertex to remove from graph.
 	 * @return The subgraph of graph from a.
 	 */
-	public static Graph<Integer, DefaultEdge> subgraphWithout(Graph<Integer, DefaultEdge> graph, Set<Integer> a) {
-		Graph<Integer, DefaultEdge> subgraph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		for(int vertex: graph.vertexSet()) {
+	public static Graph subgraphWithout(Graph graph, Set<Integer> a) {
+		Graph subgraph = new DefaultDirectedGraph();
+		for(int vertex: graph.getVertices()) {
 			if(!a.contains(vertex)) {
 				subgraph.addVertex(vertex);
 			}
 		}
-		for(int vertexX: graph.vertexSet()) {
-			for(int vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.getVertices()) {
+			for(int vertexY: graph.getVertices()) {
 				if(!a.contains(vertexX) && !a.contains(vertexY) && graph.containsEdge(vertexX, vertexY)) {
 					subgraph.addEdge(vertexX, vertexY);
 				}
@@ -212,13 +211,13 @@ public class Operations {
 	 * @param graph The graph.
 	 * @return The edges graph.
 	 */
-	public static Graph<Integer, DefaultEdge> edgesGraph(Graph<Integer, DefaultEdge> graph) {
+	public static Graph edgesGraph(Graph graph) {
 		// Couple numbers to the edges and build the vertices of the edges graph:
-		Graph<Integer, DefaultEdge> edgesGraph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		Graph edgesGraph = new DefaultDirectedGraph();
 		Map<Integer, Integer[]> edges = new HashMap<Integer, Integer[]>();
 		int num = 1;
-		for(int vertexX: graph.vertexSet()) {
-			for(int vertexY: graph.vertexSet()) {
+		for(int vertexX: graph.getVertices()) {
+			for(int vertexY: graph.getVertices()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					edges.put(num, new Integer[] {vertexX, vertexY});
 					edgesGraph.addVertex(num);

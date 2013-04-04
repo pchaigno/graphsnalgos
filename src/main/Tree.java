@@ -1,7 +1,6 @@
 package main;
 
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
+import graph.Graph;
 
 /**
  * Regroups the methods about the trees.
@@ -14,7 +13,7 @@ public class Tree {
 	 * @param graph The graph.
 	 * @return The first root found or -1 if there is no root.
 	 */
-	public static int getRoot(Graph<Integer, DefaultEdge> graph) {
+	public static int getRoot(Graph graph) {
 		int[][] routingMatrix = Routing.routingByRoyMarshallWithSuccessor(graph);
 		boolean isRoot;
 		int length = routingMatrix.length;
@@ -27,7 +26,7 @@ public class Tree {
 				}
 			}
 			if(isRoot) {
-				Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+				Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 				return vertices[a];
 			}
 		}
@@ -39,8 +38,8 @@ public class Tree {
 	 * @param graph The graph.
 	 * @return True if it is.
 	 */
-	public static boolean isRootedTree(Graph<Integer, DefaultEdge> graph) {
-		if(graph.edgeSet().size()+1!=graph.vertexSet().size()) {
+	public static boolean isRootedTree(Graph graph) {
+		if(graph.getEdges().size()+1!=graph.getVertices().size()) {
 			return false;
 		}
 		if(Connectivity.isAlmostStronglyConnected(graph)) {

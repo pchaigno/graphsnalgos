@@ -1,14 +1,12 @@
 package test;
 
+import graph.DefaultDirectedGraph;
+import graph.Graph;
+
 import java.util.Map;
 import java.util.Set;
 
 import main.Cycles;
-import main.Tools;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
 
 import junit.framework.TestCase;
 
@@ -17,15 +15,15 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestCycles extends TestCase {
-	private Graph<Integer, DefaultEdge> graph;
+	private Graph graph;
 	
 	/**
 	 * Initialiaze the tests with the graph from the handout.
 	 */
 	protected void setUp() {
-		this.graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		this.graph = new DefaultDirectedGraph();
 
-		Tools.addVertices(this.graph, 12);
+		this.graph.addVertices(12);
 		this.graph.addEdge(1, 4);
 		this.graph.addEdge(1, 5);
 		this.graph.addEdge(2, 6);

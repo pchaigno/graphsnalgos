@@ -3,12 +3,6 @@ package main;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jgrapht.Graph;
-import org.jgrapht.WeightedGraph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultDirectedWeightedGraph;
-import org.jgrapht.graph.DefaultEdge;
-
 public class Tools {
 
 	/**
@@ -37,7 +31,7 @@ public class Tools {
 	 * @param graph The graph to clone.
 	 * @return The cloned graph.
 	 */
-	public static Graph<Integer, DefaultEdge> clone(Graph<Integer, DefaultEdge> graph) {
+	/*public static Graph<Integer, DefaultEdge> clone(Graph<Integer, DefaultEdge> graph) {
 		Graph<Integer, DefaultEdge> clone = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		for(int vertex: graph.vertexSet()) {
 			clone.addVertex(vertex);
@@ -50,14 +44,14 @@ public class Tools {
 			}
 		}
 		return clone;
-	}
+	}*/
 	
 	/**
 	 * Build a copy of a weighted graph.
 	 * @param graph The graph to clone.
 	 * @return The cloned graph.
 	 */
-	public static WeightedGraph<Integer, DefaultEdge> clone(WeightedGraph<Integer, DefaultEdge> graph) {
+	/*public static WeightedGraph<Integer, DefaultEdge> clone(WeightedGraph<Integer, DefaultEdge> graph) {
 		WeightedGraph<Integer, DefaultEdge> clone = new DefaultDirectedWeightedGraph<Integer, DefaultEdge>(DefaultEdge.class);
 		for(int vertex: graph.vertexSet()) {
 			clone.addVertex(vertex);
@@ -71,7 +65,7 @@ public class Tools {
 			}
 		}
 		return clone;
-	}
+	}*/
 	
 	/**
 	 * Build a copy of a set of integers.
@@ -92,7 +86,7 @@ public class Tools {
 	 * @param graph2 The second graph.
 	 * @return True if they are equals, false else.
 	 */
-	public static boolean graphEquals(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) {
+	/*public static boolean graphEquals(Graph<Integer, DefaultEdge> graph1, Graph<Integer, DefaultEdge> graph2) {
 		if(!graph1.vertexSet().equals(graph2.vertexSet())) {
 			return false;
 		}
@@ -107,7 +101,7 @@ public class Tools {
 			}
 		}
 		return true;
-	}
+	}*/
 	
 	/**
 	 * Add vertices to a graph.
@@ -115,12 +109,12 @@ public class Tools {
 	 * @param graph An empty graph.
 	 * @param nbVertices The number of vertices to add.
 	 */
-	public static void addVertices(Graph<Integer, DefaultEdge> graph, int nbVertices) {
+	/*public static void addVertices(Graph<Integer, DefaultEdge> graph, int nbVertices) {
 		if(graph.vertexSet().size()!=0) {
 			throw new IllegalArgumentException("The graph need to be empty.");
 		}
 		for(int i=1 ; i<=nbVertices ; i++) {
 			graph.addVertex(i);
 		}
-	}
+	}*/
 }

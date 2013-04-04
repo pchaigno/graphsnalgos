@@ -1,10 +1,9 @@
 package main;
 
+import graph.Graph;
+
 import java.util.LinkedList;
 import java.util.List;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
 
 /**
  * Regroups the methods about Routing.
@@ -19,8 +18,8 @@ public class Routing {
 	 * @param graph The graph.
 	 * @return The routing matrix.
 	 */
-	public static int[][] routingByRoyMarshallWithSuccessor(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+	public static int[][] routingByRoyMarshallWithSuccessor(Graph graph) {
+		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		int length = vertices.length;
 		int[][] r = new int[length][length];
 		
@@ -57,8 +56,8 @@ public class Routing {
 	 * @param graph The graph.
 	 * @return The routage matrix.
 	 */
-	public static int[][] routingByRoyMarshallWithPredecessor(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+	public static int[][] routingByRoyMarshallWithPredecessor(Graph graph) {
+		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		int length = vertices.length;
 		int[][] r = new int[length][length];
 		
@@ -95,8 +94,8 @@ public class Routing {
 	 * @param graph The graph.
 	 * @return The routage matrix.
 	 */
-	public static int[][] routingByRoyMarshallWithAStep(Graph<Integer, DefaultEdge> graph) {
-		Integer[] vertices = graph.vertexSet().toArray(new Integer[0]);
+	public static int[][] routingByRoyMarshallWithAStep(Graph graph) {
+		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		int length = vertices.length;
 		int[][] r = new int[length][length];
 		

@@ -1,32 +1,29 @@
 package test;
 
-import main.Tools;
+import graph.DefaultDirectedGraph;
+import graph.Graph;
 import main.Tree;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
 
 import junit.framework.TestCase;
 
 public class TestTree extends TestCase {
-	private Graph<Integer, DefaultEdge> graph1;
-	private Graph<Integer, DefaultEdge> graph2;
-	private Graph<Integer, DefaultEdge> graph3;
-	private Graph<Integer, DefaultEdge> graph4;
-	private Graph<Integer, DefaultEdge> graph5;
+	private Graph graph1;
+	private Graph graph2;
+	private Graph graph3;
+	private Graph graph4;
+	private Graph graph5;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
 	protected void setUp() throws Exception {
-		this.graph1 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		this.graph2 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		this.graph3 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		this.graph4 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		this.graph5 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		this.graph1 = new DefaultDirectedGraph();
+		this.graph2 = new DefaultDirectedGraph();
+		this.graph3 = new DefaultDirectedGraph();
+		this.graph4 = new DefaultDirectedGraph();
+		this.graph5 = new DefaultDirectedGraph();
 		
-		Tools.addVertices(this.graph1, 6);
+		this.graph1.addVertices(6);
 		this.graph1.addEdge(1, 2);
 		this.graph1.addEdge(1, 3);
 		this.graph1.addEdge(1, 4);
@@ -35,18 +32,18 @@ public class TestTree extends TestCase {
 		this.graph1.addEdge(6, 4);
 		this.graph1.addEdge(4, 5);
 
-		Tools.addVertices(this.graph2, 4);
+		this.graph2.addVertices(4);
 		this.graph2.addEdge(1, 2);
 		this.graph2.addEdge(2, 3);
 		this.graph2.addEdge(2, 4);
 		this.graph2.addEdge(4, 3);
 		this.graph2.addEdge(3, 1);
 
-		Tools.addVertices(this.graph3, 3);
+		this.graph3.addVertices(3);
 		this.graph3.addEdge(2, 1);
 		this.graph3.addEdge(3, 1);
 
-		Tools.addVertices(this.graph4, 8);
+		this.graph4.addVertices(8);
 		this.graph4.addEdge(2, 1);
 		this.graph4.addEdge(2, 4);
 		this.graph4.addEdge(3, 1);
@@ -55,7 +52,7 @@ public class TestTree extends TestCase {
 		this.graph4.addEdge(4, 7);
 		this.graph4.addEdge(6, 8);
 		
-		Tools.addVertices(this.graph5, 8);
+		this.graph5.addVertices(8);
 		this.graph5.addEdge(1, 2);
 		this.graph5.addEdge(1, 3);
 		this.graph5.addEdge(2, 4);

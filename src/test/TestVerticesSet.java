@@ -1,14 +1,12 @@
 package test;
 
+import graph.DefaultDirectedGraph;
+import graph.Graph;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import main.Tools;
 import main.VerticesSet;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
 
 import junit.framework.TestCase;
 
@@ -17,23 +15,21 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestVerticesSet extends TestCase {
-	private Graph<Integer, DefaultEdge> graph1;
-	private Graph<Integer, DefaultEdge> graph2;
+	private Graph graph1;
+	private Graph graph2;
 	
 	@Override
 	protected void setUp() {
-		this.graph1 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
-		this.graph2 = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		this.graph1 = new DefaultDirectedGraph();
+		this.graph2 = new DefaultDirectedGraph();
 
-
-		Tools.addVertices(this.graph1, 4);
+		this.graph1.addVertices(4);
 		this.graph1.addEdge(1, 2);
 		this.graph1.addEdge(2, 3);
 		this.graph1.addEdge(3, 4);
 		this.graph1.addEdge(4, 2);
 
-
-		Tools.addVertices(this.graph2, 6);
+		this.graph2.addVertices(6);
 		this.graph2.addEdge(1, 6);
 		this.graph2.addEdge(2, 1);
 		this.graph2.addEdge(2, 3);

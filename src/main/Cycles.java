@@ -1,12 +1,11 @@
 package main;
 
+import graph.Graph;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
 
 /**
  * Regroups the methods about the cycles.
@@ -20,10 +19,10 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return True if the graph contains cycles.
 	 */
-	public static boolean containsCyclesByInputOutput(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> subGraph = Tools.clone(graph);
+	public static boolean containsCyclesByInputOutput(Graph graph) {
+		Graph subGraph = (Graph)graph.clone();
 		Set<Integer> inputVertices, outputVertices;
-		while(subGraph.vertexSet().size()!=0) {
+		while(subGraph.getVertices().size()!=0) {
 			inputVertices = getInputVertices(subGraph);
 			outputVertices = getOutputVertices(subGraph);
 			if(inputVertices.size()==0 || outputVertices.size()==0) {
@@ -41,10 +40,10 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return True if the graph contains cycles.
 	 */
-	public static boolean containsCyclesByInput(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> subGraph = Tools.clone(graph);
+	public static boolean containsCyclesByInput(Graph graph) {
+		Graph subGraph = (Graph)graph.clone();
 		Set<Integer> inputVertices;
-		while(subGraph.vertexSet().size()!=0) {
+		while(subGraph.getVertices().size()!=0) {
 			inputVertices = getInputVertices(subGraph);
 			if(inputVertices.size()==0) {
 				return true;
@@ -60,10 +59,10 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return True if the graph contains cycles.
 	 */
-	public static boolean containsCyclesByOutput(Graph<Integer, DefaultEdge> graph) {
-		Graph<Integer, DefaultEdge> subGraph = Tools.clone(graph);
+	public static boolean containsCyclesByOutput(Graph graph) {
+		Graph subGraph = (Graph)graph.clone();
 		Set<Integer> outputVertices;
-		while(subGraph.vertexSet().size()!=0) {
+		while(subGraph.getVertices().size()!=0) {
 			outputVertices = getOutputVertices(subGraph);
 			if(outputVertices.size()==0) {
 				return true;
@@ -79,12 +78,12 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return A map with the rank as key and the vertices corresponding as value or null if the graph contains cycle.
 	 */
-	public static Map<Integer, Set<Integer>> getRanksOfVertices(Graph<Integer, DefaultEdge> graph) {
+	public static Map<Integer, Set<Integer>> getRanksOfVertices(Graph graph) {
 		Map<Integer, Set<Integer>> levels = new HashMap<Integer, Set<Integer>>();
-		Graph<Integer, DefaultEdge> subGraph = Tools.clone(graph);
+		Graph subGraph = (Graph)graph.clone();
 		Set<Integer> inputVertices;
 		int rank = 0;
-		while(subGraph.vertexSet().size()!=0) {
+		while(subGraph.getVertices().size()!=0) {
 			inputVertices = getInputVertices(subGraph);
 			if(inputVertices.size()==0) {
 				return null;
@@ -101,12 +100,12 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return The input vertices.
 	 */
-	public static Set<Integer> getInputVertices(Graph<Integer, DefaultEdge> graph) {
+	public static Set<Integer> getInputVertices(Graph graph) {
 		Set<Integer> inputVertices = new HashSet<Integer>();
 		boolean hasPredecessor;
-		for(int vertexX: graph.vertexSet()) {
+		for(int vertexX: graph.getVertices()) {
 			hasPredecessor = false;
-			for(int vertexY: graph.vertexSet()) {
+			for(int vertexY: graph.getVertices()) {
 				if(graph.containsEdge(vertexY, vertexX)) {
 					hasPredecessor = true;
 					break;
@@ -124,12 +123,12 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return The output vertices.
 	 */
-	public static Set<Integer> getOutputVertices(Graph<Integer, DefaultEdge> graph) {
+	public static Set<Integer> getOutputVertices(Graph graph) {
 		Set<Integer> outputVertices = new HashSet<Integer>();
 		boolean hasSuccessor;
-		for(int vertexX: graph.vertexSet()) {
+		for(int vertexX: graph.getVertices()) {
 			hasSuccessor = false;
-			for(int vertexY: graph.vertexSet()) {
+			for(int vertexY: graph.getVertices()) {
 				if(graph.containsEdge(vertexX, vertexY)) {
 					hasSuccessor = true;
 					break;

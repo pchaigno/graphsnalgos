@@ -1,13 +1,12 @@
 package test;
 
+import graph.DefaultDirectedGraph;
+import graph.Graph;
+
 import java.util.List;
 
 import main.Routing;
 import main.Tools;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
 
 import junit.framework.TestCase;
 
@@ -16,15 +15,15 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestRouting extends TestCase {
-	private Graph<Integer, DefaultEdge> graph;
+	private Graph graph;
 	
 	/**
 	 * Initalize the tests with the graph from the TD.
 	 */
 	protected void setUp() throws Exception {
-		this.graph = new DefaultDirectedGraph<Integer, DefaultEdge>(DefaultEdge.class);
+		this.graph = new DefaultDirectedGraph();
 
-		Tools.addVertices(this.graph, 7);
+		this.graph.addVertices(7);
 		this.graph.addEdge(1, 2);
 		this.graph.addEdge(1, 5);
 		this.graph.addEdge(2, 3);
