@@ -14,6 +14,11 @@ public class DefaultDirectedGraph extends DefaultGraph implements DirectedGraph 
 		}
 		return this.edges.add(new DefaultDirectedEdge(x, y));
 	}
+
+	@Override
+	public boolean removeEdge(int x, int y) {
+		return this.edges.remove(new DefaultDirectedEdge(x, y));
+	}
 	
 	@Override
 	public DefaultDirectedGraph clone() {

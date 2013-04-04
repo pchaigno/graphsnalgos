@@ -71,5 +71,20 @@ public interface Graph extends Cloneable {
 	 */
 	public boolean addEdge(int x, int y);
 	
+	/**
+	 * Remove an edge from the graph.
+	 * @param x The starting vertex of the edge.
+	 * @param y The end vertex of the edge.
+	 * @return True if the graph contained the edge.
+	 */
+	public boolean removeEdge(int x, int y);
+	
+	/**
+	 * Remove an edge from the graph.
+	 * @param edge The edge to add.
+	 * @return True if the graph contained the edge.
+	 */
+	public boolean removeEdge(Edge edge);
+	
 	public Object clone();
 }

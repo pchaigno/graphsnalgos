@@ -131,4 +131,14 @@ public class DefaultGraph implements Graph {
 		}
 		return true;
 	}
+
+	@Override
+	public boolean removeEdge(int x, int y) {
+		return this.edges.remove(new DefaultEdge(x, y));
+	}
+
+	@Override
+	public boolean removeEdge(Edge edge) {
+		return this.edges.remove(edge);
+	}
 }
