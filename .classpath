@@ -2,12 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="libs/jgrapht-jdk1.6.jar"/>
-	<classpathentry kind="lib" path="libs/jgraph.jar"/>
 	<classpathentry kind="lib" path="libs/junit.jar"/>
-	<classpathentry kind="lib" path="libs/svnant.jar"/>
-	<classpathentry kind="lib" path="libs/svnClientAdapter.jar"/>
-	<classpathentry kind="lib" path="libs/TGGraphLayout.jar"/>
-	<classpathentry kind="lib" path="libs/xmlunit1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
