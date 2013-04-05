@@ -6,8 +6,6 @@ import graph.Graph;
 import java.util.HashSet;
 import java.util.Set;
 
-import main.Operations;
-
 import junit.framework.TestCase;
 
 /**
@@ -53,7 +51,7 @@ public class TestOperations extends TestCase {
 	 * Test the union method.
 	 */
 	public void testUnion() {
-		Graph graph = Operations.union(this.graph1, this.graph2);
+		Graph graph = this.graph1.union(this.graph2);
 		System.out.println("Union:");
 		System.out.println(graph);
 	}
@@ -62,10 +60,10 @@ public class TestOperations extends TestCase {
 	 * Test the composition method.
 	 */
 	public void testComposition() {
-		Graph graph = Operations.composition(this.graph1, this.graph2);
+		Graph graph = this.graph1.composition(this.graph2);
 		System.out.println("Composition g1 o g2:");
 		System.out.println(graph);
-		graph = Operations.composition(this.graph2, this.graph1);
+		graph = this.graph2.composition(this.graph1);
 		System.out.println("Composition g2 o g1:");
 		System.out.println(graph);
 	}
@@ -74,7 +72,7 @@ public class TestOperations extends TestCase {
 	 * Test the power method.
 	 */
 	public void testPower() {
-		Graph graph = Operations.power(this.graph1, 2);
+		Graph graph = this.graph1.power(2);
 		System.out.println("g1 square:");
 		System.out.println(graph);
 	}
@@ -83,10 +81,10 @@ public class TestOperations extends TestCase {
 	 * Test the transpose method.
 	 */
 	public void testTransposed() {
-		Graph graph = Operations.transpose(this.graph1);
+		Graph graph = this.graph1.transpose();
 		System.out.println("g1 transposed:");
 		System.out.println(graph);
-		graph = Operations.transpose(this.graph2);
+		graph = this.graph2.transpose();
 		System.out.println("g2 transposed:");
 		System.out.println(graph);
 	}
@@ -95,10 +93,10 @@ public class TestOperations extends TestCase {
 	 * Test the complementary method.
 	 */
 	public void testComplementary() {
-		Graph graph = Operations.complementary(this.graph1);
+		Graph graph = this.graph1.complementary();
 		System.out.println("g1 complementary:");
 		System.out.println(graph);
-		graph = Operations.complementary(this.graph2);
+		graph = this.graph2.complementary();
 		System.out.println("g2 complementary:");
 		System.out.println(graph);
 	}
@@ -107,10 +105,10 @@ public class TestOperations extends TestCase {
 	 * Test the complementaryWithoutLoops method.
 	 */
 	public void testComplementaryWithoutLoops() {
-		Graph graph = Operations.complementaryWithoutLoops(this.graph1);
+		Graph graph = this.graph1.complementaryWithoutLoops();
 		System.out.println("g1 complementary without loops:");
 		System.out.println(graph);
-		graph = Operations.complementaryWithoutLoops(this.graph2);
+		graph = this.graph2.complementaryWithoutLoops();
 		System.out.println("g2 complementary without loops:");
 		System.out.println(graph);
 	}
@@ -130,10 +128,10 @@ public class TestOperations extends TestCase {
 		a.add(1);
 		a.add(2);
 		a.add(4);
-		Graph graph = Operations.subgraphFrom(this.graph1, a);
+		Graph graph = this.graph1.subgraphFrom(a);
 		System.out.println("g1 subgraph:");
 		System.out.println(graph);
-		graph = Operations.subgraphFrom(this.graph2, a);
+		graph = this.graph2.subgraphFrom(a);
 		System.out.println("g2 subgraph:");
 		System.out.println(graph);
 	}
@@ -142,7 +140,7 @@ public class TestOperations extends TestCase {
 	 * Test the edgesGraph method.
 	 */
 	public void testEdgesGraph() {
-		Graph edgesGraph = Operations.edgesGraph(this.graph3);
+		Graph edgesGraph = this.graph3.edgesGraph();
 		System.out.println("g3 edges graph:");
 		System.out.println(edgesGraph);
 	}

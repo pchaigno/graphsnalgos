@@ -76,7 +76,7 @@ public class Connectivity {
 				connectedVertexes.add(vertices[i]);
 			}
 		}
-		Graph subgraph = Operations.subgraphFrom(graph, connectedVertexes);
+		Graph subgraph = graph.subgraphFrom(connectedVertexes);
 		return subgraph;
 	}
 	
@@ -177,7 +177,7 @@ public class Connectivity {
 				}
 				
 				// Construct the graph:
-				Graph subgraph = Operations.subgraphFrom(graph, cfc);
+				Graph subgraph = graph.subgraphFrom(cfc);
 				composants.add(subgraph);
 			}
 		}
@@ -208,7 +208,7 @@ public class Connectivity {
 				nc.removeAll(cfc);
 				
 				// Construct the graph:
-				Graph subgraph = Operations.subgraphFrom(graph, cfc);
+				Graph subgraph = graph.subgraphFrom(cfc);
 				composants.add(subgraph);
 			}
 		}

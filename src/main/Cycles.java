@@ -29,7 +29,7 @@ public class Cycles {
 				return true;
 			}
 			inputVertices.addAll(outputVertices);
-			subGraph = Operations.subgraphWithout(subGraph, inputVertices);
+			subGraph = subGraph.subgraphWithout(inputVertices);
 		}
 		return false;
 	}
@@ -48,7 +48,7 @@ public class Cycles {
 			if(inputVertices.size()==0) {
 				return true;
 			}
-			subGraph = Operations.subgraphWithout(subGraph, inputVertices);
+			subGraph = subGraph.subgraphWithout(inputVertices);
 		}
 		return false;
 	}
@@ -67,7 +67,7 @@ public class Cycles {
 			if(outputVertices.size()==0) {
 				return true;
 			}
-			subGraph = Operations.subgraphWithout(subGraph, outputVertices);
+			subGraph = subGraph.subgraphWithout(outputVertices);
 		}
 		return false;
 	}
@@ -90,7 +90,7 @@ public class Cycles {
 			}
 			levels.put(rank, inputVertices);
 			rank++;
-			subGraph = Operations.subgraphWithout(subGraph, inputVertices);
+			subGraph = subGraph.subgraphWithout(inputVertices);
 		}
 		return levels;
 	}

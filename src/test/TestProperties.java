@@ -2,7 +2,6 @@ package test;
 
 import graph.DefaultDirectedGraph;
 import graph.Graph;
-import main.Operations;
 import main.Properties;
 
 import junit.framework.TestCase;
@@ -68,7 +67,7 @@ public class TestProperties extends TestCase {
 		this.graph5.addEdge(1, 3);
 		this.graph5.addEdge(2, 3);
 	
-		this.graph6 = Operations.union(this.graph4, this.graph5);
+		this.graph6 = this.graph4.union(this.graph5);
 		
 		this.graph7 = (Graph)this.graph6.clone();
 		this.graph7.addEdge(2, 2);

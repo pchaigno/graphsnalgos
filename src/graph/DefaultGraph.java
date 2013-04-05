@@ -237,4 +237,181 @@ public class DefaultGraph implements Graph {
 			}
 		}
 	}
+
+	@Override
+	public Graph union(Graph graph) {
+		if(!this.getVertices().equals(graph.getVertices())) {
+			throw new IllegalArgumentException("The two graphs must have the same vertices.");
+		}
+		Graph union = new DefaultDirectedGraph();
+		for(int vertex: this.getVertices()) {
+			union.addVertex(vertex);
+		}
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(this.containsEdge(vertexX, vertexY) || graph.containsEdge(vertexX, vertexY)) {
+					union.addEdge(vertexX, vertexY);
+				}
+			}
+		}
+		return graph;
+	}
+
+	@Override
+	public Graph composition(Graph graph) {
+		if(!this.getVertices().equals(graph.getVertices())) {
+			throw new IllegalArgumentException("The two graphs must have the same vertices.");
+		}
+		Graph composition = new DefaultDirectedGraph();
+		for(int vertex: this.getVertices()) {
+			composition.addVertex(vertex);
+		}
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				for(int vertexZ: this.getVertices()) {
+					if(graph.containsEdge(vertexX, vertexZ) && this.containsEdge(vertexZ, vertexY)) {
+						composition.addEdge(vertexX, vertexY);
+					}
+				}
+			}
+		}
+		return graph;
+	}
+
+	@Override
+	public Graph power(int p) {
+		if(p==1) {
+			return (Graph)this.clone();
+		}
+		return this.composition(this.power(p-1));
+	}
+
+	@Override
+	public Graph transpose() {
+		Graph transposed = new DefaultDirectedGraph();
+		for(int vertex: this.getVertices()) {
+			transposed.addVertex(vertex);
+		}
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(this.containsEdge(vertexX, vertexY)) {
+					transposed.addEdge(vertexY, vertexX);
+				}
+			}
+		}
+		return transposed;
+	}
+
+	@Override
+	public Graph complementary() {
+		Graph complementary = new DefaultDirectedGraph();
+		for(int vertex: this.getVertices()) {
+			complementary.addVertex(vertex);
+		}
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(!this.containsEdge(vertexX, vertexY)) {
+					complementary.addEdge(vertexX, vertexY);
+				}
+			}
+		}
+		return complementary;
+	}
+
+	@Override
+	public Graph complementaryWithoutLoops() {
+		Graph complementary = new DefaultDirectedGraph();
+		for(int vertex: this.getVertices()) {
+			complementary.addVertex(vertex);
+		}
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(vertexX!=vertexY && !this.containsEdge(vertexX, vertexY)) {
+					complementary.addEdge(vertexX, vertexY);
+				}
+			}
+		}
+		return complementary;
+	}
+
+	@Override
+	public boolean isPartialGraph(Graph partialGraph) {
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(partialGraph.containsEdge(vertexX, vertexY) && !this.containsEdge(vertexX, vertexY)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public Graph subgraphFrom(Set<Integer> a) {
+		Graph subgraph = new DefaultDirectedGraph();
+		for(int vertex: a) {
+			subgraph.addVertex(vertex);
+		}
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(a.contains(vertexX) && a.contains(vertexY) && this.containsEdge(vertexX, vertexY)) {
+					subgraph.addEdge(vertexX, vertexY);
+				}
+			}
+		}
+		return subgraph;
+	}
+
+	@Override
+	public Graph subgraphWithout(Set<Integer> a) {
+		Graph subgraph = new DefaultDirectedGraph();
+		for(int vertex: this.getVertices()) {
+			if(!a.contains(vertex)) {
+				subgraph.addVertex(vertex);
+			}
+		}
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(!a.contains(vertexX) && !a.contains(vertexY) && this.containsEdge(vertexX, vertexY)) {
+					subgraph.addEdge(vertexX, vertexY);
+				}
+			}
+		}
+		return subgraph;
+	}
+
+	@Override
+	public Graph edgesGraph() {
+		// Couple numbers to the edges and build the vertices of the edges graph:
+		Graph edgesGraph = new DefaultDirectedGraph();
+		Map<Integer, Integer[]> edges = new HashMap<Integer, Integer[]>();
+		int num = 1;
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(this.containsEdge(vertexX, vertexY)) {
+					edges.put(num, new Integer[] {vertexX, vertexY});
+					edgesGraph.addVertex(num);
+					num++;
+				}
+			}
+		}
+		
+		// Link the vertices:
+		Integer[] edgeX, edgeY;
+		for(int vertexX: edges.keySet()) {
+			edgeX = edges.get(vertexX);
+			for(int vertexY: edges.keySet()) {
+				if(vertexX!=vertexY) {
+					edgeY = edges.get(vertexY);
+					if(edgeX[0].equals(edgeY[0]) || edgeX[0].equals(edgeY[1]) || edgeX[1].equals(edgeY[0]) || edgeX[1].equals(edgeY[1])) {
+						if(!edgesGraph.containsEdge(vertexY, vertexX)) {
+							edgesGraph.addEdge(vertexX, vertexY);
+						}
+					}
+				}
+			}
+		}
+		
+		return edgesGraph;
+	}
 }

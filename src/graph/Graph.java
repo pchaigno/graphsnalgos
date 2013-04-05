@@ -125,5 +125,79 @@ public interface Graph extends Cloneable {
 	 */
 	public void buildGraphFromSourcesLists(Map<Integer, List<Integer>> sources);
 	
+	/**
+	 * Build the union of two graphs.
+	 * The result graph is always a 1-graph.
+	 * The two graph must have the same vertices.
+	 * @param graph The second graph.
+	 * @return The union of graph1 and graph2.
+	 * @throws IllegalArgumentException If the two graphs don't have the same vertices.
+	 */
+	public Graph union(Graph graph);
+	
+	/**
+	 * Build the composition of two graphs.
+	 * The result graph is always a 1-graph.
+	 * @param graph The second graph.
+	 * @return The composition of graph1 and graph2, graph1 o graph2.
+	 * @throws IllegalArgumentException If the two graphs don't have the same vertices.
+	 */
+	public Graph composition(Graph graph);
+	
+	/**
+	 * Build the graph power p.
+	 * The result graph is always a 1-graph.
+	 * This method is recursive (non-tail-recursive).
+	 * @param p The power.
+	 * @return Power p of the graph.
+	 */
+	public Graph power(int p);
+	
+	/**
+	 * Build the transposed graph.
+	 * @return The transposed graph.
+	 */
+	public Graph transpose();
+	
+	/**
+	 * Build the complementary graph.
+	 * @return The complementary graph.
+	 */
+	public Graph complementary();
+	
+	/**
+	 * Build the complementary graph without the loops.
+	 * @return The complementary graph whitout loops.
+	 */
+	public Graph complementaryWithoutLoops();
+	
+	/**
+	 * Check if a graph is a partial graph of this one.
+	 * @param partialGraph The possible partial graph to test.
+	 * @return True if partialGraph is a partial of this one.
+	 */
+	public boolean isPartialGraph(Graph partialGraph);
+	
+	/**
+	 * Construct the subgraph of graph from a.
+	 * @param a The list of vertex for the subgraph.
+	 * @return The subgraph of graph from a.
+	 */
+	public Graph subgraphFrom(Set<Integer> a);
+	
+	/**
+	 * Construct the subgraph of graph without the vertices of a.
+	 * @param a The list of vertex to remove from graph.
+	 * @return The subgraph of graph from a.
+	 */
+	public Graph subgraphWithout(Set<Integer> a);
+	
+	/**
+	 * Build the edges graph of a graph.
+	 * It must be an undirected 1-graph.
+	 * @return The edges graph.
+	 */
+	public Graph edgesGraph();
+	
 	public Object clone();
 }

@@ -22,7 +22,7 @@ public class TransitiveClosure {
 		Graph h;
 		for(int i=2 ; i<=n ; i++) {
 			h = (Graph)closure.clone();
-			closure = Operations.union(graph, Operations.composition(graph, closure));
+			closure = graph.union(graph.composition(closure));
 			if(closure.equals(h)) {
 				break;
 			}
