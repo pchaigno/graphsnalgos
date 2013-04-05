@@ -414,4 +414,90 @@ public class DefaultGraph implements Graph {
 		
 		return edgesGraph;
 	}
+
+	@Override
+	public boolean isReflexive() {
+		for(int vertex: this.getVertices()) {
+			if(!this.containsEdge(vertex, vertex)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isAntiReflexive() {
+		for(int vertex: this.getVertices()) {
+			if(this.containsEdge(vertex, vertex)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isSymetric() {
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(this.containsEdge(vertexX, vertexY)) {
+					if(vertexX!=vertexY && !this.containsEdge(vertexY, vertexX)) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isAntiSymetric() {
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				if(this.containsEdge(vertexX, vertexY)) {
+					if(vertexX!=vertexY && this.containsEdge(vertexY, vertexX)) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isTransitive() {
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				for(int vertexZ: this.getVertices()) {
+					if(this.containsEdge(vertexX, vertexY) && this.containsEdge(vertexY, vertexZ)) {
+						if(!this.containsEdge(vertexX, vertexZ)) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isAntiTransitive() {
+		for(int vertexX: this.getVertices()) {
+			for(int vertexY: this.getVertices()) {
+				for(int vertexZ: this.getVertices()) {
+					if(this.containsEdge(vertexX, vertexY) && this.containsEdge(vertexY, vertexZ)) {
+						if(this.containsEdge(vertexX, vertexZ)) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean isStronglyAntiTransitive() {
+		// TODO No idea on how to check this...
+		return true;
+	}
 }

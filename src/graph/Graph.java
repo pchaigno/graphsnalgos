@@ -199,5 +199,47 @@ public interface Graph extends Cloneable {
 	 */
 	public Graph edgesGraph();
 	
+	/**
+	 * Check if a graph is reflexive.
+	 * @return True if the graph is reflexive, false else.
+	 */
+	public boolean isReflexive();
+	
+	/**
+	 * Check if a graph is anti-reflexive.
+	 * @return True if the graph is anti-reflexive, false else.
+	 */
+	public boolean isAntiReflexive();
+	
+	/**
+	 * Check if a graph is symetric.
+	 * @return True if the graph is symetric, false else.
+	 */
+	public boolean isSymetric();
+	
+	/**
+	 * Check if a graph is anti-symetric.
+	 * @return True if the graph is anti-symetric, false else.
+	 */
+	public boolean isAntiSymetric();
+	
+	/**
+	 * Check if a graph is transitive.
+	 * @return True if the graph is transitive, false else.
+	 */
+	public boolean isTransitive();
+	
+	/**
+	 * Check if a graph is anti-transitive.
+	 * @return True if the graph is anti-transitive, false else.
+	 */
+	public boolean isAntiTransitive();
+	
+	/**
+	 * Check if a graph is strongly anti-symetric.
+	 * @return True if the graph is strongly anti-symetric, false else.
+	 */
+	public boolean isStronglyAntiTransitive();
+	
 	public Object clone();
 }

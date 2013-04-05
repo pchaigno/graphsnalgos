@@ -2,7 +2,6 @@ package test;
 
 import graph.DefaultDirectedGraph;
 import graph.Graph;
-import main.Properties;
 
 import junit.framework.TestCase;
 
@@ -93,54 +92,54 @@ public class TestProperties extends TestCase {
 	 * Test the isReflexive method.
 	 */
 	public void testIsReflexive() {
-		assertTrue(Properties.isReflexive(this.graph1));
-		assertFalse(Properties.isReflexive(this.graph2));
-		assertFalse(Properties.isReflexive(this.graph3));
+		assertTrue(this.graph1.isReflexive());
+		assertFalse(this.graph2.isReflexive());
+		assertFalse(this.graph3.isReflexive());
 	}
 	
 	/**
 	 * Test the isAntiReflexive method.
 	 */
 	public void testIsAntiReflexive() {
-		assertFalse(Properties.isAntiReflexive(this.graph1));
-		assertTrue(Properties.isAntiReflexive(this.graph2));
-		assertFalse(Properties.isAntiReflexive(this.graph3));
+		assertFalse(this.graph1.isAntiReflexive());
+		assertTrue(this.graph2.isAntiReflexive());
+		assertFalse(this.graph3.isAntiReflexive());
 	}
 	
 	/**
 	 * Test the isSymetric method.
 	 */
 	public void testIsSymetric() {
-		assertTrue(Properties.isSymetric(this.graph4));
-		assertFalse(Properties.isSymetric(this.graph5));
-		assertFalse(Properties.isSymetric(this.graph6));
+		assertTrue(this.graph4.isSymetric());
+		assertFalse(this.graph5.isSymetric());
+		assertFalse(this.graph6.isSymetric());
 	}
 	
 	/**
 	 * Test the isReflexive method.
 	 */
 	public void testIsAntiSymetricReflexive() {
-		assertFalse(Properties.isAntiSymetric(this.graph4));
-		assertTrue(Properties.isAntiSymetric(this.graph5));
-		assertFalse(Properties.isAntiSymetric(this.graph6));
+		assertFalse(this.graph4.isAntiSymetric());
+		assertTrue(this.graph5.isAntiSymetric());
+		assertFalse(this.graph6.isAntiSymetric());
 	}
 	
 	/**
 	 * Test the isTransitive method.
 	 */
 	public void testIsTransitive() {
-		assertTrue(Properties.isTransitive(this.graph7));
-		assertFalse(Properties.isTransitive(this.graph8));
-		assertFalse(Properties.isTransitive(this.graph9));
+		assertTrue(this.graph7.isTransitive());
+		assertFalse(this.graph8.isTransitive());
+		assertFalse(this.graph9.isTransitive());
 	}
 	
 	/**
 	 * Test the isAntiTransitive method.
 	 */
 	public void testIsAntiTransitive() {
-		assertFalse(Properties.isAntiTransitive(this.graph7));
-		assertTrue(Properties.isAntiTransitive(this.graph8));
-		assertFalse(Properties.isAntiTransitive(this.graph9));
+		assertFalse(this.graph7.isAntiTransitive());
+		assertTrue(this.graph8.isAntiTransitive());
+		assertFalse(this.graph9.isAntiTransitive());
 	}
 	
 	/**
@@ -148,6 +147,6 @@ public class TestProperties extends TestCase {
 	 */
 	public void testIsStronglyAntiTransitive() {
 		fail("Not implemented yet...");
-		assertFalse(Properties.isStronglyAntiTransitive(this.graph10));
+		assertFalse(this.graph10.isStronglyAntiTransitive());
 	}
 }
