@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -85,6 +87,43 @@ public interface Graph extends Cloneable {
 	 * @return True if the graph contained the edge.
 	 */
 	public boolean removeEdge(Edge edge);
+	
+	/**
+	 * The adjacency matrix is a square matrix of size (number of vertex).
+	 * When there is an edge between i and j, m[i][j] = 1, 0 else.
+	 * @return The adjacency matrix.
+	 */
+	public int[][] getAdjacencyMatrix();
+	
+	/**
+	 * @return The list of targets vertices for each vertex.
+	 */
+	public Map<Integer, List<Integer>> getTargetsLists();
+	
+	/**
+	 * @return The list of sources vertices for each vertex.
+	 */
+	public Map<Integer, List<Integer>> getSourcesLists();
+	
+	/**
+	 * Build the graph from the adjacency matrix.
+	 * @param matrix The adjacency matrix.
+	 * @param vertices The vertices.
+	 * @throws IllegalArgumentException If the adjacency matrix is empty or not a square matrix or if the graph isn't empty.
+	 */
+	public void buildGraphFromAdjacencyMatrix(int[][] matrix, int[] vertices);
+	
+	/**
+	 * Build the graph from the list of targets vertices.
+	 * @param targets The list of targets vertices for each vertex.
+	 */
+	public void buildGraphFromTargetsLists(Map<Integer, List<Integer>> targets);
+	
+	/**
+	 * Build the graph from the list of sources vertices.
+	 * @param sources The list of sources vertices for each vertex.
+	 */
+	public void buildGraphFromSourcesLists(Map<Integer, List<Integer>> sources);
 	
 	public Object clone();
 }

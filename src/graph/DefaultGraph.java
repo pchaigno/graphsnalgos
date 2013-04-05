@@ -1,6 +1,10 @@
 package graph;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -140,5 +144,97 @@ public class DefaultGraph implements Graph {
 	@Override
 	public boolean removeEdge(Edge edge) {
 		return this.edges.remove(edge);
+	}
+
+	@Override
+	public int[][] getAdjacencyMatrix() {
+		Integer[] vertices = this.getVertices().toArray(new Integer[0]);
+		int[][] adjacencyMatrix = new int[this.vertices.size()][this.vertices.size()];
+		for(int i=0 ; i<this.vertices.size() ; i++) {
+			for(int j=0 ; j<this.vertices.size() ; j++) {
+				if(this.containsEdge(vertices[i], vertices[j])) {
+					adjacencyMatrix[i][j] = 1;
+				}
+			}
+		}
+		return adjacencyMatrix;
+	}
+
+	@Override
+	public Map<Integer, List<Integer>> getTargetsLists() {
+		Integer[] vertices = this.getVertices().toArray(new Integer[0]);
+		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
+		Integer source;
+		for(int i=0 ; i<this.vertices.size() ; i++) {
+			source = vertices[i];
+			map.put(source, new LinkedList<Integer>());
+			for(int vertex: vertices) {
+				if(this.containsEdge(source, vertex)) {
+					map.get(source).add(vertex);
+				}
+			}
+		}
+		return map;
+	}
+
+	@Override
+	public Map<Integer, List<Integer>> getSourcesLists() {
+		Integer[] vertices = this.getVertices().toArray(new Integer[0]);
+		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
+		Integer target;
+		for(int i=0 ; i<this.vertices.size() ; i++) {
+			target = vertices[i];
+			map.put(target, new LinkedList<Integer>());
+			for(int vertex: vertices) {
+				if(this.containsEdge(vertex, target)) {
+					map.get(target).add(vertex);
+				}
+			}
+		}
+		return map;
+	}
+
+	@Override
+	public void buildGraphFromAdjacencyMatrix(int[][] matrix, int[] vertices) {
+		int length = matrix.length;
+		if(length<1 || length!=matrix[0].length || this.vertices.size()!=0) {
+			throw new IllegalArgumentException();
+		}
+		for(int vertex: vertices) {
+			this.addVertex(vertex);
+		}
+		for(int i=0 ; i<length ; i++) {
+			for(int j=0 ; j<length ; j++) {
+				if(matrix[i][j]==1) {
+					this.addEdge(vertices[i], vertices[j]);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void buildGraphFromTargetsLists(Map<Integer, List<Integer>> targets) {
+		for(int source: targets.keySet()) {
+			this.addVertex(source);
+			for(int target: targets.get(source)) {
+				if(!this.containsVertex(target)) {
+					this.addVertex(target);
+				}
+				this.addEdge(source, target);
+			}
+		}
+	}
+
+	@Override
+	public void buildGraphFromSourcesLists(Map<Integer, List<Integer>> sources) {
+		for(int target: sources.keySet()) {
+			this.addVertex(target);
+			for(int source: sources.get(target)) {
+				if(!this.containsVertex(source)) {
+					this.addVertex(source);
+				}
+				this.addEdge(source, target);
+			}
+		}
 	}
 }

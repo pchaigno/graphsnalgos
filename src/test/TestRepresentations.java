@@ -1,13 +1,13 @@
 package test;
 
 import graph.DefaultDirectedGraph;
+import graph.DefaultGraph;
 import graph.DirectedGraph;
 import graph.Graph;
 
 import java.util.List;
 import java.util.Map;
 
-import main.Representations;
 import main.Tools;
 import junit.framework.TestCase;
 
@@ -41,7 +41,7 @@ public class TestRepresentations extends TestCase {
 	 * Test the getAdjacencyMatrix method.
 	 */
 	public void testAdjacencyMatrix() {        
-		int[][] adjacencyMatrix = Representations.getAdjacencyMatrix(this.graph);
+		int[][] adjacencyMatrix = this.graph.getAdjacencyMatrix();
 		System.out.println(Tools.matrixToString(adjacencyMatrix));
 	}
 	
@@ -49,10 +49,11 @@ public class TestRepresentations extends TestCase {
 	 *  Test the getSourcesLists method.
 	 */
 	public void testSourcesLists() {
-		Map<Integer, List<Integer>> sources = Representations.getSourcesLists(this.graph);
+		Map<Integer, List<Integer>> sources = this.graph.getSourcesLists();
 		System.out.println("Sources lists:");
 		System.out.println(sources);
-		Graph graphBis = Representations.getGraphFromSourcesLists(sources);
+		Graph graphBis = new DefaultGraph();
+		graphBis.buildGraphFromSourcesLists(sources);
 		assertTrue(this.graph.equals(graphBis));
 	}
 	
@@ -60,10 +61,11 @@ public class TestRepresentations extends TestCase {
 	 * Test the getTargetsLists method.
 	 */
 	public void testTargetsLists() {
-		Map<Integer, List<Integer>> targets = Representations.getTargetsLists(this.graph);
+		Map<Integer, List<Integer>> targets = this.graph.getTargetsLists();
 		System.out.println("Targets lists:");
 		System.out.println(targets);
-		Graph graphBis = Representations.getGraphFromTargetsLists(targets);
+		Graph graphBis = new DefaultGraph(); 
+		graphBis.buildGraphFromTargetsLists(targets);
 		assertTrue(this.graph.equals(graphBis));
 	}
 }
