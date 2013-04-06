@@ -11,6 +11,7 @@ import java.util.Set;
 public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 	protected Set<Integer> vertices;
 	protected EdgeFactory<T> edgeFactory;
+	protected GraphFactory<T> graphFactory;
 	protected Set<T> edges;
 	
 	/**
@@ -23,8 +24,9 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
         ParameterizedType superclass = (ParameterizedType)getClass().getGenericSuperclass();
 		try {
 			this.edgeFactory = new EdgeFactory<T>((Class<T>)superclass.getActualTypeArguments()[0]);
+			this.graphFactory = new GraphFactory<T>(this.getClass());
 		} catch (InstantiationException e) {
-			// Not possible normaly since T extends Edge.
+			// Not possible normally since T extends Edge.
 		}
 	}
 	
@@ -235,27 +237,100 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 	}
 
 	@Override
-	public abstract AbstractGraph<T> union(Graph<T> graph);
+    public Graph<T> union(Graph<T> graph) {
+	    if(!this.getVertices().equals(graph.getVertices())) {
+            throw new IllegalArgumentException("The two graphs must have the same vertices.");
+	    }
+	    Graph<T> union = this.graphFactory.build();
+	    for(int vertex: this.getVertices()) {
+            union.addVertex(vertex);
+	    }
+	    for(int vertexX: this.getVertices()) {
+            for(int vertexY: this.getVertices()) {
+                if(this.containsEdge(vertexX, vertexY) || graph.containsEdge(vertexX, vertexY)) {
+                    union.addEdge(vertexX, vertexY);
+                }
+            }
+	    }
+	    return graph;
+    }
 
 	@Override
-	public abstract AbstractGraph<T> composition(Graph<T> graph);
+    public Graph<T> composition(Graph<T> graph) {
+	    if(!this.getVertices().equals(graph.getVertices())) {
+            throw new IllegalArgumentException("The two graphs must have the same vertices.");
+	    }
+	    Graph<T> composition = this.graphFactory.build();
+	    for(int vertex: this.getVertices()) {
+            composition.addVertex(vertex);
+	    }
+	    for(int vertexX: this.getVertices()) {
+            for(int vertexY: this.getVertices()) {
+                for(int vertexZ: this.getVertices()) {
+                    if(graph.containsEdge(vertexX, vertexZ) && this.containsEdge(vertexZ, vertexY)) {
+                        composition.addEdge(vertexX, vertexY);
+                    }
+                }
+            }
+	    }
+	    return graph;
+    }
 
 	@Override
-	public AbstractGraph<T> power(int p) {
+	public Graph<T> power(int p) {
 		if(p==1) {
-			return (AbstractGraph<T>)this.clone();
+			return (Graph<T>)this.clone();
 		}
 		return this.composition(this.power(p-1));
 	}
 
 	@Override
-	public abstract AbstractGraph<T> transpose();
+    public Graph<T> transpose() {
+        Graph<T> transposed = this.graphFactory.build();
+        for(int vertex: this.getVertices()) {
+            transposed.addVertex(vertex);
+        }
+        for(int vertexX: this.getVertices()) {
+            for(int vertexY: this.getVertices()) {
+                if(this.containsEdge(vertexX, vertexY)) {
+                    transposed.addEdge(vertexY, vertexX);
+                }
+            }
+        }
+        return transposed;
+    }
 
 	@Override
-	public abstract AbstractGraph<T> complementary();
+    public Graph<T> complementary() {
+        Graph<T> complementary = this.graphFactory.build();
+        for(int vertex: this.getVertices()) {
+            complementary.addVertex(vertex);
+        }
+        for(int vertexX: this.getVertices()) {
+            for(int vertexY: this.getVertices()) {
+                if(!this.containsEdge(vertexX, vertexY)) {
+                    complementary.addEdge(vertexX, vertexY);
+                }
+            }
+        }
+        return complementary;
+    }
 
 	@Override
-	public abstract AbstractGraph<T> complementaryWithoutLoops();
+    public Graph<T> complementaryWithoutLoops() {
+        Graph<T> complementary = this.graphFactory.build();
+        for(int vertex: this.getVertices()) {
+            complementary.addVertex(vertex);
+        }
+        for(int vertexX: this.getVertices()) {
+            for(int vertexY: this.getVertices()) {
+                if(vertexX!=vertexY && !this.containsEdge(vertexX, vertexY)) {
+                    complementary.addEdge(vertexX, vertexY);
+                }
+            }
+        }
+        return complementary;
+    }
 
 	@Override
 	public boolean isPartialGraph(Graph<T> partialGraph) {
@@ -268,15 +343,75 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 		}
 		return true;
 	}
-
+	
 	@Override
-	public abstract AbstractGraph<T> subgraphFrom(Set<Integer> a);
-
+    public Graph<T> subgraphFrom(Set<Integer> a) {
+        Graph<T> subgraph = this.graphFactory.build();
+        for(int vertex: a) {
+            subgraph.addVertex(vertex);
+        }
+        for(int vertexX: this.getVertices()) {
+            for(int vertexY: this.getVertices()) {
+                if(a.contains(vertexX) && a.contains(vertexY) && this.containsEdge(vertexX, vertexY)) {
+                        subgraph.addEdge(vertexX, vertexY);
+                }
+            }
+        }
+        return subgraph;
+	}
+	
 	@Override
-	public abstract AbstractGraph<T> subgraphWithout(Set<Integer> a);
-
+	public Graph<T> subgraphWithout(Set<Integer> a) {
+        Graph<T> subgraph = this.graphFactory.build();
+        for(int vertex: this.getVertices()) {
+            if(!a.contains(vertex)) {
+                subgraph.addVertex(vertex);
+            }
+        }
+        for(int vertexX: this.getVertices()) {
+            for(int vertexY: this.getVertices()) {
+                if(!a.contains(vertexX) && !a.contains(vertexY) && this.containsEdge(vertexX, vertexY)) {
+                    subgraph.addEdge(vertexX, vertexY);
+                }
+            }
+        }
+        return subgraph;
+	}
+	
 	@Override
-	public abstract AbstractGraph<T> edgesGraph();
+	public Graph<T> edgesGraph() {
+        // Couple numbers to the edges and build the vertices of the edges graph:
+        Graph<T> edgesGraph = this.graphFactory.build();
+        Map<Integer, Integer[]> edges = new HashMap<Integer, Integer[]>();
+        int num = 1;
+        for(int vertexX: this.getVertices()) {
+            for(int vertexY: this.getVertices()) {
+                if(this.containsEdge(vertexX, vertexY)) {
+                    edges.put(num, new Integer[] {vertexX, vertexY});
+                    edgesGraph.addVertex(num);
+                    num++;
+                }
+            }
+        }
+        
+        // Link the vertices:
+        Integer[] edgeX, edgeY;
+        for(int vertexX: edges.keySet()) {
+            edgeX = edges.get(vertexX);
+            for(int vertexY: edges.keySet()) {
+                if(vertexX!=vertexY) {
+                    edgeY = edges.get(vertexY);
+                    if(edgeX[0].equals(edgeY[0]) || edgeX[0].equals(edgeY[1]) || edgeX[1].equals(edgeY[0]) || edgeX[1].equals(edgeY[1])) {
+                        if(!edgesGraph.containsEdge(vertexY, vertexX)) {
+                            edgesGraph.addEdge(vertexX, vertexY);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return edgesGraph;
+	}
 
 	@Override
 	public boolean isReflexive() {

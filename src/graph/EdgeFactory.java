@@ -39,7 +39,7 @@ public class EdgeFactory<T extends Edge> {
 	}
 
 	/**
-	 * Build a weithed edge.
+	 * Build a weighted edge.
 	 * @param x The starting vertex.
 	 * @param y The end vertex.
 	 * @param value The value

@@ -4,7 +4,7 @@ package graph;
  * Represent a weighted directed graph.
  * @author Paul Chaignon
  */
-public interface WeightedGraph extends DirectedGraph<WeightedEdge> {
+public interface WeightedGraph<T extends WeightedEdge> extends DirectedGraph<T> {
 	
 	/**
 	 * Add an edge to the graph.
