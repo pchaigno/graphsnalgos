@@ -24,4 +24,9 @@ public class DefaultDirectedGraph extends DefaultGraph implements DirectedGraph 
 	public DefaultDirectedGraph clone() {
 		return (DefaultDirectedGraph)super.clone();
 	}
+
+	@Override
+	public boolean containsEdge(int x, int y) {
+		return this.edges.contains(new DefaultDirectedEdge(x, y));
+	}
 }
