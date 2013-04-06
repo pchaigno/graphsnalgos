@@ -1,5 +1,6 @@
 package test;
 
+import graph.DefaultDirectedEdge;
 import graph.DefaultDirectedGraph;
 import graph.Graph;
 
@@ -10,20 +11,21 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestProperties extends TestCase {
-	private Graph graph1;
-	private Graph graph2;
-	private Graph graph3;
-	private Graph graph4;
-	private Graph graph5;
-	private Graph graph6;
-	private Graph graph7;
-	private Graph graph8;
-	private Graph graph9;
-	private Graph graph10;
+	private Graph<DefaultDirectedEdge> graph1;
+	private Graph<DefaultDirectedEdge> graph2;
+	private Graph<DefaultDirectedEdge> graph3;
+	private Graph<DefaultDirectedEdge> graph4;
+	private Graph<DefaultDirectedEdge> graph5;
+	private Graph<DefaultDirectedEdge> graph6;
+	private Graph<DefaultDirectedEdge> graph7;
+	private Graph<DefaultDirectedEdge> graph8;
+	private Graph<DefaultDirectedEdge> graph9;
+	private Graph<DefaultDirectedEdge> graph10;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
+	@SuppressWarnings("unchecked")
 	protected void setUp() {
 		this.graph1 = new DefaultDirectedGraph();
 		this.graph2 = new DefaultDirectedGraph();
@@ -51,7 +53,7 @@ public class TestProperties extends TestCase {
 		this.graph2.addEdge(4, 5);
 		this.graph2.addEdge(5, 2);
 		
-		this.graph3 = (Graph)this.graph2.clone();
+		this.graph3 = (Graph<DefaultDirectedEdge>)this.graph2.clone();
 		this.graph3.addEdge(3, 3);
 		this.graph3.addEdge(2, 2);
 		
@@ -68,7 +70,7 @@ public class TestProperties extends TestCase {
 	
 		this.graph6 = this.graph4.union(this.graph5);
 		
-		this.graph7 = (Graph)this.graph6.clone();
+		this.graph7 = (Graph<DefaultDirectedEdge>)this.graph6.clone();
 		this.graph7.addEdge(2, 2);
 		this.graph7.addEdge(3, 3);
 		
@@ -77,7 +79,7 @@ public class TestProperties extends TestCase {
 		this.graph8.addEdge(2, 3);
 		this.graph8.addEdge(3, 2);
 
-		this.graph9 = (Graph)this.graph8.clone();
+		this.graph9 = (Graph<DefaultDirectedEdge>)this.graph8.clone();
 		this.graph9.addEdge(1, 1);
 		this.graph9.addEdge(3, 3);
 		

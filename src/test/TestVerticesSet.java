@@ -1,7 +1,6 @@
 package test;
 
-import graph.DefaultDirectedGraph;
-import graph.Graph;
+import graph.DefaultGraph;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -15,13 +14,13 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestVerticesSet extends TestCase {
-	private Graph graph1;
-	private Graph graph2;
+	private DefaultGraph graph1;
+	private DefaultGraph graph2;
 	
 	@Override
 	protected void setUp() {
-		this.graph1 = new DefaultDirectedGraph();
-		this.graph2 = new DefaultDirectedGraph();
+		this.graph1 = new DefaultGraph();
+		this.graph2 = new DefaultGraph();
 
 		this.graph1.addVertices(4);
 		this.graph1.addEdge(1, 2);

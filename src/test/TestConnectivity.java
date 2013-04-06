@@ -1,7 +1,7 @@
 package test;
 
 import graph.DefaultDirectedGraph;
-import graph.Graph;
+import graph.DefaultGraph;
 
 import java.util.List;
 
@@ -14,18 +14,18 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestConnectivity extends TestCase {
-	private Graph graph1;
-	private Graph graph2;
-	private Graph graph3;
-	private Graph graph4;
-	private Graph graph5;
+	private DefaultGraph graph1;
+	private DefaultGraph graph2;
+	private DefaultDirectedGraph graph3;
+	private DefaultDirectedGraph graph4;
+	private DefaultDirectedGraph graph5;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
 	protected void setUp() {
-		this.graph1 = new DefaultDirectedGraph();
-		this.graph2 = new DefaultDirectedGraph();
+		this.graph1 = new DefaultGraph();
+		this.graph2 = new DefaultGraph();
 		this.graph3 = new DefaultDirectedGraph();
 		this.graph4 = new DefaultDirectedGraph();
 		this.graph5 = new DefaultDirectedGraph();
@@ -120,12 +120,12 @@ public class TestConnectivity extends TestCase {
 	 * Test the getConnectedComposantByTarjan method.
 	 */
 	public void testGetConnectedComposantByTarjan() {
-		Graph subgraph = Connectivity.getConnectedComposantByTarjan(this.graph1, 1);
+		DefaultGraph subgraph = Connectivity.getConnectedComposantByTarjan(this.graph1, 1);
 		System.out.println("Connected composant of 1 by Tarjan:");
 		System.out.println(subgraph);
-		List<Graph> subgraphs = Connectivity.getConnectedComposantsByTarjan(this.graph2);
+		List<DefaultGraph> subgraphs = Connectivity.getConnectedComposantsByTarjan(this.graph2);
 		System.out.println("Connected composants by Tarjan:");
-		for(Graph graph: subgraphs) {
+		for(DefaultGraph graph: subgraphs) {
 			System.out.println(graph);
 		}
 	}
@@ -134,9 +134,9 @@ public class TestConnectivity extends TestCase {
 	 * Test the getStronglyConnectedComposantsByFoulkes method.
 	 */
 	public void testGetStronglyConnectedComposantsByFoulkes() {
-		List<Graph> subgraphs = Connectivity.getStronglyConnectedComposantsByFoulkes(this.graph4);
+		List<DefaultDirectedGraph> subgraphs = Connectivity.getStronglyConnectedComposantsByFoulkes(this.graph4);
 		System.out.println("Strongly connected composants by Foulkes:");
-		for(Graph graph: subgraphs) {
+		for(DefaultDirectedGraph graph: subgraphs) {
 			System.out.println(graph);
 		}
 	}
@@ -145,9 +145,9 @@ public class TestConnectivity extends TestCase {
 	 * Test the getStronglyConnectedComposantsByAscendantDescendant method.
 	 */
 	public void testGetStronglyConnectedComposantsByAscendantDescendant() {
-		List<Graph> subgraphs = Connectivity.getStronglyConnectedComposantsByAscendantDescendant(this.graph4);
+		List<DefaultDirectedGraph> subgraphs = Connectivity.getStronglyConnectedComposantsByAscendantDescendant(this.graph4);
 		System.out.println("Strongly connected composants by ascending-descending:");
-		for(Graph graph: subgraphs) {
+		for(DefaultDirectedGraph graph: subgraphs) {
 			System.out.println(graph);
 		}
 	}
@@ -157,7 +157,6 @@ public class TestConnectivity extends TestCase {
 	 */
 	public void testIsAlmostStronglyConnected() {
 		assertTrue(Connectivity.isAlmostStronglyConnected(this.graph3));
-		assertTrue(Connectivity.isAlmostStronglyConnected(this.graph1));
 		assertFalse(Connectivity.isAlmostStronglyConnected(this.graph5));
 	}
 }

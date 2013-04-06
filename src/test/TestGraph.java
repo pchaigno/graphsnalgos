@@ -10,10 +10,10 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestGraph extends TestCase {
-	private Graph graph1;
-	private Graph graph2;
-	private Graph graph3;
-	private Graph graph4;
+	private Graph<DefaultEdge> graph1;
+	private Graph<DefaultEdge> graph2;
+	private Graph<DefaultEdge> graph3;
+	private Graph<DefaultEdge> graph4;
 	
 	/**
 	 * Initialize a few undirected graphs.

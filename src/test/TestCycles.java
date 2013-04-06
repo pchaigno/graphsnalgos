@@ -1,7 +1,6 @@
 package test;
 
 import graph.DefaultDirectedGraph;
-import graph.Graph;
 
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +14,7 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestCycles extends TestCase {
-	private Graph graph;
+	private DefaultDirectedGraph graph;
 	
 	/**
 	 * Initialiaze the tests with the graph from the handout.

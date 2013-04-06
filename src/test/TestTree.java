@@ -1,17 +1,16 @@
 package test;
 
 import graph.DefaultDirectedGraph;
-import graph.Graph;
 import main.Tree;
 
 import junit.framework.TestCase;
 
 public class TestTree extends TestCase {
-	private Graph graph1;
-	private Graph graph2;
-	private Graph graph3;
-	private Graph graph4;
-	private Graph graph5;
+	private DefaultDirectedGraph graph1;
+	private DefaultDirectedGraph graph2;
+	private DefaultDirectedGraph graph3;
+	private DefaultDirectedGraph graph4;
+	private DefaultDirectedGraph graph5;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.

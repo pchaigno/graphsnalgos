@@ -1,7 +1,6 @@
 package test;
 
 import graph.DefaultDirectedGraph;
-import graph.Graph;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestRouting extends TestCase {
-	private Graph graph;
+	private DefaultDirectedGraph graph;
 	
 	/**
 	 * Initalize the tests with the graph from the TD.

@@ -10,10 +10,10 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestWeightedGraph extends TestCase {
-	private WeightedGraph graph1;
-	private WeightedGraph graph2;
-	private WeightedGraph graph3;
-	private WeightedGraph graph4;
+	private WeightedGraph<DefaultWeightedEdge> graph1;
+	private WeightedGraph<DefaultWeightedEdge> graph2;
+	private WeightedGraph<DefaultWeightedEdge> graph3;
+	private WeightedGraph<DefaultWeightedEdge> graph4;
 	
 	/**
 	 * Initialize a few weighted graphs.

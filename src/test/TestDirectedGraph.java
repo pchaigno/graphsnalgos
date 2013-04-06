@@ -2,7 +2,7 @@ package test;
 
 import graph.DefaultDirectedEdge;
 import graph.DefaultDirectedGraph;
-import graph.DirectedGraph;
+import graph.Graph;
 import junit.framework.TestCase;
 
 /**
@@ -10,9 +10,9 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestDirectedGraph extends TestCase {
-	private DirectedGraph graph1;
-	private DirectedGraph graph2;
-	private DirectedGraph graph3;
+	private Graph<DefaultDirectedEdge> graph1;
+	private Graph<DefaultDirectedEdge> graph2;
+	private Graph<DefaultDirectedEdge> graph3;
 	
 	/**
 	 * Initalize a few directed graphs.

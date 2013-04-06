@@ -1,7 +1,6 @@
 package test;
 
 import graph.DefaultDirectedGraph;
-import graph.Graph;
 import main.TransitiveClosure;
 
 import junit.framework.TestCase;
@@ -11,7 +10,7 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestTransitiveClosure extends TestCase {
-	private Graph graph;
+	private DefaultDirectedGraph graph;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
@@ -31,7 +30,7 @@ public class TestTransitiveClosure extends TestCase {
 	 * Test the getByPowers method.
 	 */
 	public void testGetByPowers() {
-		Graph closure = TransitiveClosure.getByPowers(this.graph);
+		DefaultDirectedGraph closure = TransitiveClosure.getByPowers(this.graph);
 		System.out.println("Transitive closure by powers:");
 		System.out.println(closure);
 	}
@@ -40,7 +39,7 @@ public class TestTransitiveClosure extends TestCase {
 	 * Test the getByRoyMarshall method.
 	 */
 	public void testGetByRoyMarshall() {
-		Graph closure = TransitiveClosure.getByRoyMarshall(this.graph);
+		DefaultDirectedGraph closure = TransitiveClosure.getByRoyMarshall(this.graph);
 		System.out.println("Transitive closure by Roy-Marshall:");
 		System.out.println(closure);
 	}

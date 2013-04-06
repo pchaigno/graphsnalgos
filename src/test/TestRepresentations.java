@@ -1,8 +1,7 @@
 package test;
 
+import graph.DefaultDirectedEdge;
 import graph.DefaultDirectedGraph;
-import graph.DefaultGraph;
-import graph.DirectedGraph;
 import graph.Graph;
 
 import java.util.List;
@@ -16,7 +15,7 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestRepresentations extends TestCase {
-	private DirectedGraph graph;
+	private Graph<DefaultDirectedEdge> graph;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
@@ -52,7 +51,7 @@ public class TestRepresentations extends TestCase {
 		Map<Integer, List<Integer>> sources = this.graph.getSourcesLists();
 		System.out.println("Sources lists:");
 		System.out.println(sources);
-		Graph graphBis = new DefaultGraph();
+		Graph<DefaultDirectedEdge> graphBis = new DefaultDirectedGraph();
 		graphBis.buildGraphFromSourcesLists(sources);
 		assertTrue(this.graph.equals(graphBis));
 	}
@@ -64,7 +63,7 @@ public class TestRepresentations extends TestCase {
 		Map<Integer, List<Integer>> targets = this.graph.getTargetsLists();
 		System.out.println("Targets lists:");
 		System.out.println(targets);
-		Graph graphBis = new DefaultGraph(); 
+		Graph<DefaultDirectedEdge> graphBis = new DefaultDirectedGraph(); 
 		graphBis.buildGraphFromTargetsLists(targets);
 		assertTrue(this.graph.equals(graphBis));
 	}
