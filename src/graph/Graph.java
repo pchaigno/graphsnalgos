@@ -8,7 +8,7 @@ import java.util.Set;
  * Represent an undirected graph.
  * @author Paul Chaignon
  */
-public interface Graph extends Cloneable {
+public interface Graph<T extends Edge> extends Cloneable {
 
 	/**
 	 * @return The vertices.
@@ -18,7 +18,7 @@ public interface Graph extends Cloneable {
 	/**
 	 * @return The edges.
 	 */
-	public Set<Edge> getEdges();
+	public Set<T> getEdges();
 	
 	/**
 	 * Check if a vertex is contained in the graph.
@@ -32,7 +32,7 @@ public interface Graph extends Cloneable {
 	 * @param edge The edge.
 	 * @return True if the graph contains the edge.
 	 */
-	public boolean containsEdge(Edge edge);
+	public boolean containsEdge(T edge);
 	
 	/**
 	 * Check if an edge is contained in the graph.
@@ -62,7 +62,7 @@ public interface Graph extends Cloneable {
 	 * @return True if the edge wasn't already in the graph.
 	 * @throw IllegalArgumentException If one of the vertices in not contained in the graph.
 	 */
-	public boolean addEdge(Edge edge);
+	public boolean addEdge(T edge);
 	
 	/**
 	 * Add an edge to the graph.
@@ -86,7 +86,7 @@ public interface Graph extends Cloneable {
 	 * @param edge The edge to add.
 	 * @return True if the graph contained the edge.
 	 */
-	public boolean removeEdge(Edge edge);
+	public boolean removeEdge(T edge);
 	
 	/**
 	 * The adjacency matrix is a square matrix of size (number of vertex).
@@ -133,7 +133,7 @@ public interface Graph extends Cloneable {
 	 * @return The union of graph1 and graph2.
 	 * @throws IllegalArgumentException If the two graphs don't have the same vertices.
 	 */
-	public Graph union(Graph graph);
+	public Graph<T> union(Graph<T> graph);
 	
 	/**
 	 * Build the composition of two graphs.
@@ -142,7 +142,7 @@ public interface Graph extends Cloneable {
 	 * @return The composition of graph1 and graph2, graph1 o graph2.
 	 * @throws IllegalArgumentException If the two graphs don't have the same vertices.
 	 */
-	public Graph composition(Graph graph);
+	public Graph<T> composition(Graph<T> graph);
 	
 	/**
 	 * Build the graph power p.
@@ -151,53 +151,53 @@ public interface Graph extends Cloneable {
 	 * @param p The power.
 	 * @return Power p of the graph.
 	 */
-	public Graph power(int p);
+	public Graph<T> power(int p);
 	
 	/**
 	 * Build the transposed graph.
 	 * @return The transposed graph.
 	 */
-	public Graph transpose();
+	public Graph<T> transpose();
 	
 	/**
 	 * Build the complementary graph.
 	 * @return The complementary graph.
 	 */
-	public Graph complementary();
+	public Graph<T> complementary();
 	
 	/**
 	 * Build the complementary graph without the loops.
 	 * @return The complementary graph whitout loops.
 	 */
-	public Graph complementaryWithoutLoops();
+	public Graph<T> complementaryWithoutLoops();
 	
 	/**
 	 * Check if a graph is a partial graph of this one.
 	 * @param partialGraph The possible partial graph to test.
 	 * @return True if partialGraph is a partial of this one.
 	 */
-	public boolean isPartialGraph(Graph partialGraph);
+	public boolean isPartialGraph(Graph<T> partialGraph);
 	
 	/**
 	 * Construct the subgraph of graph from a.
 	 * @param a The list of vertex for the subgraph.
 	 * @return The subgraph of graph from a.
 	 */
-	public Graph subgraphFrom(Set<Integer> a);
+	public Graph<T> subgraphFrom(Set<Integer> a);
 	
 	/**
 	 * Construct the subgraph of graph without the vertices of a.
 	 * @param a The list of vertex to remove from graph.
 	 * @return The subgraph of graph from a.
 	 */
-	public Graph subgraphWithout(Set<Integer> a);
+	public Graph<T> subgraphWithout(Set<Integer> a);
 	
 	/**
 	 * Build the edges graph of a graph.
 	 * It must be an undirected 1-graph.
 	 * @return The edges graph.
 	 */
-	public Graph edgesGraph();
+	public Graph<T> edgesGraph();
 	
 	/**
 	 * Check if a graph is reflexive.

@@ -1,33 +1,76 @@
 package graph;
 
+import java.util.Set;
+
 /**
  * Default implementation for WeightedGraph.
  * @author Paul Chaignon
  */
-public class DefaultWeightedGraph extends DefaultDirectedGraph implements WeightedGraph {
-	
-	@Override
-	public boolean addEdge(int x, int y) {
-		return this.addEdge(new DefaultWeightedEdge(x, y));
-	}
+public class DefaultWeightedGraph extends AbstractGraph<WeightedEdge> implements WeightedGraph {
 
 	@Override
 	public boolean addEdge(int x, int y, double value) {
-		return this.addEdge(new DefaultWeightedEdge(x, y, value));
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public DefaultWeightedGraph clone() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public boolean removeEdge(int x, int y) {
-		return this.edges.remove(new DefaultWeightedEdge(x, y));
-	}
-	
-	@Override
-	public DefaultWeightedGraph clone() {
-		return (DefaultWeightedGraph)super.clone();
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	public boolean containsEdge(int x, int y) {
-		return this.edges.contains(new DefaultWeightedEdge(x, y));
+	public DefaultWeightedGraph transpose() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DefaultWeightedGraph complementary() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DefaultWeightedGraph complementaryWithoutLoops() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DefaultWeightedGraph subgraphFrom(Set<Integer> a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DefaultWeightedGraph subgraphWithout(Set<Integer> a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DefaultWeightedGraph edgesGraph() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DefaultWeightedGraph union(Graph<WeightedEdge> graph) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public DefaultWeightedGraph composition(Graph<WeightedEdge> graph) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
