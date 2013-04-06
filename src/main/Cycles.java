@@ -1,6 +1,6 @@
 package main;
 
-import graph.Graph;
+import graph.DefaultDirectedGraph;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,8 +19,8 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return True if the graph contains cycles.
 	 */
-	public static boolean containsCyclesByInputOutput(Graph graph) {
-		Graph subGraph = (Graph)graph.clone();
+	public static boolean containsCyclesByInputOutput(DefaultDirectedGraph graph) {
+		DefaultDirectedGraph subGraph = graph.clone();
 		Set<Integer> inputVertices, outputVertices;
 		while(subGraph.getVertices().size()!=0) {
 			inputVertices = getInputVertices(subGraph);
@@ -29,7 +29,7 @@ public class Cycles {
 				return true;
 			}
 			inputVertices.addAll(outputVertices);
-			subGraph = subGraph.subgraphWithout(inputVertices);
+			subGraph = (DefaultDirectedGraph)subGraph.subgraphWithout(inputVertices);
 		}
 		return false;
 	}
@@ -40,15 +40,15 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return True if the graph contains cycles.
 	 */
-	public static boolean containsCyclesByInput(Graph graph) {
-		Graph subGraph = (Graph)graph.clone();
+	public static boolean containsCyclesByInput(DefaultDirectedGraph graph) {
+		DefaultDirectedGraph subGraph = graph.clone();
 		Set<Integer> inputVertices;
 		while(subGraph.getVertices().size()!=0) {
 			inputVertices = getInputVertices(subGraph);
 			if(inputVertices.size()==0) {
 				return true;
 			}
-			subGraph = subGraph.subgraphWithout(inputVertices);
+			subGraph = (DefaultDirectedGraph)subGraph.subgraphWithout(inputVertices);
 		}
 		return false;
 	}
@@ -59,15 +59,15 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return True if the graph contains cycles.
 	 */
-	public static boolean containsCyclesByOutput(Graph graph) {
-		Graph subGraph = (Graph)graph.clone();
+	public static boolean containsCyclesByOutput(DefaultDirectedGraph graph) {
+		DefaultDirectedGraph subGraph = graph.clone();
 		Set<Integer> outputVertices;
 		while(subGraph.getVertices().size()!=0) {
 			outputVertices = getOutputVertices(subGraph);
 			if(outputVertices.size()==0) {
 				return true;
 			}
-			subGraph = subGraph.subgraphWithout(outputVertices);
+			subGraph = (DefaultDirectedGraph)subGraph.subgraphWithout(outputVertices);
 		}
 		return false;
 	}
@@ -78,9 +78,9 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return A map with the rank as key and the vertices corresponding as value or null if the graph contains cycle.
 	 */
-	public static Map<Integer, Set<Integer>> getRanksOfVertices(Graph graph) {
+	public static Map<Integer, Set<Integer>> getRanksOfVertices(DefaultDirectedGraph graph) {
 		Map<Integer, Set<Integer>> levels = new HashMap<Integer, Set<Integer>>();
-		Graph subGraph = (Graph)graph.clone();
+		DefaultDirectedGraph subGraph = graph.clone();
 		Set<Integer> inputVertices;
 		int rank = 0;
 		while(subGraph.getVertices().size()!=0) {
@@ -90,7 +90,7 @@ public class Cycles {
 			}
 			levels.put(rank, inputVertices);
 			rank++;
-			subGraph = subGraph.subgraphWithout(inputVertices);
+			subGraph = (DefaultDirectedGraph)subGraph.subgraphWithout(inputVertices);
 		}
 		return levels;
 	}
@@ -100,7 +100,7 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return The input vertices.
 	 */
-	public static Set<Integer> getInputVertices(Graph graph) {
+	public static Set<Integer> getInputVertices(DefaultDirectedGraph graph) {
 		Set<Integer> inputVertices = new HashSet<Integer>();
 		boolean hasPredecessor;
 		for(int vertexX: graph.getVertices()) {
@@ -123,7 +123,7 @@ public class Cycles {
 	 * @param graph The graph.
 	 * @return The output vertices.
 	 */
-	public static Set<Integer> getOutputVertices(Graph graph) {
+	public static Set<Integer> getOutputVertices(DefaultDirectedGraph graph) {
 		Set<Integer> outputVertices = new HashSet<Integer>();
 		boolean hasSuccessor;
 		for(int vertexX: graph.getVertices()) {

@@ -1,6 +1,6 @@
 package main;
 
-import graph.Graph;
+import graph.DefaultDirectedGraph;
 
 import java.util.Set;
 
@@ -16,13 +16,13 @@ public class TransitiveClosure {
 	 * @param graph The graph.
 	 * @return The transitive closure.
 	 */
-	public static Graph getByPowers(Graph graph) {
+	public static DefaultDirectedGraph getByPowers(DefaultDirectedGraph graph) {
 		int n = graph.getVertices().size();
-		Graph closure = (Graph)graph.clone();
-		Graph h;
+		DefaultDirectedGraph closure = (DefaultDirectedGraph)graph.clone();
+		DefaultDirectedGraph h;
 		for(int i=2 ; i<=n ; i++) {
-			h = (Graph)closure.clone();
-			closure = graph.union(graph.composition(closure));
+			h = (DefaultDirectedGraph)closure.clone();
+			closure = (DefaultDirectedGraph)graph.union(graph.composition(closure));
 			if(closure.equals(h)) {
 				break;
 			}
@@ -35,8 +35,8 @@ public class TransitiveClosure {
 	 * @param graph The graph.
 	 * @return The transitive closure.
 	 */
-	public static Graph getByRoyMarshall(Graph graph) {
-		Graph closure = (Graph)graph.clone();
+	public static DefaultDirectedGraph getByRoyMarshall(DefaultDirectedGraph graph) {
+		DefaultDirectedGraph closure = (DefaultDirectedGraph)graph.clone();
 		for(int vertex: graph.getVertices()) {
 			teta(closure, vertex, graph.getVertices());
 		}
@@ -49,7 +49,7 @@ public class TransitiveClosure {
 	 * @param graph The graph to be changed.
 	 * @param i The vertex on which compute the teta function.
 	 */
-	private static void teta(Graph graph, int i, Set<Integer> vertices) {
+	private static void teta(DefaultDirectedGraph graph, int i, Set<Integer> vertices) {
 		for(int vertexX: vertices) {
 			if(graph.containsEdge(vertexX, i)) {
 				for(int vertexY: vertices) {
@@ -67,8 +67,8 @@ public class TransitiveClosure {
 	 * @param graph The graph.
 	 * @return True if it's tau-minimal, false else.
 	 */
-	public static boolean isTauMinimal(Graph graph) {
-		Graph closure = getByRoyMarshall(graph);
+	public static boolean isTauMinimal(DefaultDirectedGraph graph) {
+		DefaultDirectedGraph closure = getByRoyMarshall(graph);
 		for(int vertexX: graph.getVertices()) {
 			for(int vertexY: graph.getVertices()) {
 				if(graph.containsEdge(vertexX, vertexY)) {

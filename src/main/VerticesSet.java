@@ -1,6 +1,6 @@
 package main;
 
-import graph.Graph;
+import graph.DefaultGraph;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -20,7 +20,7 @@ public class VerticesSet {
 	 * @param s The set to test.
 	 * @return True if the set s is an independent set of graph.
 	 */
-	public static boolean isIndependentSet(Graph graph, Set<Integer> s) {
+	public static boolean isIndependentSet(DefaultGraph graph, Set<Integer> s) {
 		for(int x: s) {
 			for(int y: s) {
 				if(graph.containsEdge(x, y)) {
@@ -37,7 +37,7 @@ public class VerticesSet {
 	 * @param s The set to test.
 	 * @return True if the set s is a maximal independent set of graph.
 	 */
-	public static boolean isMaximalIndependentSet(Graph graph, Set<Integer> s) {
+	public static boolean isMaximalIndependentSet(DefaultGraph graph, Set<Integer> s) {
 		for(Integer vertex: graph.getVertices()) {
 			if(!s.contains(vertex)) {
 				s.add(vertex);
@@ -56,7 +56,7 @@ public class VerticesSet {
 	 * @param graph The graph.
 	 * @return The maximum independent set of graph.
 	 */
-	public static Set<Integer> getMaximumIndependentSet(Graph graph) {
+	public static Set<Integer> getMaximumIndependentSet(DefaultGraph graph) {
 		Set<Integer> maximum = new HashSet<Integer>();
 		Set<Integer> set;
 		int firstVertex;
@@ -101,7 +101,7 @@ public class VerticesSet {
 	 * @param s The set to test.
 	 * @return True if the set s is a clique of graph.
 	 */
-	public static boolean isClique(Graph graph, Set<Integer> s) {
+	public static boolean isClique(DefaultGraph graph, Set<Integer> s) {
 		for(int x: s) {
 			for(int y: s) {
 				if(x!=y && !graph.containsEdge(x, y) && !graph.containsEdge(y, x)) {
@@ -118,7 +118,7 @@ public class VerticesSet {
 	 * @param s The set to test.
 	 * @return True if the set s is a maximal clique of graph.
 	 */
-	public static boolean isMaximalClique(Graph graph, Set<Integer> s) {
+	public static boolean isMaximalClique(DefaultGraph graph, Set<Integer> s) {
 		for(int vertex: graph.getVertices()) {
 			if(!s.contains(vertex)) {
 				s.add(vertex);
@@ -137,7 +137,7 @@ public class VerticesSet {
 	 * @param s The set to test.
 	 * @return True if the set is an dominating set.
 	 */
-	public static boolean isDominatingSet(Graph graph, Set<Integer> s) {
+	public static boolean isDominatingSet(DefaultGraph graph, Set<Integer> s) {
 		boolean isAdjacent;
 		for(int vertex: graph.getVertices()) {
 			if(!s.contains(vertex)) {
@@ -162,7 +162,7 @@ public class VerticesSet {
 	 * @param s The set to check.
 	 * @return True if the set is minimal.
 	 */
-	public static boolean isMinimalDominatingSet(Graph graph, Set<Integer> s) {
+	public static boolean isMinimalDominatingSet(DefaultGraph graph, Set<Integer> s) {
 		Set<Integer> copiedSet = Tools.clone(s);
 		for(int vertex: s) {
 			copiedSet.remove(vertex);

@@ -33,9 +33,7 @@ public class Tools {
 	 */
 	public static Set<Integer> clone(Set<Integer> set) {
 		Set<Integer> result = new HashSet<Integer>();
-		for(int el: set) {
-			result.add(el);
-		}
+		result.addAll(set);
 		return result;
 	}
 }

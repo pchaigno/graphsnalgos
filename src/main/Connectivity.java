@@ -1,6 +1,7 @@
 package main;
 
-import graph.Graph;
+import graph.DefaultDirectedGraph;
+import graph.DefaultGraph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ public class Connectivity {
 	 * @param a The vertex to start on.
 	 * @return The connected composant of a graph from the vertex a.
 	 */
-	public static Graph getConnectedComposantByTarjan(Graph graph, Integer a) {
+	public static DefaultGraph getConnectedComposantByTarjan(DefaultGraph graph, Integer a) {
 		Map<Integer, List<Integer>> map = getAdjacencyVertexes(graph);
 		
 		// Initialization:
@@ -65,7 +66,7 @@ public class Connectivity {
 		
 		// Check if the graph is connected:
 		if(k+1==length) {
-			return (Graph)graph.clone();
+			return (DefaultGraph)graph.clone();
 		}
 		
 		// Construct the subgraph which is the connected composant:
@@ -76,7 +77,7 @@ public class Connectivity {
 				connectedVertexes.add(vertices[i]);
 			}
 		}
-		Graph subgraph = graph.subgraphFrom(connectedVertexes);
+		DefaultGraph subgraph = (DefaultGraph)graph.subgraphFrom(connectedVertexes);
 		return subgraph;
 	}
 	
@@ -85,7 +86,7 @@ public class Connectivity {
 	 * @param graph The graph.
 	 * @return The map of all adjacency vertices.
 	 */
-	private static Map<Integer, List<Integer>> getAdjacencyVertexes(Graph graph) {
+	private static Map<Integer, List<Integer>> getAdjacencyVertexes(DefaultGraph graph) {
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		int length = vertices.length;
@@ -112,8 +113,8 @@ public class Connectivity {
 	 * @param graph The graph.
 	 * @return A list of all connected composants (subgraphs of graph).
 	 */
-	public static List<Graph> getConnectedComposantsByTarjan(Graph graph) {
-		List<Graph> connectedComposants = new ArrayList<Graph>();
+	public static List<DefaultGraph> getConnectedComposantsByTarjan(DefaultGraph graph) {
+		List<DefaultGraph> connectedComposants = new ArrayList<DefaultGraph>();
 		List<Integer> vertices = new ArrayList<Integer>();
 		for(int vertex: graph.getVertices()) {
 			vertices.add(vertex);
@@ -130,8 +131,8 @@ public class Connectivity {
 	 * @param graph The graph.
 	 * @return True if the graph is connected, false else.
 	 */
-	public static boolean isStronglyConnected(Graph graph) {
-		Graph closure = TransitiveClosure.getByRoyMarshall(graph);
+	public static boolean isStronglyConnected(DefaultDirectedGraph graph) {
+		DefaultDirectedGraph closure = TransitiveClosure.getByRoyMarshall(graph);
 		Integer[] vertices = closure.getVertices().toArray(new Integer[0]);
 		for(int vertexX: vertices) {
 			for(int vertexY: vertices) {
@@ -148,9 +149,9 @@ public class Connectivity {
 	 * @param graph The graph.
 	 * @return The strongly connected composants of a graph.
 	 */
-	public static List<Graph> getStronglyConnectedComposantsByFoulkes(Graph graph) {
-		List<Graph> composants = new LinkedList<Graph>();
-		Graph closure = TransitiveClosure.getByRoyMarshall(graph);
+	public static List<DefaultDirectedGraph> getStronglyConnectedComposantsByFoulkes(DefaultDirectedGraph graph) {
+		List<DefaultDirectedGraph> composants = new LinkedList<DefaultDirectedGraph>();
+		DefaultDirectedGraph closure = TransitiveClosure.getByRoyMarshall(graph);
 		Set<Integer> nc = new HashSet<Integer>();
 		for(int vertex: graph.getVertices()) {
 			nc.add(vertex);
@@ -177,7 +178,7 @@ public class Connectivity {
 				}
 				
 				// Construct the graph:
-				Graph subgraph = graph.subgraphFrom(cfc);
+				DefaultDirectedGraph subgraph = (DefaultDirectedGraph)graph.subgraphFrom(cfc);
 				composants.add(subgraph);
 			}
 		}
@@ -190,8 +191,8 @@ public class Connectivity {
 	 * @param graph The graph.
 	 * @return The strongly connected composants of a graph.
 	 */
-	public static List<Graph> getStronglyConnectedComposantsByAscendantDescendant(Graph graph) {
-		List<Graph> composants = new LinkedList<Graph>();
+	public static List<DefaultDirectedGraph> getStronglyConnectedComposantsByAscendantDescendant(DefaultDirectedGraph graph) {
+		List<DefaultDirectedGraph> composants = new LinkedList<DefaultDirectedGraph>();
 		Set<Integer> nc = new HashSet<Integer>();
 		for(int vertex: graph.getVertices()) {
 			nc.add(vertex);
@@ -208,7 +209,7 @@ public class Connectivity {
 				nc.removeAll(cfc);
 				
 				// Construct the graph:
-				Graph subgraph = graph.subgraphFrom(cfc);
+				DefaultDirectedGraph subgraph = (DefaultDirectedGraph)graph.subgraphFrom(cfc);
 				composants.add(subgraph);
 			}
 		}
@@ -223,7 +224,7 @@ public class Connectivity {
 	 * @param x The vertex.
 	 * @return Unclassified ascendants of x.
 	 */
-	private static Set<Integer> ascendantsUnclassified(Graph graph, Set<Integer> nc, Integer x) {
+	private static Set<Integer> ascendantsUnclassified(DefaultDirectedGraph graph, Set<Integer> nc, Integer x) {
 		Set<Integer> a = new HashSet<Integer>();
 		ancestors(a, x, nc, graph);
 		return a;
@@ -239,7 +240,7 @@ public class Connectivity {
 	 * @param nc The vertices not rated.
 	 * @param graph The graph.
 	 */
-	private static void ancestors(Set<Integer> a, Integer y, Set<Integer> nc, Graph graph) {
+	private static void ancestors(Set<Integer> a, Integer y, Set<Integer> nc, DefaultDirectedGraph graph) {
 		a.add(y);
 		
 		// Get unclassified predecessors of y:
@@ -264,7 +265,7 @@ public class Connectivity {
 	 * @param x The vertex.
 	 * @return Unclassified descendants of x.
 	 */
-	private static Set<Integer> descendantsUnclassified(Graph graph, Set<Integer> nc, Integer x) {
+	private static Set<Integer> descendantsUnclassified(DefaultDirectedGraph graph, Set<Integer> nc, Integer x) {
 		Set<Integer> d = new HashSet<Integer>();
 		sons(d, x, nc, graph);
 		return d;
@@ -280,7 +281,7 @@ public class Connectivity {
 	 * @param nc The vertices not rated.
 	 * @param graph The graph.
 	 */
-	private static void sons(Set<Integer> d, Integer y, Set<Integer> nc, Graph graph) {
+	private static void sons(Set<Integer> d, Integer y, Set<Integer> nc, DefaultDirectedGraph graph) {
 		d.add(y);
 		
 		// Get unclassified successors of y. 
@@ -303,7 +304,7 @@ public class Connectivity {
 	 * @param graph The graph.
 	 * @return True if it's almost strongly connected, false else.
 	 */
-	public static boolean isAlmostStronglyConnected(Graph graph) {
+	public static boolean isAlmostStronglyConnected(DefaultDirectedGraph graph) {
 		int[][] routingMatrix = Routing.routingByRoyMarshallWithSuccessor(graph);
 		return isAlmostStronglyConnected(routingMatrix);
 	}

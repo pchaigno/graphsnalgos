@@ -1,6 +1,6 @@
 package main;
 
-import graph.Graph;
+import graph.DefaultDirectedGraph;
 
 /**
  * Regroups the methods about the trees.
@@ -13,7 +13,7 @@ public class Tree {
 	 * @param graph The graph.
 	 * @return The first root found or -1 if there is no root.
 	 */
-	public static int getRoot(Graph graph) {
+	public static int getRoot(DefaultDirectedGraph graph) {
 		int[][] routingMatrix = Routing.routingByRoyMarshallWithSuccessor(graph);
 		boolean isRoot;
 		int length = routingMatrix.length;
@@ -38,7 +38,7 @@ public class Tree {
 	 * @param graph The graph.
 	 * @return True if it is.
 	 */
-	public static boolean isRootedTree(Graph graph) {
+	public static boolean isRootedTree(DefaultDirectedGraph graph) {
 		if(graph.getEdges().size()+1!=graph.getVertices().size()) {
 			return false;
 		}

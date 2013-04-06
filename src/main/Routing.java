@@ -1,6 +1,6 @@
 package main;
 
-import graph.Graph;
+import graph.DefaultDirectedGraph;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class Routing {
 	 * @param graph The graph.
 	 * @return The routing matrix.
 	 */
-	public static int[][] routingByRoyMarshallWithSuccessor(Graph graph) {
+	public static int[][] routingByRoyMarshallWithSuccessor(DefaultDirectedGraph graph) {
 		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		int length = vertices.length;
 		int[][] r = new int[length][length];
@@ -56,7 +56,7 @@ public class Routing {
 	 * @param graph The graph.
 	 * @return The routage matrix.
 	 */
-	public static int[][] routingByRoyMarshallWithPredecessor(Graph graph) {
+	public static int[][] routingByRoyMarshallWithPredecessor(DefaultDirectedGraph graph) {
 		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		int length = vertices.length;
 		int[][] r = new int[length][length];
@@ -94,7 +94,7 @@ public class Routing {
 	 * @param graph The graph.
 	 * @return The routage matrix.
 	 */
-	public static int[][] routingByRoyMarshallWithAStep(Graph graph) {
+	public static int[][] routingByRoyMarshallWithAStep(DefaultDirectedGraph graph) {
 		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
 		int length = vertices.length;
 		int[][] r = new int[length][length];
