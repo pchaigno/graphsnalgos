@@ -1,5 +1,6 @@
 package test;
 
+import graph.DefaultEdge;
 import graph.DefaultGraph;
 import graph.Graph;
 import junit.framework.TestCase;
@@ -57,5 +58,15 @@ public class TestGraph extends TestCase {
 	public void testClone() {
 		assertEquals(this.graph1, this.graph1.clone());
 		assertEquals(this.graph3, this.graph3.clone());
+	}
+	
+	/**
+	 * Test containsEdge methods.
+	 */
+	public void testContainsEdge() {
+		assertTrue(this.graph4.containsEdge(1, 3));
+		assertTrue(this.graph4.containsEdge(new DefaultEdge(3, 1)));
+		assertFalse(this.graph4.containsEdge(1, 1));
+		assertFalse(this.graph4.containsEdge(new DefaultEdge(1, 1)));
 	}
 }

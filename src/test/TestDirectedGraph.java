@@ -1,5 +1,6 @@
 package test;
 
+import graph.DefaultDirectedEdge;
 import graph.DefaultDirectedGraph;
 import graph.DirectedGraph;
 import junit.framework.TestCase;
@@ -47,5 +48,15 @@ public class TestDirectedGraph extends TestCase {
 	public void testClone() {
 		assertEquals(this.graph1, this.graph1.clone());
 		assertEquals(this.graph3, this.graph3.clone());
+	}
+	
+	/**
+	 * Test containsEdge methods.
+	 */
+	public void testContainsEdge() {
+		assertTrue(this.graph1.containsEdge(1, 2));
+		assertTrue(this.graph1.containsEdge(new DefaultDirectedEdge(1, 2)));
+		assertFalse(this.graph1.containsEdge(2, 1));
+		assertFalse(this.graph1.containsEdge(new DefaultDirectedEdge(2, 1)));
 	}
 }
