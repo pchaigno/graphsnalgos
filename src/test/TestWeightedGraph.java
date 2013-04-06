@@ -1,6 +1,6 @@
 package test;
 
-import graph.DefaultDirectedEdge;
+import graph.DefaultWeightedEdge;
 import graph.DefaultWeightedGraph;
 import graph.WeightedGraph;
 import junit.framework.TestCase;
@@ -63,8 +63,8 @@ public class TestWeightedGraph extends TestCase {
 	 */
 	public void testContainsEdge() {
 		assertTrue(this.graph4.containsEdge(1, 2));
-		assertTrue(this.graph4.containsEdge(new DefaultDirectedEdge(1, 2)));
+		assertTrue(this.graph4.containsEdge(new DefaultWeightedEdge(1, 2)));
 		assertFalse(this.graph4.containsEdge(2, 1));
-		assertFalse(this.graph4.containsEdge(new DefaultDirectedEdge(2, 1)));
+		assertFalse(this.graph4.containsEdge(new DefaultWeightedEdge(2, 1)));
 	}
 }
