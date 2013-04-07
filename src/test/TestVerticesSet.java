@@ -94,9 +94,8 @@ public class TestVerticesSet extends TestCase {
 	 */
 	public void testIsDominatingSet() {
 		Set<Integer> set = new HashSet<Integer>();
-		set.add(2);
 		assertFalse(VerticesSet.isDominatingSet(this.graph1, set));
-		set.add(3);
+		set.add(2);
 		assertTrue(VerticesSet.isDominatingSet(this.graph1, set));
 		set.remove(2);
 		assertFalse(VerticesSet.isDominatingSet(this.graph1, set));
@@ -108,9 +107,8 @@ public class TestVerticesSet extends TestCase {
 	public void testIsMinimalDominatingSet() {
 		Set<Integer> set = new HashSet<Integer>();
 		set.add(2);
-		set.add(3);
 		assertTrue(VerticesSet.isMinimalDominatingSet(this.graph1, set));
-		set.add(4);
+		set.add(3);
 		assertFalse(VerticesSet.isMinimalDominatingSet(this.graph1, set));
 	}
 }
