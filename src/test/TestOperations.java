@@ -74,6 +74,16 @@ public class TestOperations extends TestCase {
 		DefaultDirectedGraph graph = (DefaultDirectedGraph)this.graph1.composition(this.graph2);
 		DefaultDirectedGraph expected = new DefaultDirectedGraph();
 		expected.addVertices(5);
+		expected.addEdge(1, 2);
+		expected.addEdge(2, 2);
+		expected.addEdge(4, 5);
+		expected.addEdge(5, 3);
+		expected.addEdge(5, 4);
+		assertEquals(expected, graph);
+		
+		graph = (DefaultDirectedGraph)this.graph2.composition(this.graph1);
+		expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
 		expected.addEdge(1, 1);
 		expected.addEdge(1, 3);
 		expected.addEdge(2, 4);
@@ -81,16 +91,6 @@ public class TestOperations extends TestCase {
 		expected.addEdge(3, 1);
 		expected.addEdge(3, 3);
 		expected.addEdge(5, 2);
-		assertEquals(expected, graph);
-		
-		graph = (DefaultDirectedGraph)this.graph2.composition(this.graph1);
-		expected = new DefaultDirectedGraph();
-		expected.addVertices(5);
-		expected.addEdge(1, 2);
-		expected.addEdge(2, 2);
-		expected.addEdge(4, 5);
-		expected.addEdge(5, 3);
-		expected.addEdge(5, 4);
 		assertEquals(expected, graph);
 	}
 	

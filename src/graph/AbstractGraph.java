@@ -274,7 +274,7 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
                 }
             }
 	    }
-	    return graph;
+	    return composition;
     }
 
 	@Override
