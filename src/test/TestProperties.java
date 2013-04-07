@@ -120,9 +120,6 @@ public class TestProperties extends TestCase {
 	public void testIsAntiSymetricReflexive() {
 		assertFalse(this.graph4.isAntiSymetric());
 		assertTrue(this.graph5.isAntiSymetric());
-		System.out.println(this.graph4);
-		System.out.println(this.graph5);
-		System.out.println(this.graph6);
 		assertFalse(this.graph6.isAntiSymetric());
 	}
 	
