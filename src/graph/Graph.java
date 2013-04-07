@@ -193,13 +193,6 @@ public interface Graph<T extends Edge> extends Cloneable {
 	public Graph<T> subgraphWithout(Set<Integer> a);
 	
 	/**
-	 * Build the edges graph of a graph.
-	 * It must be an undirected 1-graph.
-	 * @return The edges graph.
-	 */
-	public Graph<T> edgesGraph();
-	
-	/**
 	 * Check if a graph is reflexive.
 	 * @return True if the graph is reflexive, false else.
 	 */

@@ -377,41 +377,6 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
         }
         return subgraph;
 	}
-	
-	@Override
-	public Graph<T> edgesGraph() {
-        // Couple numbers to the edges and build the vertices of the edges graph:
-        Graph<T> edgesGraph = this.graphFactory.build();
-        Map<Integer, Integer[]> edges = new HashMap<Integer, Integer[]>();
-        int num = 1;
-        for(int vertexX: this.getVertices()) {
-            for(int vertexY: this.getVertices()) {
-                if(this.containsEdge(vertexX, vertexY)) {
-                    edges.put(num, new Integer[] {vertexX, vertexY});
-                    edgesGraph.addVertex(num);
-                    num++;
-                }
-            }
-        }
-        
-        // Link the vertices:
-        Integer[] edgeX, edgeY;
-        for(int vertexX: edges.keySet()) {
-            edgeX = edges.get(vertexX);
-            for(int vertexY: edges.keySet()) {
-                if(vertexX!=vertexY) {
-                    edgeY = edges.get(vertexY);
-                    if(edgeX[0].equals(edgeY[0]) || edgeX[0].equals(edgeY[1]) || edgeX[1].equals(edgeY[0]) || edgeX[1].equals(edgeY[1])) {
-                        if(!edgesGraph.containsEdge(vertexY, vertexX)) {
-                            edgesGraph.addEdge(vertexX, vertexY);
-                        }
-                    }
-                }
-            }
-        }
-        
-        return edgesGraph;
-	}
 
 	@Override
 	public boolean isReflexive() {
