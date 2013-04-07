@@ -45,7 +45,7 @@ public class TestWeightedGraph extends TestCase {
 	public void testEquals() {
 		assertEquals(this.graph1, this.graph2);
 		assertFalse(this.graph1.equals(this.graph3));
-		assertFalse(this.graph1.equals(this.graph4));
+		assertEquals(this.graph1, this.graph4);
 	}
 	
 	/**
