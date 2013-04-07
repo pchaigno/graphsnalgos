@@ -8,8 +8,10 @@ public class DefaultWeightedGraph extends AbstractGraph<DefaultWeightedEdge> imp
 
 	@Override
 	public boolean addEdge(int x, int y, double value) {
-		// TODO Auto-generated method stub
-		return false;
+		if(!this.vertices.contains(x) || (x!=y && !this.vertices.contains(y))) {
+	            throw new IllegalArgumentException();
+	    }
+	    return this.edges.add(new DefaultWeightedEdge(x, y, value));
 	}
 
 	@Override
