@@ -1,6 +1,7 @@
 package test;
 
 import graph.DefaultDirectedGraph;
+import graph.DefaultGraph;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +15,7 @@ import junit.framework.TestCase;
 public class TestOperations extends TestCase {
 	private DefaultDirectedGraph graph1;
 	private DefaultDirectedGraph graph2;
-	private DefaultDirectedGraph graph3;
+	private DefaultGraph graph3;
 
 	/**
 	 * Initalize the tests with the graph from the handout.
@@ -22,7 +23,7 @@ public class TestOperations extends TestCase {
 	protected void setUp() throws Exception {
 		this.graph1 = new DefaultDirectedGraph();
 		this.graph2 = new DefaultDirectedGraph();
-		this.graph3 = new DefaultDirectedGraph();
+		this.graph3 = new DefaultGraph();
 
 		this.graph1.addVertices(5);
 		this.graph1.addEdge(1, 2);
@@ -51,8 +52,19 @@ public class TestOperations extends TestCase {
 	 */
 	public void testUnion() {
 		DefaultDirectedGraph graph = (DefaultDirectedGraph)this.graph1.union(this.graph2);
-		System.out.println("Union:");
-		System.out.println(graph);
+		DefaultDirectedGraph expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(1, 2);
+		expected.addEdge(1, 3);
+		expected.addEdge(2, 1);
+		expected.addEdge(2, 3);
+		expected.addEdge(2, 4);
+		expected.addEdge(3, 2);
+		expected.addEdge(3, 4);
+		expected.addEdge(4, 5);
+		expected.addEdge(5, 2);
+		expected.addEdge(5, 5);
+		assertEquals(expected, graph);
 	}
 	
 	/**
@@ -60,11 +72,26 @@ public class TestOperations extends TestCase {
 	 */
 	public void testComposition() {
 		DefaultDirectedGraph graph = (DefaultDirectedGraph)this.graph1.composition(this.graph2);
-		System.out.println("Composition g1 o g2:");
-		System.out.println(graph);
+		DefaultDirectedGraph expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(1, 1);
+		expected.addEdge(1, 3);
+		expected.addEdge(2, 4);
+		expected.addEdge(2, 5);
+		expected.addEdge(3, 1);
+		expected.addEdge(3, 3);
+		expected.addEdge(5, 2);
+		assertEquals(expected, graph);
+		
 		graph = (DefaultDirectedGraph)this.graph2.composition(this.graph1);
-		System.out.println("Composition g2 o g1:");
-		System.out.println(graph);
+		expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(1, 2);
+		expected.addEdge(2, 2);
+		expected.addEdge(4, 5);
+		expected.addEdge(5, 3);
+		expected.addEdge(5, 4);
+		assertEquals(expected, graph);
 	}
 	
 	/**
@@ -72,8 +99,15 @@ public class TestOperations extends TestCase {
 	 */
 	public void testPower() {
 		DefaultDirectedGraph graph = (DefaultDirectedGraph)this.graph1.power(2);
-		System.out.println("g1 square:");
-		System.out.println(graph);
+		DefaultDirectedGraph expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(1, 3);
+		expected.addEdge(1, 4);
+		expected.addEdge(2, 2);
+		expected.addEdge(3, 3);
+		expected.addEdge(3, 4);
+		expected.addEdge(5, 5);
+		assertEquals(expected, graph);
 	}
 	
 	/**
@@ -81,11 +115,25 @@ public class TestOperations extends TestCase {
 	 */
 	public void testTransposed() {
 		DefaultDirectedGraph graph = (DefaultDirectedGraph)this.graph1.transpose();
-		System.out.println("g1 transposed:");
-		System.out.println(graph);
+		DefaultDirectedGraph expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(2, 1);
+		expected.addEdge(3, 2);
+		expected.addEdge(4, 2);
+		expected.addEdge(2, 3);
+		expected.addEdge(5, 5);
+		assertEquals(expected, graph);
+		
 		graph = (DefaultDirectedGraph)this.graph2.transpose();
-		System.out.println("g2 transposed:");
-		System.out.println(graph);
+		expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(1, 2);
+		expected.addEdge(3, 1);
+		expected.addEdge(3, 2);
+		expected.addEdge(4, 3);
+		expected.addEdge(5, 4);
+		expected.addEdge(2, 5);
+		assertEquals(expected, graph);
 	}
 	
 	/**
@@ -93,11 +141,53 @@ public class TestOperations extends TestCase {
 	 */
 	public void testComplementary() {
 		DefaultDirectedGraph graph = (DefaultDirectedGraph)this.graph1.complementary();
-		System.out.println("g1 complementary:");
-		System.out.println(graph);
+		DefaultDirectedGraph expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(1, 1);
+		expected.addEdge(1, 3);
+		expected.addEdge(1, 4);
+		expected.addEdge(1, 5);
+		expected.addEdge(2, 2);
+		expected.addEdge(2, 1);
+		expected.addEdge(2, 5);
+		expected.addEdge(3, 3);
+		expected.addEdge(3, 1);
+		expected.addEdge(3, 4);
+		expected.addEdge(3, 5);
+		expected.addEdge(4, 4);
+		expected.addEdge(4, 1);
+		expected.addEdge(4, 2);
+		expected.addEdge(4, 3);
+		expected.addEdge(4, 5);
+		expected.addEdge(5, 1);
+		expected.addEdge(5, 2);
+		expected.addEdge(5, 3);
+		expected.addEdge(5, 4);
+		assertEquals(expected, graph);
+		
 		graph = (DefaultDirectedGraph)this.graph2.complementary();
-		System.out.println("g2 complementary:");
-		System.out.println(graph);
+		expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(1, 1);
+		expected.addEdge(1, 2);
+		expected.addEdge(1, 4);
+		expected.addEdge(1, 5);
+		expected.addEdge(2, 2);
+		expected.addEdge(2, 4);
+		expected.addEdge(2, 5);
+		expected.addEdge(3, 3);
+		expected.addEdge(3, 1);
+		expected.addEdge(3, 2);
+		expected.addEdge(3, 5);
+		expected.addEdge(4, 4);
+		expected.addEdge(4, 3);
+		expected.addEdge(4, 1);
+		expected.addEdge(4, 2);
+		expected.addEdge(5, 5);
+		expected.addEdge(5, 4);
+		expected.addEdge(5, 1);
+		expected.addEdge(5, 3);
+		assertEquals(expected, graph);
 	}
 	
 	/**
@@ -105,11 +195,44 @@ public class TestOperations extends TestCase {
 	 */
 	public void testComplementaryWithoutLoops() {
 		DefaultDirectedGraph graph = (DefaultDirectedGraph)this.graph1.complementaryWithoutLoops();
-		System.out.println("g1 complementary without loops:");
-		System.out.println(graph);
+		DefaultDirectedGraph expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(1, 3);
+		expected.addEdge(1, 4);
+		expected.addEdge(1, 5);
+		expected.addEdge(2, 1);
+		expected.addEdge(2, 5);
+		expected.addEdge(3, 1);
+		expected.addEdge(3, 4);
+		expected.addEdge(3, 5);
+		expected.addEdge(4, 1);
+		expected.addEdge(4, 2);
+		expected.addEdge(4, 3);
+		expected.addEdge(4, 5);
+		expected.addEdge(5, 1);
+		expected.addEdge(5, 2);
+		expected.addEdge(5, 3);
+		expected.addEdge(5, 4);
+		assertEquals(expected, graph);
+		
 		graph = (DefaultDirectedGraph)this.graph2.complementaryWithoutLoops();
-		System.out.println("g2 complementary without loops:");
-		System.out.println(graph);
+		expected = new DefaultDirectedGraph();
+		expected.addVertices(5);
+		expected.addEdge(1, 2);
+		expected.addEdge(1, 4);
+		expected.addEdge(1, 5);
+		expected.addEdge(2, 4);
+		expected.addEdge(2, 5);
+		expected.addEdge(3, 1);
+		expected.addEdge(3, 2);
+		expected.addEdge(3, 5);
+		expected.addEdge(4, 3);
+		expected.addEdge(4, 1);
+		expected.addEdge(4, 2);
+		expected.addEdge(5, 4);
+		expected.addEdge(5, 1);
+		expected.addEdge(5, 3);
+		assertEquals(expected, graph);
 	}
 	
 	/**
@@ -126,21 +249,40 @@ public class TestOperations extends TestCase {
 		Set<Integer> a = new HashSet<Integer>();
 		a.add(1);
 		a.add(2);
-		a.add(4);
+		a.add(3);
 		DefaultDirectedGraph graph = (DefaultDirectedGraph)this.graph1.subgraphFrom(a);
-		System.out.println("g1 subgraph:");
-		System.out.println(graph);
+		DefaultDirectedGraph expected = new DefaultDirectedGraph();
+		expected.addVertices(3);
+		expected.addEdge(1, 2);
+		expected.addEdge(2, 3);
+		expected.addEdge(3, 2);
+		assertEquals(expected, graph);
+		
 		graph = (DefaultDirectedGraph)this.graph2.subgraphFrom(a);
-		System.out.println("g2 subgraph:");
-		System.out.println(graph);
+		expected = new DefaultDirectedGraph();
+		expected.addVertices(3);
+		expected.addEdge(1, 3);
+		expected.addEdge(2, 1);
+		expected.addEdge(2, 3);
+		assertEquals(expected, graph);
 	}
 	
 	/**
 	 * Test the edgesGraph method.
 	 */
 	public void testEdgesGraph() {
-		DefaultDirectedGraph edgesGraph = (DefaultDirectedGraph)this.graph3.edgesGraph();
-		System.out.println("g3 edges graph:");
-		System.out.println(edgesGraph);
+		DefaultGraph edgesGraph = (DefaultGraph)this.graph3.edgesGraph();
+		DefaultGraph expected = new DefaultGraph();
+		expected.addVertices(4);
+		expected.addVertex(1);
+		expected.addVertex(2);
+		expected.addVertex(3);
+		expected.addVertex(4);
+		expected.addEdge(1, 4);
+		expected.addEdge(1, 2);
+		expected.addEdge(2, 3);
+		expected.addEdge(2, 4);
+		expected.addEdge(3, 4);
+		assertEquals(expected, edgesGraph);
 	}
 }
