@@ -247,12 +247,13 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 	    }
 	    for(int vertexX: this.getVertices()) {
             for(int vertexY: this.getVertices()) {
-                if(this.containsEdge(vertexX, vertexY) || graph.containsEdge(vertexX, vertexY)) {
-                    union.addEdge(vertexX, vertexY);
+            	T edge = this.edgeFactory.build(vertexX, vertexY);
+                if(this.containsEdge(edge) || graph.containsEdge(edge)) {
+                    union.addEdge(edge);
                 }
             }
 	    }
-	    return graph;
+	    return union;
     }
 
 	@Override

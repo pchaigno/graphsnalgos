@@ -35,4 +35,9 @@ public class GraphFactory<T extends Edge> {
 			return (Graph<T>)new DefaultWeightedGraph();
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return this.graphClass.toString();
+	}
 }

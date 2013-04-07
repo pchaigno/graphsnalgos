@@ -52,4 +52,9 @@ public class EdgeFactory<T extends Edge> {
 			throw new IllegalArgumentException("To use this method, the factory must have been initiate with a WeightedEdge.");
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return this.edgeClass.toString();
+	}
 }
