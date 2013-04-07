@@ -1,8 +1,6 @@
 package test;
 
-import graph.DefaultDirectedEdge;
 import graph.DefaultDirectedGraph;
-import graph.Graph;
 
 import junit.framework.TestCase;
 
@@ -11,21 +9,20 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestProperties extends TestCase {
-	private Graph<DefaultDirectedEdge> graph1;
-	private Graph<DefaultDirectedEdge> graph2;
-	private Graph<DefaultDirectedEdge> graph3;
-	private Graph<DefaultDirectedEdge> graph4;
-	private Graph<DefaultDirectedEdge> graph5;
-	private Graph<DefaultDirectedEdge> graph6;
-	private Graph<DefaultDirectedEdge> graph7;
-	private Graph<DefaultDirectedEdge> graph8;
-	private Graph<DefaultDirectedEdge> graph9;
-	private Graph<DefaultDirectedEdge> graph10;
+	private DefaultDirectedGraph graph1;
+	private DefaultDirectedGraph graph2;
+	private DefaultDirectedGraph graph3;
+	private DefaultDirectedGraph graph4;
+	private DefaultDirectedGraph graph5;
+	private DefaultDirectedGraph graph6;
+	private DefaultDirectedGraph graph7;
+	private DefaultDirectedGraph graph8;
+	private DefaultDirectedGraph graph9;
+	private DefaultDirectedGraph graph10;
 	
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
-	@SuppressWarnings("unchecked")
 	protected void setUp() {
 		this.graph1 = new DefaultDirectedGraph();
 		this.graph2 = new DefaultDirectedGraph();
@@ -53,7 +50,7 @@ public class TestProperties extends TestCase {
 		this.graph2.addEdge(4, 5);
 		this.graph2.addEdge(5, 2);
 		
-		this.graph3 = (Graph<DefaultDirectedEdge>)this.graph2.clone();
+		this.graph3 = (DefaultDirectedGraph)this.graph2.clone();
 		this.graph3.addEdge(3, 3);
 		this.graph3.addEdge(2, 2);
 		
@@ -68,9 +65,9 @@ public class TestProperties extends TestCase {
 		this.graph5.addEdge(1, 3);
 		this.graph5.addEdge(2, 3);
 	
-		this.graph6 = this.graph4.union(this.graph5);
+		this.graph6 = (DefaultDirectedGraph)this.graph4.union(this.graph5);
 		
-		this.graph7 = (Graph<DefaultDirectedEdge>)this.graph6.clone();
+		this.graph7 = this.graph6.clone();
 		this.graph7.addEdge(2, 2);
 		this.graph7.addEdge(3, 3);
 		
@@ -79,7 +76,7 @@ public class TestProperties extends TestCase {
 		this.graph8.addEdge(2, 3);
 		this.graph8.addEdge(3, 2);
 
-		this.graph9 = (Graph<DefaultDirectedEdge>)this.graph8.clone();
+		this.graph9 = this.graph8.clone();
 		this.graph9.addEdge(1, 1);
 		this.graph9.addEdge(3, 3);
 		

@@ -2,7 +2,6 @@ package test;
 
 import graph.DefaultWeightedEdge;
 import graph.DefaultWeightedGraph;
-import graph.WeightedGraph;
 import junit.framework.TestCase;
 
 /**
@@ -10,10 +9,10 @@ import junit.framework.TestCase;
  * @author Paul Chaignon
  */
 public class TestWeightedGraph extends TestCase {
-	private WeightedGraph<DefaultWeightedEdge> graph1;
-	private WeightedGraph<DefaultWeightedEdge> graph2;
-	private WeightedGraph<DefaultWeightedEdge> graph3;
-	private WeightedGraph<DefaultWeightedEdge> graph4;
+	private DefaultWeightedGraph graph1;
+	private DefaultWeightedGraph graph2;
+	private DefaultWeightedGraph graph3;
+	private DefaultWeightedGraph graph4;
 	
 	/**
 	 * Initialize a few weighted graphs.
