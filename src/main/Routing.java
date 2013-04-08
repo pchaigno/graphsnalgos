@@ -1,6 +1,8 @@
 package main;
 
 import graph.DefaultDirectedGraph;
+import graph.DefaultWeightedEdge;
+import graph.DefaultWeightedGraph;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -11,7 +13,9 @@ import java.util.List;
  * @author Paul Chaignon
  */
 public class Routing {
-
+	private static int[][] routes;
+	private static double[][] values;
+	
 	/**
 	 * Constructs the routing matrix using a derivative of the Roy-Marshall algorithm.
 	 * The routing matrix stores, for each path (x,y), the successor of x.
@@ -224,5 +228,62 @@ public class Routing {
 			buildPathFromRoutingWithAStep(r, path, i, r[i-1][j-1]);
 			buildPathFromRoutingWithAStep(r, path, r[i-1][j-1], j);
 		}
+	}
+	
+	/**
+	 * Build all minimal-cost path from a vertex to another using the Roy-Marshall algorithm.
+	 * Fill the routing and values matrices.
+	 * The value matrix stores, for each path, its cost.
+	 * The routing matrix stores, for each path (x,y), the successor of x.
+	 * @param graph The graph.
+	 */
+	public static void bestCostRoutingByRoyMarshallWithSuccessor(DefaultWeightedGraph graph) {
+		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
+		routes = new int[vertices.length][vertices.length];
+		values = new double[vertices.length][vertices.length];
+		
+		// Initialization:
+		for(int i=0 ; i<vertices.length ; i++) {
+			for(int j=0 ; j<vertices.length ; j++) {
+				DefaultWeightedEdge edge = new DefaultWeightedEdge(vertices[i], vertices[j]);
+				if(graph.containsEdge(edge)) {
+					routes[i][j] = vertices[j];
+					values[i][j] = graph.getValue(edge);
+				} else {
+					routes[i][j] = -1;
+					values[i][j] = Double.MAX_VALUE;
+				}
+			}
+		}
+		
+		// Roy-Marshall's algorithm:
+		for(int i=0 ; i<vertices.length ; i++) {
+			for(int x=0 ; x<vertices.length ; x++) {
+				if(routes[x][i]!=-1) {
+					for(int y=0 ; y<vertices.length ; y++) {
+						if(routes[i][y]!=-1) {
+							if(values[x][y]>values[x][i]+values[i][y]) {
+								values[x][y] = values[x][i]+values[i][y];
+								routes[x][y] = routes[x][i];
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * @return The last routing matrix computed.
+	 */
+	public static int[][] getRoutes() {
+		return routes;
+	}
+	
+	/**
+	 * @return The last matrix of values computed.
+	 */
+	public static double[][] getValues() {
+		return values;
 	}
 }
