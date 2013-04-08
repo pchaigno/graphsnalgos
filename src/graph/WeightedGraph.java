@@ -15,4 +15,21 @@ public interface WeightedGraph<T extends WeightedEdge> extends DirectedGraph<T> 
 	 * @throw IllegalArgumentException If one of the vertices in not contained in the graph.
 	 */
 	public boolean addEdge(int x, int y, double value);
+	
+	/**
+	 * Get the value of an edge.
+	 * @param x The starting vertex.
+	 * @param y The end vertex.
+	 * @return The value of the edge.
+	 * @throws IllegalArgumentException The edge must be in the graph.
+	 */
+	public double getValue(int x, int y);
+	
+	/**
+	 * Get the value of an edge.
+	 * @param edge The edge.
+	 * @return The value of the edge.
+	 * @throws IllegalArgumentException The edge must be in the graph.
+	 */
+	public double getValue(T edge);
 }

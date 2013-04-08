@@ -1,5 +1,7 @@
 package graph;
 
+import java.util.Iterator;
+
 /**
  * Default implementation for WeightedGraph.
  * @author Paul Chaignon
@@ -21,4 +23,21 @@ public class DefaultWeightedGraph extends AbstractGraph<DefaultWeightedEdge> imp
         graph.edges.addAll(this.edges);
         return graph;
     }
+
+	@Override
+	public double getValue(int x, int y) {
+		return this.getValue(new DefaultWeightedEdge(x, y));
+	}
+
+	@Override
+	public double getValue(DefaultWeightedEdge edge) {
+		Iterator<DefaultWeightedEdge> iterator = this.edges.iterator();
+		while(iterator.hasNext()) {
+			DefaultWeightedEdge e = iterator.next();
+			if(edge.equals(e)) {
+				return e.getValue();
+			}
+		}
+		throw new IllegalArgumentException("The edge must be in the graph.");
+	}
 }
