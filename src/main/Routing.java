@@ -286,4 +286,17 @@ public class Routing {
 	public static double[][] getValues() {
 		return values;
 	}
+
+	/**
+	 * Check the values matrix to determine if there are cycles in the last graph computed.
+	 * @return True if the last graph computed contains cycles.
+	 */
+	public static boolean containsCycles() {
+		for(int i=0 ; i<values.length ; i++) {
+			if(values[i][i]<0) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

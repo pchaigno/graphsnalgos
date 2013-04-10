@@ -88,6 +88,7 @@ public class TestRouting extends TestCase {
 	 */
 	public void testBestCostRoutingByRoyMarshallWithSuccessor() {
 		Routing.bestCostRoutingByRoyMarshallWithSuccessor(this.graph2);
+		assertFalse(Routing.containsCycles());
 		int[][] routes = Routing.getRoutes();
 		int[] routes_total = {7, 8, 6, 1, -5};
 		for(int i=0 ; i<routes.length ; i++) {
@@ -108,5 +109,14 @@ public class TestRouting extends TestCase {
 			}
 			assertEquals(values_total[i], total);
 		}
+	}
+	
+	/**
+	 * Test the method to get the paths with best cost on a graph with a dominating cycle.
+	 */
+	public void testBestCostRoutingByRoyMarshallWithSuccessorWithDominatingCycle() {
+		this.graph2.addEdge(4, 2, -4);
+		Routing.bestCostRoutingByRoyMarshallWithSuccessor(this.graph2);
+		assertTrue(Routing.containsCycles());
 	}
 }
