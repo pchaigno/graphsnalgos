@@ -4,7 +4,7 @@ package graph;
  * The default implementation for DirectedGraph.
  * @author Paul Chaignon
  */
-public class DefaultDirectedGraph extends AbstractGraph<DefaultDirectedEdge> implements DirectedGraph<DefaultDirectedEdge> {
+public class DefaultDirectedGraph extends AbstractDirectedGraph<DefaultDirectedEdge> implements DirectedGraph<DefaultDirectedEdge> {
 
 	@Override
     public DefaultDirectedGraph clone() {

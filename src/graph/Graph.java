@@ -96,28 +96,6 @@ public interface Graph<T extends Edge> extends Cloneable {
 	public int[][] getAdjacencyMatrix();
 	
 	/**
-	 * @return The list of targets vertices for each vertex.
-	 */
-	public Map<Integer, List<Integer>> getTargetsLists();
-	
-	/**
-	 * @param vertex A vertex.
-	 * @return The list of targets for this vertex.
-	 */
-	public Set<Integer> getTargets(int vertex);
-	
-	/**
-	 * @return The list of sources vertices for each vertex.
-	 */
-	public Map<Integer, List<Integer>> getSourcesLists();
-
-	/**
-	 * @param vertex A vertex.
-	 * @return The list of sources for this vertex.
-	 */
-	public Set<Integer> getSources(int vertex);
-	
-	/**
 	 * Build the graph from the adjacency matrix.
 	 * @param matrix The adjacency matrix.
 	 * @param vertices The vertices.

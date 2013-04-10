@@ -6,7 +6,7 @@ import java.util.Iterator;
  * Default implementation for WeightedGraph.
  * @author Paul Chaignon
  */
-public class DefaultWeightedGraph extends AbstractGraph<DefaultWeightedEdge> implements WeightedGraph<DefaultWeightedEdge> {
+public class DefaultWeightedGraph extends AbstractDirectedGraph<DefaultWeightedEdge> implements WeightedGraph<DefaultWeightedEdge> {
 
 	@Override
 	public boolean addEdge(int x, int y, double value) {
