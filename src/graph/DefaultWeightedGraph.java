@@ -38,7 +38,7 @@ public class DefaultWeightedGraph extends AbstractGraph<DefaultWeightedEdge> imp
 				return e.getValue();
 			}
 		}
-		throw new IllegalArgumentException("The edge must be in the graph.");
+		return Double.MAX_VALUE;
 	}
 
 	@Override
