@@ -2,6 +2,7 @@ package test;
 
 import graph.DefaultDirectedEdge;
 import graph.DefaultDirectedGraph;
+import graph.DefaultWeightedEdge;
 import junit.framework.TestCase;
 
 /**
@@ -57,5 +58,23 @@ public class TestDirectedGraph extends TestCase {
 		assertTrue(this.graph1.containsEdge(new DefaultDirectedEdge(1, 2)));
 		assertFalse(this.graph1.containsEdge(2, 1));
 		assertFalse(this.graph1.containsEdge(new DefaultDirectedEdge(2, 1)));
+	}
+	
+	/**
+	 * Test the errors returned if the edge param is incorrect.
+	 */
+	public void testErrors() {
+		try {
+			this.graph3.containsEdge(new DefaultWeightedEdge(1, 3));
+			fail();
+		} catch(IllegalArgumentException e) {}
+		try {
+			this.graph3.removeEdge(new DefaultWeightedEdge(3, 1));
+			fail();
+		} catch(IllegalArgumentException e) {}
+		try {
+			this.graph3.addEdge(new DefaultWeightedEdge(9, 9));
+			fail();
+		} catch(IllegalArgumentException e) {}
 	}
 }

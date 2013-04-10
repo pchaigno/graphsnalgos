@@ -40,4 +40,11 @@ public class DefaultWeightedGraph extends AbstractGraph<DefaultWeightedEdge> imp
 		}
 		throw new IllegalArgumentException("The edge must be in the graph.");
 	}
+
+	@Override
+	protected void checkEdge(DefaultWeightedEdge edge) {
+		if(edge.getClass()!=DefaultWeightedEdge.class) {
+			throw new IllegalArgumentException("The edge must be a of class DefaultWeightedEdge.");
+		}
+	}
 }

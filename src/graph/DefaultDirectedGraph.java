@@ -13,4 +13,11 @@ public class DefaultDirectedGraph extends AbstractGraph<DefaultDirectedEdge> imp
         graph.edges.addAll(this.edges);
         return graph;
     }
+
+	@Override
+	protected void checkEdge(DefaultDirectedEdge edge) {
+		if(edge.getClass()!=DefaultDirectedEdge.class) {
+			throw new IllegalArgumentException("The edge must be a of class DefaultDirectedEdge.");
+		}
+	}
 }

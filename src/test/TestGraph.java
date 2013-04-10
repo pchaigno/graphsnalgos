@@ -1,5 +1,6 @@
 package test;
 
+import graph.DefaultDirectedEdge;
 import graph.DefaultEdge;
 import graph.DefaultGraph;
 import graph.Graph;
@@ -68,5 +69,23 @@ public class TestGraph extends TestCase {
 		assertTrue(this.graph4.containsEdge(new DefaultEdge(3, 1)));
 		assertFalse(this.graph4.containsEdge(1, 1));
 		assertFalse(this.graph4.containsEdge(new DefaultEdge(1, 1)));
+	}
+	
+	/**
+	 * Test the errors returned if the edge param is incorrect.
+	 */
+	public void testErrors() {
+		try {
+			this.graph4.containsEdge(new DefaultDirectedEdge(1, 3));
+			fail();
+		} catch(IllegalArgumentException e) {}
+		try {
+			this.graph4.removeEdge(new DefaultDirectedEdge(3, 1));
+			fail();
+		} catch(IllegalArgumentException e) {}
+		try {
+			this.graph4.addEdge(new DefaultDirectedEdge(9, 9));
+			fail();
+		} catch(IllegalArgumentException e) {}
 	}
 }

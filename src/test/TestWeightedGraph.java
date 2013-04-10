@@ -66,4 +66,23 @@ public class TestWeightedGraph extends TestCase {
 		assertFalse(this.graph4.containsEdge(2, 1));
 		assertFalse(this.graph4.containsEdge(new DefaultWeightedEdge(2, 1)));
 	}
+	
+	/**
+	 * Test the errors returned if the edge param is incorrect.
+	 */
+	@SuppressWarnings("unused")
+	public void testErrors() {
+		try {
+			this.graph4.containsEdge(new DefaultWeightedEdge(1, 3) { private int test; });
+			fail();
+		} catch(IllegalArgumentException e) {}
+		try {
+			this.graph4.removeEdge(new DefaultWeightedEdge(1, 3) { private int test; });
+			fail();
+		} catch(IllegalArgumentException e) {}
+		try {
+			this.graph4.addEdge(new DefaultWeightedEdge(1, 3) { private int test; });
+			fail();
+		} catch(IllegalArgumentException e) {}
+	}
 }

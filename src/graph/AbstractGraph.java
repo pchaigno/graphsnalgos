@@ -39,6 +39,8 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 	public Set<T> getEdges() {
 		return this.edges;
 	}
+	
+	protected abstract void checkEdge(T edge);
 
 	@Override
 	public boolean containsVertex(int vertex) {
@@ -47,6 +49,7 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 
 	@Override
 	public boolean containsEdge(T edge) {
+		this.checkEdge(edge);
 		return this.edges.contains(edge);
 	}
 
@@ -72,6 +75,7 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 
 	@Override
 	public boolean addEdge(T edge) {
+		this.checkEdge(edge);
 		if(!this.vertices.contains(edge.getX()) || (edge.getX()!=edge.getY() && !this.vertices.contains(edge.getY()))) {
 			throw new IllegalArgumentException();
 		}
@@ -141,6 +145,7 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 
 	@Override
 	public boolean removeEdge(T edge) {
+		this.checkEdge(edge);
 		return this.edges.remove(edge);
 	}
 

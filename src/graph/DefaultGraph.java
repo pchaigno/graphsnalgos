@@ -57,4 +57,11 @@ public class DefaultGraph extends AbstractGraph<DefaultEdge> implements Undirect
         
         return edgesGraph;
 	}
+
+	@Override
+	protected void checkEdge(DefaultEdge edge) {
+		if(edge.getClass()!=DefaultEdge.class) {
+			throw new IllegalArgumentException("The edge must be a of class DefaultEdge.");
+		}
+	}
 }
