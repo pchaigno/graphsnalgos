@@ -29,6 +29,11 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 	}
 	
 	@Override
+	public int getOrder() {
+		return this.vertices.size();
+	}
+	
+	@Override
 	public Set<Integer> getVertices() {
 		return this.vertices;
 	}

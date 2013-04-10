@@ -11,6 +11,11 @@ import java.util.Set;
 public interface Graph<T extends Edge> extends Cloneable {
 
 	/**
+	 * @return The order of the graph.
+	 */
+	public int getOrder();
+	
+	/**
 	 * @return The vertices.
 	 */
 	public Set<Integer> getVertices();
