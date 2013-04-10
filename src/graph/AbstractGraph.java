@@ -179,6 +179,17 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 		}
 		return map;
 	}
+	
+	@Override
+	public Set<Integer> getTargets(int vertex) {
+		Set<Integer> targets = new HashSet<Integer>();
+		for(int v: this.vertices) {
+			if(this.containsEdge(vertex, v)) {
+				targets.add(v);
+			}
+		}
+		return targets;
+	}
 
 	@Override
 	public Map<Integer, List<Integer>> getSourcesLists() {
@@ -195,6 +206,17 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 			}
 		}
 		return map;
+	}
+	
+	@Override
+	public Set<Integer> getSources(int vertex) {
+		Set<Integer> sources = new HashSet<Integer>();
+		for(int v: this.vertices) {
+			if(this.containsEdge(v, vertex)) {
+				sources.add(v);
+			}
+		}
+		return sources;
 	}
 
 	@Override
