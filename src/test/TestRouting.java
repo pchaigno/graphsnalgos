@@ -84,7 +84,7 @@ public class TestRouting extends TestCase {
 	}
 	
 	/**
-	 * Test the method to get the paths with best cost.
+	 * Test the method to get the paths with best cost by the Roy-Marshall algorithm.
 	 */
 	public void testBestCostRoutingByRoyMarshallWithSuccessor() {
 		Routing.bestCostRoutingByRoyMarshallWithSuccessor(this.graph2);
@@ -112,11 +112,67 @@ public class TestRouting extends TestCase {
 	}
 	
 	/**
+	 * Test the method to get the paths with best cost by the Roy-Marshall algorithm.
+	 */
+	public void testBestCostRoutingByRoyMarshallWithPredecessor() {
+		Routing.bestCostRoutingByRoyMarshallWithPredecessor(this.graph2);
+		assertFalse(Routing.containsCycles());
+		int[][] routes = Routing.getRoutes();
+		int[] routes_total = {7, 5, 3, 0, -5};
+		for(int i=0 ; i<routes.length ; i++) {
+			int total = 0;
+			for(int j=0 ; j<routes.length ; j++) {
+				total += routes[i][j];
+			}
+			assertEquals(routes_total[i], total);
+		}
+		double[][] values = Routing.getValues();
+		double[] values_total = {15, 7, 6, 7, 0};
+		for(int i=0 ; i<values.length ; i++) {
+			double total = 0;
+			for(int j=0 ; j<values.length ; j++) {
+				if(values[i][j]<Double.MAX_VALUE) {
+					total += values[i][j];
+				}
+			}
+			assertEquals(values_total[i], total);
+		}
+	}
+	
+	/**
 	 * Test the method to get the paths with best cost on a graph with a dominating cycle.
 	 */
 	public void testBestCostRoutingByRoyMarshallWithSuccessorWithDominatingCycle() {
 		this.graph2.addEdge(4, 2, -4);
 		Routing.bestCostRoutingByRoyMarshallWithSuccessor(this.graph2);
 		assertTrue(Routing.containsCycles());
+	}
+	
+	/**
+	 * Tets the method to get the paths with the best cost by the Moor-Dijkstra algorithm.
+	 */
+	public void testBestCostRoutingByMoorDijkstra() {
+		Routing.bestCostRoutingByMoorDijkstra(this.graph2);
+		assertFalse(Routing.containsCycles());
+		int[][] routes = Routing.getRoutes();
+		int[] routes_total = {7, 5, 3, 0, -5};
+		for(int i=0 ; i<routes.length ; i++) {
+			int total = 0;
+			for(int j=0 ; j<routes.length ; j++) {
+				total += routes[i][j];
+			}
+			assertEquals(routes_total[i], total);
+		}
+		double[][] values = Routing.getValues();
+		double[] values_total = {15, 7, 6, 7, 0};
+		for(int i=0 ; i<values.length ; i++) {
+			double total = 0;
+			for(int j=0 ; j<values.length ; j++) {
+				if(values[i][j]<Double.MAX_VALUE) {
+					total += values[i][j];
+				}
+			}
+			assertEquals(values_total[i], total);
+		}
 	}
 }
