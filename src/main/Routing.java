@@ -20,6 +20,7 @@ import java.util.Set;
 public class Routing {
 	private static int[][] routes;
 	private static double[][] values;
+	private static int[][] nbPaths;
 	
 	/**
 	 * Constructs the routing matrix using a derivative of the Roy-Marshall algorithm.
@@ -423,6 +424,109 @@ public class Routing {
 	}
 	
 	/**
+	 * Build all minimal-cost paths from a vertex to another using the Bellman algorithm.
+	 * Compute this algorithm for each vertex of the graph.
+	 * @param graph The graph.
+	 */
+	public static void bestCostRoutingByBellman(DefaultWeightedGraph graph) {
+		routes = new int[graph.getOrder()][graph.getOrder()];
+		values = new double[graph.getOrder()][graph.getOrder()];
+		for(int vertex: graph.getVertices()) {
+			bestCostRoutingByBellman(graph, vertex);
+		}
+	}
+	
+	/**
+	 * Build minimal-cost paths from the vertex in parameter to all other vertices.
+	 * Use the Bellman algorithm.
+	 * @param graph The graph.
+	 * @param x0 The starting vertex.
+	 * @return TODO
+	 */
+	// TODO
+	private static boolean bestCostRoutingByBellman(DefaultWeightedGraph graph, int x0) {
+		/*// Initialization:
+		boolean end = false;
+		Map<Integer, List<Double>> costs = new HashMap<Integer, List<Double>>();
+		Map<Integer, Integer> predecessors = new HashMap<Integer, Integer>();
+		for(int vertex: graph.getVertices()) {
+			costs.put(vertex, new LinkedList<Double>());
+		}
+		int k = 1;
+		int n = graph.getOrder();
+		
+		// Algorithm:
+		while(k<n && !end) {
+			costs.get(1).add(0.0);
+			for(int i=2 ; i<=n ; i++) {
+				List<Double> lambda = costs.get(i);
+				lambda.add();
+				if(!lambda.get(lambda.size()-1).equals(lambda.get(lambda.size()-2))) {
+					predecessors.put(i, );
+				}
+			}
+			if() {
+				end = true;
+			} else {
+				k++;
+			}
+		}
+		
+		// 
+		if(k==n+1) {
+			return true;
+		}
+		*/
+		return false;
+	}
+	
+	/**
+	 * Compute the number of paths of maximum value in a capacity graph for each vertices.
+	 * @param graph The capacity graph.
+	 */
+	public static void numberMaximumPathsByRoyMarshall(DefaultWeightedGraph graph) {
+		Integer[] vertices = graph.getVertices().toArray(new Integer[0]);
+		routes = new int[vertices.length][vertices.length];
+		values = new double[vertices.length][vertices.length];
+		nbPaths = new int[vertices.length][vertices.length];
+		
+		// Initialization:
+		for(int i=0 ; i<vertices.length ; i++) {
+			for(int j=0 ; j<vertices.length ; j++) {
+				DefaultWeightedEdge edge = new DefaultWeightedEdge(vertices[i], vertices[j]);
+				if(graph.containsEdge(edge)) {
+					routes[i][j] = vertices[j];
+					values[i][j] = graph.getValue(edge);
+					nbPaths[i][j] = 1;
+				} else {
+					routes[i][j] = -1;
+					values[i][j] = Double.MIN_VALUE;
+					nbPaths[i][j] = 0;
+				}
+			}
+		}
+		
+		// Roy-Marshall's algorithm:
+		for(int i=0 ; i<vertices.length ; i++) {
+			for(int x=0 ; x<vertices.length ; x++) {
+				if(routes[x][i]!=-1) {
+					for(int y=0 ; y<vertices.length ; y++) {
+						if(routes[i][y]!=-1) {
+							if(values[x][y]<Math.min(values[x][i], values[i][y])) {
+								values[x][y] = Math.min(values[x][i], values[i][y]);
+								routes[x][y] = routes[x][i];
+								nbPaths[x][y] = 1;
+							} else if(values[x][y]==Math.min(values[x][i], values[i][y])) {
+								nbPaths[x][y]++;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/**
 	 * @return The last routing matrix computed.
 	 */
 	public static int[][] getRoutes() {
@@ -434,6 +538,13 @@ public class Routing {
 	 */
 	public static double[][] getValues() {
 		return values;
+	}
+	
+	/**
+	 * @return The last matrix of number of paths computed.
+	 */
+	public static int[][] getNbPaths() {
+		return nbPaths;
 	}
 
 	/**

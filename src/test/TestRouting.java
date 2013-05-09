@@ -17,13 +17,15 @@ import junit.framework.TestCase;
 public class TestRouting extends TestCase {
 	private DefaultDirectedGraph graph1;
 	private DefaultWeightedGraph graph2;
+	private DefaultWeightedGraph graph3;
 	
 	/**
-	 * Initalize the tests with the graph from the TD.
+	 * Initalize the tests with the graph from the TD and the annals.
 	 */
 	protected void setUp() throws Exception {
 		this.graph1 = new DefaultDirectedGraph();
 		this.graph2 = new DefaultWeightedGraph();
+		this.graph3 = new DefaultWeightedGraph();
 
 		this.graph1.addVertices(7);
 		this.graph1.addEdge(1, 2);
@@ -45,6 +47,18 @@ public class TestRouting extends TestCase {
 		this.graph2.addEdge(3, 4, 4);
 		this.graph2.addEdge(3, 5, 2);
 		this.graph2.addEdge(4, 5, 7);
+		
+		this.graph3.addVertices(6);
+		this.graph3.addEdge(1, 3, 6);
+		this.graph3.addEdge(2, 1, 10);
+		this.graph3.addEdge(2, 3, 8);
+		this.graph3.addEdge(2, 4, 6);
+		this.graph3.addEdge(3, 4, 8);
+		this.graph3.addEdge(3, 5, 6);
+		this.graph3.addEdge(3, 6, 10);
+		this.graph3.addEdge(4, 5, 12);
+		this.graph3.addEdge(4, 6, 9);
+		this.graph3.addEdge(5, 6, 4);
 	}
 	
 	/**
@@ -174,5 +188,19 @@ public class TestRouting extends TestCase {
 			}
 			assertEquals(values_total[i], total);
 		}
+	}
+	
+	/**
+	 * Test the method to get the number of maximum paths by Roy-Marshall.
+	 */
+	public void testNumberMaximumPathsByRoyMarshall() {
+		Routing.numberMaximumPathsByRoyMarshall(this.graph3);
+		assertFalse(Routing.containsCycles());
+		int[][] nbPaths = Routing.getNbPaths();
+		int[][] routes = Routing.getRoutes();
+		double[][] values = Routing.getValues();
+		System.out.println(Tools.matrixToString(routes));
+		System.out.println(Tools.matrixToString(nbPaths));
+		System.out.println(Tools.matrixToString(values));
 	}
 }
