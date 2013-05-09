@@ -19,7 +19,11 @@ public class Tools {
 				if(matrix[i][j]>=0) {
 					str += " ";
 				}
-				str += matrix[i][j]+" ";
+				if(matrix[i][j]==Integer.MAX_VALUE || matrix[i][j]==Integer.MIN_VALUE) {
+					str += "- ";
+				} else {
+					str += matrix[i][j]+" ";
+				}
 			}
 			str += "\n";
 		}
@@ -40,7 +44,11 @@ public class Tools {
 				if(matrix[i][j]>=0) {
 					str += " ";
 				}
-				str += matrix[i][j]+" ";
+				if(matrix[i][j]==Double.MAX_VALUE || matrix[i][j]==Double.MIN_VALUE) {
+					str += "- ";
+				} else {
+					str += matrix[i][j]+" ";
+				}
 			}
 			str += "\n";
 		}
