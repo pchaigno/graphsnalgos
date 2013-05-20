@@ -17,6 +17,7 @@ public class TestWeightedGraph extends TestCase {
 	/**
 	 * Initialize a few weighted graphs.
 	 */
+	@Override
 	protected void setUp() {
 		this.graph1 = new DefaultWeightedGraph();
 		this.graph1.addVertex(1);

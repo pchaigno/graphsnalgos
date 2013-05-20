@@ -48,9 +48,8 @@ public class EdgeFactory<T extends Edge> {
 	public WeightedEdge build(int x, int y, double value) {
 		if(this.edgeClass==DefaultWeightedEdge.class) {
 			return new DefaultWeightedEdge(x, y, value);
-		} else {
-			throw new IllegalArgumentException("To use this method, the factory must have been initiate with a WeightedEdge.");
 		}
+		throw new IllegalArgumentException("To use this method, the factory must have been initiate with a WeightedEdge.");
 	}
 	
 	@Override

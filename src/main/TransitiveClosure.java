@@ -18,10 +18,10 @@ public class TransitiveClosure {
 	 */
 	public static DefaultDirectedGraph getByPowers(DefaultDirectedGraph graph) {
 		int n = graph.getVertices().size();
-		DefaultDirectedGraph closure = (DefaultDirectedGraph)graph.clone();
+		DefaultDirectedGraph closure = graph.clone();
 		DefaultDirectedGraph h;
 		for(int i=2 ; i<=n ; i++) {
-			h = (DefaultDirectedGraph)closure.clone();
+			h = closure.clone();
 			closure = (DefaultDirectedGraph)graph.union(graph.composition(closure));
 			if(closure.equals(h)) {
 				break;
@@ -36,7 +36,7 @@ public class TransitiveClosure {
 	 * @return The transitive closure.
 	 */
 	public static DefaultDirectedGraph getByRoyMarshall(DefaultDirectedGraph graph) {
-		DefaultDirectedGraph closure = (DefaultDirectedGraph)graph.clone();
+		DefaultDirectedGraph closure = graph.clone();
 		for(int vertex: graph.getVertices()) {
 			teta(closure, vertex, graph.getVertices());
 		}

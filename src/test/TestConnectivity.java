@@ -23,6 +23,7 @@ public class TestConnectivity extends TestCase {
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
+	@Override
 	protected void setUp() {
 		this.graph1 = new DefaultGraph();
 		this.graph2 = new DefaultGraph();

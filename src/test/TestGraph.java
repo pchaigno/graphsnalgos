@@ -19,6 +19,7 @@ public class TestGraph extends TestCase {
 	/**
 	 * Initialize a few undirected graphs.
 	 */
+	@Override
 	protected void setUp() {
 		this.graph1 = new DefaultGraph();
 		this.graph1.addVertex(1);

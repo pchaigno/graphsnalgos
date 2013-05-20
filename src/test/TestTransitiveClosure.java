@@ -15,6 +15,7 @@ public class TestTransitiveClosure extends TestCase {
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		this.graph = new DefaultDirectedGraph();
 

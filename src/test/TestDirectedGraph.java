@@ -17,6 +17,7 @@ public class TestDirectedGraph extends TestCase {
 	/**
 	 * Initalize a few directed graphs.
 	 */
+	@Override
 	protected void setUp() {
 		this.graph1 = new DefaultDirectedGraph();
 		this.graph1.addVertex(1);

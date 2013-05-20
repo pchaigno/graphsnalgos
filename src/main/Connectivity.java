@@ -66,7 +66,7 @@ public class Connectivity {
 		
 		// Check if the graph is connected:
 		if(k+1==length) {
-			return (DefaultGraph)graph.clone();
+			return graph.clone();
 		}
 		
 		// Construct the subgraph which is the connected composant:

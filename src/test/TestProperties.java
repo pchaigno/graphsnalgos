@@ -23,6 +23,7 @@ public class TestProperties extends TestCase {
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
+	@Override
 	protected void setUp() {
 		this.graph1 = new DefaultDirectedGraph();
 		this.graph2 = new DefaultDirectedGraph();
@@ -50,7 +51,7 @@ public class TestProperties extends TestCase {
 		this.graph2.addEdge(4, 5);
 		this.graph2.addEdge(5, 2);
 		
-		this.graph3 = (DefaultDirectedGraph)this.graph2.clone();
+		this.graph3 = this.graph2.clone();
 		this.graph3.addEdge(3, 3);
 		this.graph3.addEdge(2, 2);
 		

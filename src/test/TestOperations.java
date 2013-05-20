@@ -20,6 +20,7 @@ public class TestOperations extends TestCase {
 	/**
 	 * Initalize the tests with the graph from the handout.
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		this.graph1 = new DefaultDirectedGraph();
 		this.graph2 = new DefaultDirectedGraph();

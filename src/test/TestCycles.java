@@ -19,6 +19,7 @@ public class TestCycles extends TestCase {
 	/**
 	 * Initialiaze the tests with the graph from the handout.
 	 */
+	@Override
 	protected void setUp() {
 		this.graph = new DefaultDirectedGraph();
 

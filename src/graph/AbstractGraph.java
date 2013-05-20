@@ -254,7 +254,7 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 	@Override
 	public Graph<T> power(int p) {
 		if(p==1) {
-			return (Graph<T>)this.clone();
+			return this.clone();
 		}
 		return this.composition(this.power(p-1));
 	}

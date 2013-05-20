@@ -33,11 +33,11 @@ public class DefaultEdge implements Edge {
 		DefaultEdge edge = null;
 	    try {
 	    	edge = (DefaultEdge)super.clone();
+	    	edge.x = this.x;
+	    	edge.y = this.y;
 	    } catch(CloneNotSupportedException e) {
 	      	System.err.println(e.getMessage());
 	    }
-	    edge.x = this.x;
-	    edge.y = this.y;
 	    return edge;
 	}
 
