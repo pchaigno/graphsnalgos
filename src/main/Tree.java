@@ -17,9 +17,9 @@ public class Tree {
 		int[][] routingMatrix = Routing.routingByRoyMarshallWithSuccessor(graph);
 		boolean isRoot;
 		int length = routingMatrix.length;
-		for(int a=0 ; a<length ; a++) {
+		for(int a=0; a<length; a++) {
 			isRoot = true;
-			for(int x=0 ; x<length ; x++) {
+			for(int x=0; x<length; x++) {
 				if(a!=x && routingMatrix[a][x]==-1) {
 					isRoot = false;
 					break;

@@ -41,20 +41,20 @@ public class DefaultWeightedEdge extends DefaultDirectedEdge implements Weighted
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if(this==obj) {
 			return true;
 		}
-		if (obj == null) {
+		if(obj==null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if(getClass()!=obj.getClass()) {
 			return false;
 		}
-		DefaultWeightedEdge other = (DefaultWeightedEdge) obj;
-		if (x!=other.x) {
+		DefaultWeightedEdge other = (DefaultWeightedEdge)obj;
+		if(x!=other.x) {
 			return false;
 		}
-		if (y!=other.y) {
+		if(y!=other.y) {
 			return false;
 		}
 		return true;

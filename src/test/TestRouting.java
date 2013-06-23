@@ -106,18 +106,18 @@ public class TestRouting extends TestCase {
 		assertFalse(Routing.containsCycles());
 		int[][] routes = Routing.getRoutes();
 		int[] routes_total = {7, 8, 6, 1, -5};
-		for(int i=0 ; i<routes.length ; i++) {
+		for(int i=0; i<routes.length; i++) {
 			int total = 0;
-			for(int j=0 ; j<routes.length ; j++) {
+			for(int j=0; j<routes.length; j++) {
 				total += routes[i][j];
 			}
 			assertEquals(routes_total[i], total);
 		}
 		double[][] values = Routing.getValues();
 		double[] values_total = {15, 7, 6, 7, 0};
-		for(int i=0 ; i<values.length ; i++) {
+		for(int i=0; i<values.length; i++) {
 			double total = 0;
-			for(int j=0 ; j<values.length ; j++) {
+			for(int j=0; j<values.length; j++) {
 				if(values[i][j]<Double.MAX_VALUE) {
 					total += values[i][j];
 				}
@@ -134,18 +134,18 @@ public class TestRouting extends TestCase {
 		assertFalse(Routing.containsCycles());
 		int[][] routes = Routing.getRoutes();
 		int[] routes_total = {7, 5, 3, 0, -5};
-		for(int i=0 ; i<routes.length ; i++) {
+		for(int i=0; i<routes.length; i++) {
 			int total = 0;
-			for(int j=0 ; j<routes.length ; j++) {
+			for(int j=0; j<routes.length; j++) {
 				total += routes[i][j];
 			}
 			assertEquals(routes_total[i], total);
 		}
 		double[][] values = Routing.getValues();
 		double[] values_total = {15, 7, 6, 7, 0};
-		for(int i=0 ; i<values.length ; i++) {
+		for(int i=0; i<values.length; i++) {
 			double total = 0;
-			for(int j=0 ; j<values.length ; j++) {
+			for(int j=0; j<values.length; j++) {
 				if(values[i][j]<Double.MAX_VALUE) {
 					total += values[i][j];
 				}
@@ -171,18 +171,18 @@ public class TestRouting extends TestCase {
 		assertFalse(Routing.containsCycles());
 		int[][] routes = Routing.getRoutes();
 		int[] routes_total = {7, 5, 3, 0, -5};
-		for(int i=0 ; i<routes.length ; i++) {
+		for(int i=0; i<routes.length; i++) {
 			int total = 0;
-			for(int j=0 ; j<routes.length ; j++) {
+			for(int j=0; j<routes.length; j++) {
 				total += routes[i][j];
 			}
 			assertEquals(routes_total[i], total);
 		}
 		double[][] values = Routing.getValues();
 		double[] values_total = {15, 7, 6, 7, 0};
-		for(int i=0 ; i<values.length ; i++) {
+		for(int i=0; i<values.length; i++) {
 			double total = 0;
-			for(int j=0 ; j<values.length ; j++) {
+			for(int j=0; j<values.length; j++) {
 				if(values[i][j]<Double.MAX_VALUE) {
 					total += values[i][j];
 				}
