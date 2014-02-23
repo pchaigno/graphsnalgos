@@ -20,7 +20,7 @@ public class TransitiveClosure {
 		int n = graph.getVertices().size();
 		DefaultDirectedGraph closure = graph.clone();
 		DefaultDirectedGraph h;
-		for(int i=2 ; i<=n ; i++) {
+		for(int i=2; i<=n; i++) {
 			h = closure.clone();
 			closure = (DefaultDirectedGraph)graph.union(graph.composition(closure));
 			if(closure.equals(h)) {

@@ -41,14 +41,14 @@ public class TestRepresentations extends TestCase {
 	public void testAdjacencyMatrix() {        
 		int[][] adjacencyMatrix = this.graph.getAdjacencyMatrix();
 		System.out.println(Tools.matrixToString(adjacencyMatrix));
-		for(int i=0 ; i<adjacencyMatrix.length ; i++) {
+		for(int i=0; i<adjacencyMatrix.length; i++) {
 			assertEquals(adjacencyMatrix.length, adjacencyMatrix[i].length);
 		}
 		int sums[] = {1, 3, 1, 1, 2, 0, 1, 1};
 		int sum;
-		for(int i=0 ; i<adjacencyMatrix.length ; i++) {
+		for(int i=0; i<adjacencyMatrix.length; i++) {
 			sum = 0;
-			for(int j=0 ; j<adjacencyMatrix.length ; j++) {
+			for(int j=0; j<adjacencyMatrix.length; j++) {
 				sum += adjacencyMatrix[i][j];
 			}
 			assertEquals(sums[i], sum);

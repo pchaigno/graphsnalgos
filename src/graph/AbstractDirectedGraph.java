@@ -14,7 +14,7 @@ public abstract class AbstractDirectedGraph<T extends DirectedEdge> extends Abst
 		Integer[] vertices = this.getVertices().toArray(new Integer[0]);
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer source;
-		for(int i=0 ; i<this.vertices.size() ; i++) {
+		for(int i=0; i<this.vertices.size(); i++) {
 			source = vertices[i];
 			map.put(source, new LinkedList<Integer>());
 			for(int vertex: vertices) {
@@ -42,7 +42,7 @@ public abstract class AbstractDirectedGraph<T extends DirectedEdge> extends Abst
 		Integer[] vertices = this.getVertices().toArray(new Integer[0]);
 		Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
 		Integer target;
-		for(int i=0 ; i<this.vertices.size() ; i++) {
+		for(int i=0; i<this.vertices.size(); i++) {
 			target = vertices[i];
 			map.put(target, new LinkedList<Integer>());
 			for(int vertex: vertices) {

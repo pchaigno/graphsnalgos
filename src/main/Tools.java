@@ -13,9 +13,9 @@ public class Tools {
 		String str = "";
 		int length_matrix = matrix.length;
 		int length_vector;
-		for(int i=0 ; i<length_matrix ; i++) {
+		for(int i=0; i<length_matrix; i++) {
 			length_vector = matrix[i].length;
-			for(int j=0 ; j<length_vector ; j++) {
+			for(int j=0; j<length_vector; j++) {
 				if(matrix[i][j]>=0) {
 					str += " ";
 				}
@@ -38,9 +38,9 @@ public class Tools {
 		String str = "";
 		int length_matrix = matrix.length;
 		int length_vector;
-		for(int i=0 ; i<length_matrix ; i++) {
+		for(int i=0; i<length_matrix; i++) {
 			length_vector = matrix[i].length;
-			for(int j=0 ; j<length_vector ; j++) {
+			for(int j=0; j<length_vector; j++) {
 				if(matrix[i][j]>=0) {
 					str += " ";
 				}

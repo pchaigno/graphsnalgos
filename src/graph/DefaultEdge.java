@@ -51,20 +51,20 @@ public class DefaultEdge implements Edge {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if(this==obj) {
 			return true;
 		}
-		if (obj == null) {
+		if(obj==null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if(getClass()!=obj.getClass()) {
 			return false;
 		}
-		DefaultEdge other = (DefaultEdge) obj;
-		if (x!=other.x && x!=other.y) {
+		DefaultEdge other = (DefaultEdge)obj;
+		if(x!=other.x && x!=other.y) {
 			return false;
 		}
-		if (y!=other.y && y!=other.x) {
+		if(y!=other.y && y!=other.x) {
 			return false;
 		}
 		return true;

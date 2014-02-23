@@ -71,7 +71,7 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 		if(this.vertices.size()!=0) {
 			throw new IllegalArgumentException();
 		}
-		for(int i=1 ; i<=nbVertices ; i++) {
+		for(int i=1; i<=nbVertices; i++) {
 			this.addVertex(i);
 		}
 	}
@@ -105,37 +105,36 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((edges == null) ? 0 : edges.hashCode());
-		result = prime * result
-				+ ((vertices == null) ? 0 : vertices.hashCode());
+		result = prime*result + ((edges==null)? 0 : edges.hashCode());
+		result = prime*result + ((vertices==null)? 0 : vertices.hashCode());
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if(this==obj) {
 			return true;
 		}
-		if (obj == null) {
+		if(obj==null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
+		if(getClass()!=obj.getClass()) {
 			return false;
 		}
 		AbstractGraph<T> other = (AbstractGraph<T>) obj;
-		if (edges == null) {
-			if (other.edges != null) {
+		if(edges==null) {
+			if(other.edges!=null) {
 				return false;
 			}
-		} else if (!edges.equals(other.edges)) {
+		} else if(!edges.equals(other.edges)) {
 			return false;
 		}
-		if (vertices == null) {
-			if (other.vertices != null) {
+		if(vertices==null) {
+			if(other.vertices!=null) {
 				return false;
 			}
-		} else if (!vertices.equals(other.vertices)) {
+		} else if(!vertices.equals(other.vertices)) {
 			return false;
 		}
 		return true;
@@ -156,8 +155,8 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 	public int[][] getAdjacencyMatrix() {
 		Integer[] vertices = this.getVertices().toArray(new Integer[0]);
 		int[][] adjacencyMatrix = new int[this.vertices.size()][this.vertices.size()];
-		for(int i=0 ; i<this.vertices.size() ; i++) {
-			for(int j=0 ; j<this.vertices.size() ; j++) {
+		for(int i=0; i<this.vertices.size(); i++) {
+			for(int j=0; j<this.vertices.size(); j++) {
 				if(this.containsEdge(vertices[i], vertices[j])) {
 					adjacencyMatrix[i][j] = 1;
 				}
@@ -175,8 +174,8 @@ public abstract class AbstractGraph<T extends Edge> implements Graph<T> {
 		for(int vertex: vertices) {
 			this.addVertex(vertex);
 		}
-		for(int i=0 ; i<length ; i++) {
-			for(int j=0 ; j<length ; j++) {
+		for(int i=0; i<length; i++) {
+			for(int j=0; j<length; j++) {
 				if(matrix[i][j]==1) {
 					this.addEdge(vertices[i], vertices[j]);
 				}
